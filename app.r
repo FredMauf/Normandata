@@ -1,12 +1,18 @@
- 
+####################################
+# Data Professor                   #
+# http://youtube.com/dataprofessor #
+# http://github.com/dataprofessor  #
+####################################
+
+# Modified from Winston Chang, 
+# https://shiny.rstudio.com/gallery/shiny-theme-selector.html
+
+# Concepts about Reactive programming used by Shiny, 
+# https://shiny.rstudio.com/articles/reactivity-overview.html
 
 # Load R packages
 library(shiny)
 library(shinythemes)
-library(ggplot2)
-library(data.table)
-library(RPostgreSQL)
-library(DBI)
 
 theme<-"cosmo"
 
@@ -71,15 +77,15 @@ ui <- fluidPage(theme = shinytheme(theme),
 # Define server function 
 
 
- server <- function(input, output) {
-    
-    output$txtout <- renderText({
-      paste( input$txt1, input$txt2, sep = " " )
-    })
-  } # server
-  
+
 
 server <- function(input, output) {
+  library(ggplot2)
+  library(data.table)
+  library(RPostgres)
+  library(DBI)
+  
+  
  
    # Filter data based on selections
     output$Table_Poll_Filtre <- DT::renderDataTable(DT::datatable({
@@ -89,7 +95,7 @@ server <- function(input, output) {
         Lien_Consulter =  c("Consulter","Consulter")
         
         )
-       
+      DT
     }))
     
     # Filter data based on selections
@@ -100,7 +106,7 @@ server <- function(input, output) {
         Titre_Donnée =c("Nb Depassagement 120µg/8h","Moyenne 1/4h O3"),
         Maturite_Donnée =  c("Consulter","Consulter")
       )
-       
+      DT2
     }))
    
 }
