@@ -1,16 +1,4 @@
-####################################
-# Data Professor                   #
-# http://youtube.com/dataprofessor #
-# http://github.com/dataprofessor  #
-####################################
-
-# Modified from Winston Chang, 
-# https://shiny.rstudio.com/gallery/shiny-theme-selector.html
-
-# Concepts about Reactive programming used by Shiny, 
-# https://shiny.rstudio.com/articles/reactivity-overview.html
-
-# Load R packages
+ 
 library(shiny)
 library(shinythemes)
 library(DT)
@@ -22,18 +10,25 @@ ui <- fluidPage(theme = shinytheme(theme),
                 navbarPage(
                    
                   "Cartographe Data Atmo Normandie",
-                  tabPanel("Polluants et Substances",  
+                  tabPanel("Polluants et Substances", 
+                           
                            fluidRow( 
-                             
-                             textInput("code_filtre_polluant", "Recherche libre:", "Ozone"),
-                             verbatimTextOutput("status_filtre"),
-                             verbatimTextOutput("status_page"),
-                           ), 
+                             h3("Hello....") 
+                            
+                           ),
+                           
+                           fluidRow( 
+                             h3("Tous les polluants...."),
+                             DT::dataTableOutput("Table_Poll_Filtre"  )
+
+                           ) ,
+                           
+                           
                            fluidRow( 
                              column(2,h3("Fiche Polluant") ),
-                             column(2,textInput("Nom_polluant", "Nom du polluant", "Ozone") ),
-                             column(2, textInput("Code_Polluant_lcsqa", "Code Polluant LCSQA", "XX") ),
-                            
+                             column(2,textInput("Nom_polluant", "Nom du polluant", "AJout ICI") ),
+                             column(2, textInput("Code_Polluant_lcsqa", "Code Polluant LCSQA", "AJout ICI") ),
+
                              column(2, textInput("Date_maj", "Date de mise à jour:", "") ),
                              actionButton("Ajouter_Polluant","Ajouter")
                             
@@ -42,32 +37,14 @@ ui <- fluidPage(theme = shinytheme(theme),
                              h3("Données Associées.avec le polluant XXX"),
                              DT::dataTableOutput("Table_Donne_Asso_Poll" )
                              
-                           ) ,
-                           
-                           fluidRow( 
-                             h3("Tous les polluants...."),
-                             DT::dataTableOutput("Table_Poll_Filtre"  )
-                             
                            ) 
+
                   ),
                            
+
                            
-                           
-                  tabPanel("Données ",
-                           sidebarPanel(
-                             tags$h3("Input:"),
-                             textInput("txt1", "Given Name:", ""),
-                             textInput("txt2", "Surname:", ""),
-                             
-                           ), # sidebarPanel
-                           mainPanel(
-                             h1("Header 1"),
-                             
-                             h4("Output 1"),
-                             verbatimTextOutput("txtout"),
-                             
-                           ) # mainPanel
-                           
+                  tabPanel("Données ",  "This panel is intentionally left blank"
+                            
                   ), # Navbar 1, tabPanel
                   tabPanel("Media", "This panel is intentionally left blank"),
                   
@@ -104,14 +81,9 @@ server <- function(input, output) {
   
   polluant=data.table(polluant)
   donnee=data.table(donnee)
-  print(donnee)
-  
- 
+
    # Filter data based on selections
     output$Table_Poll_Filtre <- DT::renderDataTable(DT::datatable({
-      print("Contenu des filtres")
-      print(input$code_filtre_polluant)
-      
       DT_polluant =  polluant 
       DT_polluant
     }))
@@ -119,7 +91,6 @@ server <- function(input, output) {
     # Filter data based on selections
     output$Table_Donne_Asso_Poll <- DT::renderDataTable(DT::datatable({
       DT_donnee =  donnee  
-       
       DT_donnee
     }))
     
@@ -135,20 +106,26 @@ server <- function(input, output) {
       output$status_page<-renderText(sql_ajout_polluant)
       dbGetQuery(con,sql_ajout_polluant)
       output$status_page<-renderText(paste("Ajout du polluant " , input$Nom_polluant, " ok!"))
+
+    })
+    
+    observeEvent(input$Table_Donne_Asso_Poll_cell_clicked, {
+      print("Je suis dans Observe Envement table donnee")
+       
+      print(input$Table_Donne_Asso_Poll_cell_clicked)
       
       
     })
     
-    #observe(input$Table_Donne_Asso_Poll_cell_clicked, {
-    #  print("je filtre une donnee")
-    #  print(input$Table_Donne_Asso_Poll_cell_clicked)
-    #})
-    
-    #observe(input$Table_Poll_Filtre_cell_clicked, {
-    #  print("je filtre un polluant")
-    #  print(input$Table_Poll_Filtre_cell_clicked)
-    #})
+    observeEvent(input$Table_Poll_Filtre_cell_clicked, {
+      print("Je suis dans Observe Envement table polluant")
       
+      print(input$Table_Poll_Filtre_cell_clicked)
+      
+      
+    })
+    
+     
     
 }
   
