@@ -19,12 +19,8 @@ con<-dbConnect(
 )
 print("connecté! ")
 polluant = dbGetQuery(con, "SELECT * FROM atmonormandiedata.polluant")
-<<<<<<< HEAD
 donnee = dbGetQuery(con, "SELECT * FROM atmonormandiedata.donnee_claire")
 donnee_lien = dbGetQuery(con, "SELECT * FROM atmonormandiedata.donnee_lien")
-=======
-donnee = dbGetQuery(con, "SELECT * FROM atmonormandiedata.donnee")
->>>>>>> c32c2646f098a79c3ec1dd4fc0e2c2648aeb316e
 media = dbGetQuery(con, "SELECT * FROM atmonormandiedata.media")
 
 polluant=data.table(polluant)
@@ -47,36 +43,21 @@ ui <- fluidPage(theme = shinytheme(theme),
                            fluidRow( 
                              h3("Tous les polluants...."),
                              DT::dataTableOutput("Table_Poll_Filtre")
-<<<<<<< HEAD
-=======
-                             
->>>>>>> c32c2646f098a79c3ec1dd4fc0e2c2648aeb316e
                            ) ,
                            
                            
                            fluidRow( 
                              column(2,h3("Fiche Polluant") ),
-<<<<<<< HEAD
                              column(2,textInput("Nom_polluant", "Nom du polluant", "") ),
                              column(2, textInput("Code_Polluant_lcsqa", "Code Polluant LCSQA", " ") ),
                              column(2, textInput("Date_maj", "Date de mise à jour:", "Date du jour") ),
-=======
-                             column(2,textInput("Nom_polluant", "Nom du polluant", "AJout ICI") ),
-                             column(2, textInput("Code_Polluant_lcsqa", "Code Polluant LCSQA", "AJout ICI") ),
-                             
-                             column(2, textInput("Date_maj", "Date de mise à jour:", "") ),
->>>>>>> c32c2646f098a79c3ec1dd4fc0e2c2648aeb316e
                              actionButton("Ajouter_Polluant","Ajouter")
                              
                            ) , 
                            fluidRow( 
-<<<<<<< HEAD
                              h3("Données Associées avec "), h3(textOutput("tab_pol_lib_polluant_selectionne")),
                             
-=======
-                             h3("Données Associées.avec le polluant XXX"),
->>>>>>> c32c2646f098a79c3ec1dd4fc0e2c2648aeb316e
-                             DT::dataTableOutput("Table_Donne_Asso_Poll_polluant" )
+                             DT::dataTableOutput("Table_Donnee_Asso_Poll_polluant" )
                              
                            ) 
                            
@@ -86,23 +67,22 @@ ui <- fluidPage(theme = shinytheme(theme),
                   
                   tabPanel("Données ",  
                          fluidRow( 
-<<<<<<< HEAD
                            h3("Données Associées avec "), h3(textOutput("tab_don_lib_polluant_selectionne")),
-                           DT::dataTableOutput("Table_Donne_Asso_Poll_donnee" ),
+                           DT::dataTableOutput("Table_Donnee_Asso_Poll_donnee" ),
 
                            
-=======
-                           h3("Hello....")  
-                           ,
-                           DT::dataTableOutput("Table_Donne_Asso_Poll_donnee" )
->>>>>>> c32c2646f098a79c3ec1dd4fc0e2c2648aeb316e
                          )
                   ), # Navbar 1, tabPanel
                   tabPanel("Media",  fluidRow( 
-                    h3("Media Associées avec "), h3(textOutput("tab_media_lib_polluant_selectionne")))),
+                    h3("Media Associées avec "), h3("salut" )))
+                
+                ,
+                  
                   
                   tabPanel("Supports ", fluidRow( 
-                    h3("Media Associées avec "), h3(textOutput("tab_support_lib_polluant_selectionne"))))
+                    h3("Media Associées avec "),  h3("salut" )))
+                
+                   
                   
                 ) # navbarPage
 ) # fluidPage
@@ -113,7 +93,6 @@ ui <- fluidPage(theme = shinytheme(theme),
 
 
 server <- function(input, output) {
-<<<<<<< HEAD
 
   
   output$Table_Poll_Filtre <- DT::renderDataTable({
@@ -131,15 +110,15 @@ server <- function(input, output) {
   
   
   # Filter data based on selections
-  output$Table_Donne_Asso_Poll_polluant <- DT::renderDataTable({
+  output$Table_Donnee_Asso_Poll_polluant <- DT::renderDataTable({
     DT::datatable(filtered_data_polluant())
   })
   
-  output$Table_Donne_Asso_Poll_donnee <- DT::renderDataTable({
+  output$Table_Donnee_Asso_Poll_donnee <- DT::renderDataTable({
     DT::datatable(filtered_data_polluant())
   })
   
-  output$Table_Donne_Asso_Poll_donnee_np1 <- DT::renderDataTable({
+  output$Table_Donnee_Asso_Poll_donnee_np1 <- DT::renderDataTable({
     DT::datatable(filtered_data_cible())
   })
   
@@ -148,6 +127,7 @@ server <- function(input, output) {
   
   lib_polluant_selectionne <- reactive({
     print(" lib_polluant_selectionne bouge ")
+    print(Sys.time())
     rows_selected <- input$Table_Poll_Filtre_rows_selected
   
     if (length(rows_selected) == 0) {
@@ -170,17 +150,10 @@ server <- function(input, output) {
   )
   
   output$tab_pol_lib_polluant_selectionne <- renderText({
+    print("lib_polluant_selectionne bouge")
     lib_polluant_selectionne()
   })
-  output$tab_don_lib_polluant_selectionne <- renderText({
-    lib_polluant_selectionne()
-  })
-  output$tab_media_lib_polluant_selectionne <- renderText({
-    lib_polluant_selectionne()
-  })
-    output$tab_support_lib_polluant_selectionne <- renderText({
-    lib_polluant_selectionne()
-  })
+
     
     
   
@@ -188,52 +161,13 @@ server <- function(input, output) {
   # Fonction de filtrage du second tableau
 
   filtered_data_polluant <- reactive({
-    rows_selected <- input$Table_DonneeCible_rows_selected
+    rows_selected <- input$Table_Poll_Filtre_rows_selected
+    print(" filtered_data_polluant bouge ")
+    print(Sys.time())
     if (length(rows_selected) == 0) {
       donnee
     } else {
       v_code_pol_select <- polluant[rows_selected, "id_polluant"][ ,1]
-=======
-
-  
-  output$Table_Poll_Filtre <- DT::renderDataTable({
-    DT::datatable(
-      data = polluant,
-      options = list(
-        dom = 't',
-        pageLength = 10,
-        select = list(style = "single")
-      ),
-      rownames = FALSE
-    )
-  })
-  
-  # Filter data based on selections
-  output$Table_Donne_Asso_Poll_polluant <- DT::renderDataTable({
-    DT::datatable(filtered_data_polluant())
-  })
-  
-  output$Table_Donne_Asso_Poll_donnee <- DT::renderDataTable({
-    DT::datatable(filtered_data_polluant())
-  })
-  
- 
-  
-  output$status_filtre <- renderText({
-    paste("On cherche...", input$code_filtre_polluant,  sep = " " )
-  })
-  
-  # Fonction de filtrage du second tableau
-  # Fonction de filtrage du second tableau
-  # Fonction de filtrage du second tableau
-  # Fonction de filtrage du second tableau
-  filtered_data_polluant <- reactive({
-    rows_selected <- input$Table_Poll_Filtre_rows_selected
-    if (length(rows_selected) == 0) {
-      donnee
-    } else {
-      v_code_pol_select <- polluant[rows_selected, "code_polluant"][ ,1]
->>>>>>> c32c2646f098a79c3ec1dd4fc0e2c2648aeb316e
        
       liste_txt=""
       for (pol in v_code_pol_select) {
@@ -246,8 +180,7 @@ server <- function(input, output) {
           }
       }
       selected_code_polluant <- paste(liste_txt, collapse="|")
-<<<<<<< HEAD
-      print(" filtered_data_polluant bouge ")
+     
       donnee[grepl(selected_code_polluant, donnee$id_polluant), ]
     }
   })
@@ -277,12 +210,6 @@ server <- function(input, output) {
     }
   }
   )
-=======
-      
-      donnee[grepl(selected_code_polluant, donnee$code_polluant), ]
-    }
-  })
->>>>>>> c32c2646f098a79c3ec1dd4fc0e2c2648aeb316e
   
   
   
