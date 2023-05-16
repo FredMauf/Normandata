@@ -42,7 +42,7 @@ ui <- fluidPage(theme = shinytheme(theme),
                            
                            fluidRow( 
                              h3("Tous les polluants...."),
-                             DT::dataTableOutput("Table_Poll_Filtre")
+                             DT::dataTableOutput("Table_Polluant")
                            ) ,
                            
                            
@@ -55,9 +55,12 @@ ui <- fluidPage(theme = shinytheme(theme),
                              
                            ) , 
                            fluidRow( 
-                             h3("Données Associées avec "), h3(textOutput("tab_pol_lib_polluant_selectionne")),
-                            
-                             DT::dataTableOutput("Table_Donnee_Asso_Poll_polluant" )
+                             h3("Données Associées avec "), h3(textOutput("tab_pol_lib_polluant_selectionne"))
+                             ,
+                             DT::dataTableOutput("Table_Donnee" ),
+                              h3(textOutput("tab_donnee_lib_donee_selectionne"))
+                             
+                             
                              
                            ) 
                            
@@ -67,8 +70,8 @@ ui <- fluidPage(theme = shinytheme(theme),
                   
                   tabPanel("Données ",  
                          fluidRow( 
-                           h3("Données Associées avec "), h3(textOutput("tab_don_lib_polluant_selectionne")),
-                           DT::dataTableOutput("Table_Donnee_Asso_Poll_donnee" ),
+                           h3("Données Associées avec "), h3(textOutput("tab_don_lib_polluant_selectionne"))
+                          
 
                            
                          )
@@ -95,9 +98,21 @@ ui <- fluidPage(theme = shinytheme(theme),
 server <- function(input, output) {
 
   
-  output$Table_Poll_Filtre <- DT::renderDataTable({
+  output$Table_Polluant <- DT::renderDataTable({
     DT::datatable(
       data = polluant,
+      options = list(
+        dom = 't',
+        pageLength = 10,
+        select = list(style = "single")
+      ),
+      rownames = FALSE
+    )
+  })
+  
+  output$Table_Donnee <- DT::renderDataTable({
+    DT::datatable(
+      data = donnee,
       options = list(
         dom = 't',
         pageLength = 10,
@@ -114,13 +129,9 @@ server <- function(input, output) {
     DT::datatable(filtered_data_polluant())
   })
   
-  output$Table_Donnee_Asso_Poll_donnee <- DT::renderDataTable({
-    DT::datatable(filtered_data_polluant())
-  })
+ 
   
-  output$Table_Donnee_Asso_Poll_donnee_np1 <- DT::renderDataTable({
-    DT::datatable(filtered_data_cible())
-  })
+ 
   
   
 
@@ -128,7 +139,7 @@ server <- function(input, output) {
   lib_polluant_selectionne <- reactive({
     print(" lib_polluant_selectionne bouge ")
     print(Sys.time())
-    rows_selected <- input$Table_Poll_Filtre_rows_selected
+    rows_selected <- input$Table_Polluant_rows_selected
   
     if (length(rows_selected) == 0) {
       return("Aucun polluant sélectionné")
@@ -143,8 +154,37 @@ server <- function(input, output) {
         else {
           liste_txt<-paste(liste_txt,',',pol)
         }
-      return(liste_txt)
       }
+      print(liste_txt)
+      return(liste_txt)
+    }
+  }
+  )
+  
+  
+  
+  lib_donnee_selectionne <- reactive({
+    print(" lib_donnee_selectionne bouge ")
+    print(Sys.time())
+    rows_selected <- input$Table_Donnee_rows_selected
+    
+    if (length(rows_selected) == 0) {
+      return("Aucune donnee sélectionné")
+    } else {
+      donnee_selected <- donnee[rows_selected, "libelle_donnee"][ ,1]
+      liste_txt=""
+      for (donnne in donnee_selected) {
+        if(liste_txt=="")
+        {
+          liste_txt<-donnne
+        }
+        else {
+          liste_txt<-paste(liste_txt,',',donnne)
+        }
+        
+      }
+      print(liste_txt)
+      return(liste_txt)
     }
   }
   )
@@ -152,6 +192,10 @@ server <- function(input, output) {
   output$tab_pol_lib_polluant_selectionne <- renderText({
     print("lib_polluant_selectionne bouge")
     lib_polluant_selectionne()
+  })
+  output$tab_donnee_lib_donee_selectionne <- renderText({
+    print("lib_donnee_selectionne bouge")
+    lib_donnee_selectionne()
   })
 
     
@@ -161,7 +205,7 @@ server <- function(input, output) {
   # Fonction de filtrage du second tableau
 
   filtered_data_polluant <- reactive({
-    rows_selected <- input$Table_Poll_Filtre_rows_selected
+    rows_selected <- input$Table_Donnee_rows_selected
     print(" filtered_data_polluant bouge ")
     print(Sys.time())
     if (length(rows_selected) == 0) {
@@ -186,7 +230,7 @@ server <- function(input, output) {
   })
   
   filtered_data_cible <- reactive({
-    rows_selected <- input$Table_Poll_Filtre_rows_selected
+    rows_selected <- input$Table_Polluant_rows_selected
     print(" filtered_data_cible bouge ")
     if (length(rows_selected) == 0) {
       donnee_lien
