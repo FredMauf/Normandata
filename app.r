@@ -18,10 +18,10 @@ con <- dbConnect(
 
 print("connecté! ")
 raw_polluant <- dbGetQuery(con, "SELECT * FROM si.polluant")
-raw_donnee <- dbGetQuery(con, "SELECT * FROM si.donnee_claire")
+raw_donnee <- dbGetQuery(con, "SELECT * FROM si.donnee_clair")
 raw_donnee_lien <- dbGetQuery(con, "SELECT * FROM si.donnee_lien")
-raw_media <- dbGetQuery(con, "SELECT * FROM si.media")
-raw_publication <- dbGetQuery(con, "SELECT * FROM si.publication")
+raw_media <- dbGetQuery(con, "SELECT * FROM si.media_clair")
+raw_publication <- dbGetQuery(con, "SELECT * FROM si.publication_clair")
 
 polluant <- data.table(raw_polluant)
 donnee <- data.table(raw_donnee)
@@ -102,10 +102,8 @@ server <- function(input, output) {
   output$Table_Publication <- DT::renderDataTable({
     DT::datatable(
       data <- publication
-      
     )
   })
-  
   
   observeEvent(input$Ajouter_Polluant, {
     print("Reception evenement ajout polluant ")
