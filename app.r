@@ -17,14 +17,17 @@ con <- dbConnect(
   user = "postgres")
 
 print("connecté! ")
-polluant <- dbGetQuery(con, "SELECT * FROM si.polluant")
-donnee <- dbGetQuery(con, "SELECT * FROM si.donnee_claire")
-donnee_lien <- dbGetQuery(con, "SELECT * FROM si.donnee_lien")
-media <- dbGetQuery(con, "SELECT * FROM si.media")
+raw_polluant <- dbGetQuery(con, "SELECT * FROM si.polluant")
+raw_donnee <- dbGetQuery(con, "SELECT * FROM si.donnee_claire")
+raw_donnee_lien <- dbGetQuery(con, "SELECT * FROM si.donnee_lien")
+raw_media <- dbGetQuery(con, "SELECT * FROM si.media")
+raw_publication <- dbGetQuery(con, "SELECT * FROM si.publication")
 
-polluant <- data.table(polluant)
-donnee <- data.table(donnee)
-media <- data.table(media)
+polluant <- data.table(raw_polluant)
+donnee <- data.table(raw_donnee)
+donnee_lien <- data.table(raw_donnee_lien)
+media <- data.table(raw_media)
+raw_publication <- data.table(raw_publication)
 
 
 
@@ -38,7 +41,7 @@ ui <- fluidPage(
     tabPanel(
       "Polluants et Substances",
       fluidRow(
-        h3("Tous les polluants...."),
+        h3("Tous les polluants"),
         DT::dataTableOutput("Table_Polluant")) ,
       fluidRow(
       column(2,h3("Fiche Polluant")),
@@ -59,11 +62,15 @@ ui <- fluidPage(
       h3(textOutput("tab_don_lib_polluant_selectionne"))
     )
     ), # Navbar 1, tabPanel
-    tabPanel("Media",  fluidRow( 
-      h3("Media Associées avec "), h3("salut")))
+    tabPanel("Media",
+     fluidRow(
+     h3("Media Associées avec "),
+     DT::dataTableOutput("Table_Media")))
   ,
-    tabPanel("Supports ", fluidRow( 
-      h3("Media Associées avec "),  h3("salut")))
+    tabPanel("Supports de Publication ",
+    fluidRow(
+    h3("Supports de publication avec "),
+    DT::dataTableOutput("Table_Publication")))
   ) # navbarPage
 ) # fluidPage
 
