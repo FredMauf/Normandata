@@ -43,33 +43,35 @@ ui <- fluidPage(
       fluidRow(
         h3("Tous les polluants"),
         DT::dataTableOutput("Table_Polluant")) ,
-      fluidRow(
-        column(2,h3("Fiche Polluant")),
-        column(2,textInput("Nom_polluant", "Nom du polluant", "")),
-        column(2, textInput("Code_Polluant_lcsqa", "Code Polluant LCSQA", " ")),
-        column(2, textInput("Date_maj", "Date de mise à jour:", "Date du jour")),
-        actionButton("Ajouter_Polluant","Ajouter")
-      ) ,
+      
       fluidRow(h3("Données Associées avec "),
                h3(textOutput("tab_pol_lib_polluant_selectionne")),
                DT::dataTableOutput("Table_Donnee_poll"),
-               )
-      ),
+      )
+    ),
     tabPanel("Données",
              fluidRow(
-               h3("Données Associées avec "), 
+               h3("Données Associées avec "),
                DT::dataTableOutput("Table_Donnee_Maitre"))
-             )
-    ), # Navbar 1, tabPanel
+    ),
+    # Navbar 1, tabPanel
     tabPanel("Media",
              fluidRow(
-               h3("Media Associées avec "),
-               DT::dataTableOutput("Table_Media")))
-    ,
+               h3("Media et Documents publiés "),
+               DT::dataTableOutput("Table_Media"))),
+    
     tabPanel("Supports de Publication ",
              fluidRow(
                h3("Supports de publication avec "),
-               DT::dataTableOutput("Table_Publication")))
+               DT::dataTableOutput("Table_Publication"))),
+    tabPanel("Ajouter des données ",
+             fluidRow(
+               column(2,h3("Fiche Polluant")),
+               column(2,textInput("Nom_polluant", "Nom du polluant", "")),
+               column(2, textInput("Code_Polluant_lcsqa", "Code Polluant LCSQA", " ")),
+               column(2, textInput("Date_maj", "Date de mise à jour:", "Date du jour")),
+               actionButton("Ajouter_Polluant","Ajouter")
+             ))
   ) # navbarPage
 ) # fluidPage
 
