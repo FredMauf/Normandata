@@ -18,10 +18,10 @@ con<-dbConnect(
   
 )
 print("connecté! ")
-polluant = dbGetQuery(con, "SELECT * FROM atmonormandiedata.polluant")
-donnee = dbGetQuery(con, "SELECT * FROM atmonormandiedata.donnee_claire")
-donnee_lien = dbGetQuery(con, "SELECT * FROM atmonormandiedata.donnee_lien")
-media = dbGetQuery(con, "SELECT * FROM atmonormandiedata.media")
+polluant = dbGetQuery(con, "SELECT * FROM si.polluant")
+donnee = dbGetQuery(con, "SELECT * FROM si.donnee_claire")
+donnee_lien = dbGetQuery(con, "SELECT * FROM si.donnee_lien")
+media = dbGetQuery(con, "SELECT * FROM si.media")
 
 polluant=data.table(polluant)
 donnee=data.table(donnee)
@@ -32,72 +32,60 @@ media=data.table(media)
 theme<-"cosmo"
 
 # Define UI
-ui <- fluidPage(theme = shinytheme(theme),
-                navbarPage(
-                  
-                  "Cartographe Data Atmo Normandie",
-                  tabPanel("Polluants et Substances", 
-                           
-                         
-                           
-                           fluidRow( 
-                             h3("Tous les polluants...."),
-                             DT::dataTableOutput("Table_Polluant")
-                           ) ,
-                           
-                           
-                           fluidRow( 
-                             column(2,h3("Fiche Polluant") ),
-                             column(2,textInput("Nom_polluant", "Nom du polluant", "") ),
-                             column(2, textInput("Code_Polluant_lcsqa", "Code Polluant LCSQA", " ") ),
-                             column(2, textInput("Date_maj", "Date de mise à jour:", "Date du jour") ),
-                             actionButton("Ajouter_Polluant","Ajouter")
-                             
-                           ) , 
-                           fluidRow( 
-                             h3("Données Associées avec "), h3(textOutput("tab_pol_lib_polluant_selectionne"))
-                             ,
-                             DT::dataTableOutput("Table_Donnee" ),
-                              h3(textOutput("tab_donnee_lib_donee_selectionne"))
-                             
-                             
-                             
-                           ) 
-                           
-                  ),
-                  
-                  
-                  
-                  tabPanel("Données ",  
-                         fluidRow( 
-                           h3("Données Associées avec "), h3(textOutput("tab_don_lib_polluant_selectionne"))
-                          
+ui <- fluidPage(
+  theme = shinytheme(theme),
+  navbarPage(
+    "Cartographe Data Atmo Normandie",
+    tabPanel(
+      "Polluants et Substances", 
+      fluidRow( 
+        h3("Tous les polluants...."),
+        DT::dataTableOutput("Table_Polluant")) ,
+      fluidRow(
+      column(2,h3("Fiche Polluant")),
+      column(2,textInput("Nom_polluant", "Nom du polluant", "")),
+      column(2, textInput("Code_Polluant_lcsqa", "Code Polluant LCSQA", " ")),
+      column(2, textInput("Date_maj", "Date de mise à jour:", "Date du jour")),
+        actionButton("Ajouter_Polluant","Ajouter")
+      ) ,
+      fluidRow(h3("Données Associées avec "), h3(textOutput("tab_pol_lib_polluant_selectionne")),
+        DT::dataTableOutput("Table_Donnee" ),
+        h3(textOutput("tab_donnee_lib_donee_selectionne"))
+        
+        
+        
+      ) 
+      
+    ),
 
-                           
-                         )
-                  ), # Navbar 1, tabPanel
-                  tabPanel("Media",  fluidRow( 
-                    h3("Media Associées avec "), h3("salut" )))
-                
-                ,
-                  
-                  
-                  tabPanel("Supports ", fluidRow( 
-                    h3("Media Associées avec "),  h3("salut" )))
-                
-                   
-                  
-                ) # navbarPage
+
+
+    tabPanel("Données ",  
+    fluidRow( 
+      h3("Données Associées avec "), h3(textOutput("tab_don_lib_polluant_selectionne"))
+
+
+      
+            )
+    ), # Navbar 1, tabPanel
+    tabPanel("Media",  fluidRow( 
+      h3("Media Associées avec "), h3("salut" )))
+  
+  ,
+    
+    
+    tabPanel("Supports ", fluidRow( 
+      h3("Media Associées avec "),  h3("salut" )))
+  
+      
+    
+  ) # navbarPage
 ) # fluidPage
-
-
-
 
 
 
 server <- function(input, output) {
 
-  
   output$Table_Polluant <- DT::renderDataTable({
     DT::datatable(
       data = polluant,
@@ -109,7 +97,6 @@ server <- function(input, output) {
       rownames = FALSE
     )
   })
-  
   output$Table_Donnee <- DT::renderDataTable({
     DT::datatable(
       data = donnee,
@@ -121,26 +108,14 @@ server <- function(input, output) {
       rownames = FALSE
     )
   })
-  
-  
-  
   # Filter data based on selections
   output$Table_Donnee_Asso_Poll_polluant <- DT::renderDataTable({
     DT::datatable(filtered_data_polluant())
   })
-  
- 
-  
- 
-  
-  
-
-  
   lib_polluant_selectionne <- reactive({
     print(" lib_polluant_selectionne bouge ")
     print(Sys.time())
     rows_selected <- input$Table_Polluant_rows_selected
-  
     if (length(rows_selected) == 0) {
       return("Aucun polluant sélectionné")
     } else {
@@ -149,7 +124,7 @@ server <- function(input, output) {
       for (pol in polluant_selected) {
         if(liste_txt=="")
         {
-          liste_txt<-pol
+          liste_txt<-pol # nolint
         }
         else {
           liste_txt<-paste(liste_txt,',',pol)
@@ -160,14 +135,12 @@ server <- function(input, output) {
     }
   }
   )
-  
-  
+ 
   
   lib_donnee_selectionne <- reactive({
     print(" lib_donnee_selectionne bouge ")
     print(Sys.time())
     rows_selected <- input$Table_Donnee_rows_selected
-    
     if (length(rows_selected) == 0) {
       return("Aucune donnee sélectionné")
     } else {
@@ -181,7 +154,6 @@ server <- function(input, output) {
         else {
           liste_txt<-paste(liste_txt,',',donnne)
         }
-        
       }
       print(liste_txt)
       return(liste_txt)
@@ -197,11 +169,7 @@ server <- function(input, output) {
     print("lib_donnee_selectionne bouge")
     lib_donnee_selectionne()
   })
-
-    
-    
-  
-
+ 
   # Fonction de filtrage du second tableau
 
   filtered_data_polluant <- reactive({
@@ -212,7 +180,7 @@ server <- function(input, output) {
       donnee
     } else {
       v_code_pol_select <- polluant[rows_selected, "id_polluant"][ ,1]
-       
+ 
       liste_txt=""
       for (pol in v_code_pol_select) {
         if(liste_txt=="")
@@ -255,10 +223,7 @@ server <- function(input, output) {
   }
   )
   
-  
-  
-  
-  
+
   observeEvent(input$Ajouter_Polluant, {
     print("Reception evenement ajout polluant ")
     output$status_page<- renderText("Reception evenement ajout polluant")
@@ -266,13 +231,10 @@ server <- function(input, output) {
     output$status_page<-renderText(sql_ajout_polluant)
     dbGetQuery(con,sql_ajout_polluant)
     output$status_page<-renderText(paste("Ajout du polluant " , input$Nom_polluant, " ok!"))
-    
+
   })
   
 
-  
-  
-  
 }
 
 
