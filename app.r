@@ -76,69 +76,33 @@ ui <- fluidPage(
 server <- function(input, output) {
   output$Table_Polluant <- DT::renderDataTable({
     DT::datatable(
-      data = polluant,
-      options = list(
-        dom = "t",
-        pageLength = 10,
-        select = list(style = "single")
-      ),
-      rownames = FALSE
+      data = polluant
     )
   })
-  
   output$Table_Donnee_poll <- DT::renderDataTable({
     DT::datatable(
-      data = donnee,
-      options = list(
-        dom = "t" ,
-        pageLength = 10,
-        select = list(style = "single")
-      ),
-      rownames = FALSE
+      data <- donnee
     )
   })
   output$Table_Donnee_Maitre <- DT::renderDataTable({
     DT::datatable(
-      data = donnee,
-      options = list(
-        dom = "t",
-        pageLength = 15,
-        select = list(style = "single")
-      ),
-      rownames = FALSE
+      data <- donnee
     )
   })
   output$Table_Donnee_Lien <- DT::renderDataTable({
     DT::datatable(
-      data = donnee,
-      options = list(
-        dom = "t",
-        pageLength = 10,
-        select = list(style = "single")
-      ),
-      rownames = FALSE
+      data <- donnee
     )
   })
   output$Table_Media <- DT::renderDataTable({
     DT::datatable(
-      data = media,
-      options = list(
-        dom = 't',
-        pageLength = 10,
-        select = list(style = "single")
-      ),
-      rownames = FALSE
+      data <- media
     )
   })
   output$Table_Publication <- DT::renderDataTable({
     DT::datatable(
-      data = publication,
-      options <- list(
-        dom = "t",
-        pageLength = 15,
-        select = list(style = "single")
-      ),
-      rownames = FALSE
+      data <- publication
+      
     )
   })
   
