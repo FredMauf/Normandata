@@ -19,14 +19,22 @@ con <- dbConnect(
 print("connecté! ")
 raw_polluant <- dbGetQuery(con, "SELECT * FROM si.polluant")
 raw_donnee <- dbGetQuery(con, "SELECT * FROM si.donnee_clair")
-raw_donnee_lien <- dbGetQuery(con, "SELECT * FROM si.donnee_lien")
+raw_donnee_lien_source <- dbGetQuery(con, "SELECT * FROM si.donnee_lien_clair")
+raw_donnee_lien_cible <- dbGetQuery(con, "SELECT * FROM si.donnee_lien_clair")
 raw_media <- dbGetQuery(con, "SELECT * FROM si.media_clair")
+raw_media_donnee <- dbGetQuery(con, "SELECT * FROM si.media_donnee_clair")
+
+raw_publication_media <- dbGetQuery(con, "SELECT * FROM si.media_publication_clair")
 raw_publication <- dbGetQuery(con, "SELECT * FROM si.publication_clair")
+
 
 polluant <- data.table(raw_polluant)
 donnee <- data.table(raw_donnee)
-donnee_lien <- data.table(raw_donnee_lien)
+donnee_lien_source <- data.table(raw_donnee_lien_source)
+donnee_lien_cible <- data.table(raw_donnee_lien_cible)
 media <- data.table(raw_media)
+media_donnee <- data.table(raw_media_donnee)
+media_publication <- data.table(raw_publication_media)
 publication <- data.table(raw_publication)
 
 
@@ -44,24 +52,34 @@ ui <- fluidPage(
         h3("Tous les polluants"),
         DT::dataTableOutput("Table_Polluant")) ,
       fluidRow(h3("Données Associées avec "),
-               DT::dataTableOutput("Table_Donnee_poll"),
+               DT::dataTableOutput("Table_Donnee_polluant")
       )
     ),
     tabPanel("Données",
              fluidRow(
-               h3("Données Associées avec "),
-               DT::dataTableOutput("Table_Donnee_Maitre"))
+               h3("Données Associées "),
+               DT::dataTableOutput("Table_Donnee_Maitre"),
+               h3("Donnees en entree "),
+               DT::dataTableOutput("Table_Donnee_Lien_source"),
+               h3("Donnees en sortie "),
+               DT::dataTableOutput("Table_Donnee_Lien_cible"))
     ),
     # Navbar 1, tabPanel
     tabPanel("Media",
              fluidRow(
                h3("Media et Documents publiés "),
-               DT::dataTableOutput("Table_Media"))),
+               DT::dataTableOutput("Table_Media"),
+               h3("Donnees contenues "),
+               DT::dataTableOutput("Table_Media_Donnee")
+             )),
     
     tabPanel("Supports de Publication ",
              fluidRow(
-               h3("Supports de publication avec "),
-               DT::dataTableOutput("Table_Publication"))),
+               h3("Supports de publication"),
+               DT::dataTableOutput("Table_Publication"),
+               h3("Medias contenus dans les publications"),
+               DT::dataTableOutput("Table_Publication_Media")
+             )),
     tabPanel("Ajouter des données ",
              fluidRow(
                column(2,h3("Fiche Polluant")),
@@ -79,7 +97,7 @@ server <- function(input, output) {
       data = polluant
     )
   })
-  output$Table_Donnee_poll <- DT::renderDataTable({
+  output$Table_Donnee_polluant <- DT::renderDataTable({
     DT::datatable(
       data <- donnee
     )
@@ -89,19 +107,35 @@ server <- function(input, output) {
       data <- donnee
     )
   })
-  output$Table_Donnee_Lien <- DT::renderDataTable({
+  output$Table_Donnee_Lien_source <- DT::renderDataTable({
     DT::datatable(
-      data <- donnee
+      data <- donnee_lien_source
     )
   })
+  output$Table_Donnee_Lien_cible <- DT::renderDataTable({
+    DT::datatable(
+      data <- donnee_lien_cible
+    )
+  })
+  
   output$Table_Media <- DT::renderDataTable({
     DT::datatable(
       data <- media
     )
   })
+  output$Table_Media_Donnee <- DT::renderDataTable({
+    DT::datatable(
+      data <- media_donnee
+    )
+  })
   output$Table_Publication <- DT::renderDataTable({
     DT::datatable(
       data <- publication
+    )
+  })
+  output$Table_Publication_Media <- DT::renderDataTable({
+    DT::datatable(
+      data <- media_publication
     )
   })
   
