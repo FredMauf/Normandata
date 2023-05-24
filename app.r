@@ -8,28 +8,27 @@ library(RPostgres)
 library(DBI)
 
 print("connecting to....")
-con<-dbConnect(
+con <- dbConnect(
   RPostgres::Postgres(),
   dbname = "postgres",
   host = "localhost",
   port = "5432",
   password = "123",
-  user = "postgres" 
-  
-)
+  user = "postgres")
+
 print("connecté! ")
-polluant = dbGetQuery(con, "SELECT * FROM si.polluant")
-donnee = dbGetQuery(con, "SELECT * FROM si.donnee_claire")
-donnee_lien = dbGetQuery(con, "SELECT * FROM si.donnee_lien")
-media = dbGetQuery(con, "SELECT * FROM si.media")
+polluant <- dbGetQuery(con, "SELECT * FROM si.polluant")
+donnee <- dbGetQuery(con, "SELECT * FROM si.donnee_claire")
+donnee_lien <- dbGetQuery(con, "SELECT * FROM si.donnee_lien")
+media <- dbGetQuery(con, "SELECT * FROM si.media")
 
-polluant=data.table(polluant)
-donnee=data.table(donnee)
-media=data.table(media)
+polluant <- data.table(polluant)
+donnee <- data.table(donnee)
+media <- data.table(media)
 
 
 
-theme<-"cosmo"
+theme <- "cosmo"
 
 # Define UI
 ui <- fluidPage(
@@ -37,8 +36,8 @@ ui <- fluidPage(
   navbarPage(
     "Cartographe Data Atmo Normandie",
     tabPanel(
-      "Polluants et Substances", 
-      fluidRow( 
+      "Polluants et Substances",
+      fluidRow(
         h3("Tous les polluants...."),
         DT::dataTableOutput("Table_Polluant")) ,
       fluidRow(
@@ -46,43 +45,27 @@ ui <- fluidPage(
       column(2,textInput("Nom_polluant", "Nom du polluant", "")),
       column(2, textInput("Code_Polluant_lcsqa", "Code Polluant LCSQA", " ")),
       column(2, textInput("Date_maj", "Date de mise à jour:", "Date du jour")),
-        actionButton("Ajouter_Polluant","Ajouter")
+      actionButton("Ajouter_Polluant","Ajouter")
       ) ,
-      fluidRow(h3("Données Associées avec "), h3(textOutput("tab_pol_lib_polluant_selectionne")),
-        DT::dataTableOutput("Table_Donnee" ),
+      fluidRow(h3("Données Associées avec "),
+        h3(textOutput("tab_pol_lib_polluant_selectionne")),
+        DT::dataTableOutput("Table_Donnee"),
         h3(textOutput("tab_donnee_lib_donee_selectionne"))
-        
-        
-        
-      ) 
-      
-    ),
+      )),
 
-
-
-    tabPanel("Données ",  
-    fluidRow( 
-      h3("Données Associées avec "), h3(textOutput("tab_don_lib_polluant_selectionne"))
-
-
-      
-            )
+    tabPanel("Données ",
+    fluidRow(
+      h3("Données Associées avec "), 
+      h3(textOutput("tab_don_lib_polluant_selectionne"))
+    )
     ), # Navbar 1, tabPanel
     tabPanel("Media",  fluidRow( 
-      h3("Media Associées avec "), h3("salut" )))
-  
+      h3("Media Associées avec "), h3("salut")))
   ,
-    
-    
     tabPanel("Supports ", fluidRow( 
-      h3("Media Associées avec "),  h3("salut" )))
-  
-      
-    
+      h3("Media Associées avec "),  h3("salut")))
   ) # navbarPage
 ) # fluidPage
-
-
 
 server <- function(input, output) {
 
