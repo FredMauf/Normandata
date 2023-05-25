@@ -5,7 +5,7 @@
 -- Dumped from database version 15.2
 -- Dumped by pg_dump version 15.2
 
--- Started on 2023-05-24 17:47:21
+-- Started on 2023-05-25 08:45:24
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -33,7 +33,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- TOC entry 240 (class 1259 OID 16636)
+-- TOC entry 239 (class 1259 OID 16636)
 -- Name: application; Type: TABLE; Schema: si; Owner: postgres
 --
 
@@ -47,7 +47,7 @@ CREATE TABLE si.application (
 ALTER TABLE si.application OWNER TO postgres;
 
 --
--- TOC entry 239 (class 1259 OID 16635)
+-- TOC entry 238 (class 1259 OID 16635)
 -- Name: application_id_application_seq; Type: SEQUENCE; Schema: si; Owner: postgres
 --
 
@@ -63,8 +63,8 @@ CREATE SEQUENCE si.application_id_application_seq
 ALTER TABLE si.application_id_application_seq OWNER TO postgres;
 
 --
--- TOC entry 3505 (class 0 OID 0)
--- Dependencies: 239
+-- TOC entry 3502 (class 0 OID 0)
+-- Dependencies: 238
 -- Name: application_id_application_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
 
@@ -94,7 +94,7 @@ CREATE TABLE si.donnee (
 ALTER TABLE si.donnee OWNER TO postgres;
 
 --
--- TOC entry 228 (class 1259 OID 16493)
+-- TOC entry 227 (class 1259 OID 16493)
 -- Name: etat_maturite; Type: TABLE; Schema: si; Owner: postgres
 --
 
@@ -107,7 +107,7 @@ CREATE TABLE si.etat_maturite (
 ALTER TABLE si.etat_maturite OWNER TO postgres;
 
 --
--- TOC entry 235 (class 1259 OID 16569)
+-- TOC entry 234 (class 1259 OID 16569)
 -- Name: maille_geo; Type: TABLE; Schema: si; Owner: postgres
 --
 
@@ -120,7 +120,7 @@ CREATE TABLE si.maille_geo (
 ALTER TABLE si.maille_geo OWNER TO postgres;
 
 --
--- TOC entry 234 (class 1259 OID 16568)
+-- TOC entry 233 (class 1259 OID 16568)
 -- Name: maille_geo_id_maille_seq; Type: SEQUENCE; Schema: si; Owner: postgres
 --
 
@@ -136,8 +136,8 @@ CREATE SEQUENCE si.maille_geo_id_maille_seq
 ALTER TABLE si.maille_geo_id_maille_seq OWNER TO postgres;
 
 --
--- TOC entry 3506 (class 0 OID 0)
--- Dependencies: 234
+-- TOC entry 3503 (class 0 OID 0)
+-- Dependencies: 233
 -- Name: maille_geo_id_maille_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
 
@@ -145,7 +145,7 @@ ALTER SEQUENCE si.maille_geo_id_maille_seq OWNED BY si.maille_geo.id_maille_geo;
 
 
 --
--- TOC entry 236 (class 1259 OID 16594)
+-- TOC entry 235 (class 1259 OID 16594)
 -- Name: maille_temps; Type: TABLE; Schema: si; Owner: postgres
 --
 
@@ -173,7 +173,7 @@ CREATE TABLE si.polluant (
 ALTER TABLE si.polluant OWNER TO postgres;
 
 --
--- TOC entry 230 (class 1259 OID 16502)
+-- TOC entry 229 (class 1259 OID 16502)
 -- Name: proprietaire_objet; Type: TABLE; Schema: si; Owner: postgres
 --
 
@@ -186,7 +186,7 @@ CREATE TABLE si.proprietaire_objet (
 ALTER TABLE si.proprietaire_objet OWNER TO postgres;
 
 --
--- TOC entry 241 (class 1259 OID 16651)
+-- TOC entry 240 (class 1259 OID 16651)
 -- Name: donnee_clair; Type: VIEW; Schema: si; Owner: postgres
 --
 
@@ -231,7 +231,7 @@ CREATE SEQUENCE si.donnee_code_donnee_seq
 ALTER TABLE si.donnee_code_donnee_seq OWNER TO postgres;
 
 --
--- TOC entry 3507 (class 0 OID 0)
+-- TOC entry 3504 (class 0 OID 0)
 -- Dependencies: 218
 -- Name: donnee_code_donnee_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
@@ -240,7 +240,7 @@ ALTER SEQUENCE si.donnee_code_donnee_seq OWNED BY si.donnee.id_donnee;
 
 
 --
--- TOC entry 226 (class 1259 OID 16479)
+-- TOC entry 225 (class 1259 OID 16479)
 -- Name: donnee_lien; Type: TABLE; Schema: si; Owner: postgres
 --
 
@@ -253,7 +253,7 @@ CREATE TABLE si.donnee_lien (
 ALTER TABLE si.donnee_lien OWNER TO postgres;
 
 --
--- TOC entry 244 (class 1259 OID 16680)
+-- TOC entry 243 (class 1259 OID 16680)
 -- Name: donnee_lien_clair; Type: VIEW; Schema: si; Owner: postgres
 --
 
@@ -272,7 +272,7 @@ CREATE VIEW si.donnee_lien_clair AS
 ALTER TABLE si.donnee_lien_clair OWNER TO postgres;
 
 --
--- TOC entry 227 (class 1259 OID 16492)
+-- TOC entry 226 (class 1259 OID 16492)
 -- Name: etat_maturite_code_etat_maturite_seq; Type: SEQUENCE; Schema: si; Owner: postgres
 --
 
@@ -288,8 +288,8 @@ CREATE SEQUENCE si.etat_maturite_code_etat_maturite_seq
 ALTER TABLE si.etat_maturite_code_etat_maturite_seq OWNER TO postgres;
 
 --
--- TOC entry 3508 (class 0 OID 0)
--- Dependencies: 227
+-- TOC entry 3505 (class 0 OID 0)
+-- Dependencies: 226
 -- Name: etat_maturite_code_etat_maturite_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
 
@@ -297,7 +297,7 @@ ALTER SEQUENCE si.etat_maturite_code_etat_maturite_seq OWNED BY si.etat_maturite
 
 
 --
--- TOC entry 224 (class 1259 OID 16438)
+-- TOC entry 223 (class 1259 OID 16438)
 -- Name: media; Type: TABLE; Schema: si; Owner: postgres
 --
 
@@ -314,7 +314,7 @@ CREATE TABLE si.media (
 ALTER TABLE si.media OWNER TO postgres;
 
 --
--- TOC entry 222 (class 1259 OID 16429)
+-- TOC entry 221 (class 1259 OID 16429)
 -- Name: type_media; Type: TABLE; Schema: si; Owner: postgres
 --
 
@@ -327,7 +327,7 @@ CREATE TABLE si.type_media (
 ALTER TABLE si.type_media OWNER TO postgres;
 
 --
--- TOC entry 242 (class 1259 OID 16667)
+-- TOC entry 241 (class 1259 OID 16667)
 -- Name: media_clair; Type: VIEW; Schema: si; Owner: postgres
 --
 
@@ -347,7 +347,7 @@ CREATE VIEW si.media_clair AS
 ALTER TABLE si.media_clair OWNER TO postgres;
 
 --
--- TOC entry 225 (class 1259 OID 16453)
+-- TOC entry 224 (class 1259 OID 16453)
 -- Name: media_donnee; Type: TABLE; Schema: si; Owner: postgres
 --
 
@@ -363,7 +363,7 @@ CREATE TABLE si.media_donnee (
 ALTER TABLE si.media_donnee OWNER TO postgres;
 
 --
--- TOC entry 245 (class 1259 OID 16685)
+-- TOC entry 244 (class 1259 OID 16685)
 -- Name: media_donnee_clair; Type: VIEW; Schema: si; Owner: postgres
 --
 
@@ -383,7 +383,7 @@ CREATE VIEW si.media_donnee_clair AS
 ALTER TABLE si.media_donnee_clair OWNER TO postgres;
 
 --
--- TOC entry 223 (class 1259 OID 16437)
+-- TOC entry 222 (class 1259 OID 16437)
 -- Name: media_id_media_seq; Type: SEQUENCE; Schema: si; Owner: postgres
 --
 
@@ -399,8 +399,8 @@ CREATE SEQUENCE si.media_id_media_seq
 ALTER TABLE si.media_id_media_seq OWNER TO postgres;
 
 --
--- TOC entry 3509 (class 0 OID 0)
--- Dependencies: 223
+-- TOC entry 3506 (class 0 OID 0)
+-- Dependencies: 222
 -- Name: media_id_media_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
 
@@ -408,7 +408,7 @@ ALTER SEQUENCE si.media_id_media_seq OWNED BY si.media.id_media;
 
 
 --
--- TOC entry 233 (class 1259 OID 16551)
+-- TOC entry 232 (class 1259 OID 16551)
 -- Name: media_publication; Type: TABLE; Schema: si; Owner: postgres
 --
 
@@ -423,7 +423,7 @@ CREATE TABLE si.media_publication (
 ALTER TABLE si.media_publication OWNER TO postgres;
 
 --
--- TOC entry 232 (class 1259 OID 16515)
+-- TOC entry 231 (class 1259 OID 16515)
 -- Name: publication; Type: TABLE; Schema: si; Owner: postgres
 --
 
@@ -438,7 +438,7 @@ CREATE TABLE si.publication (
 ALTER TABLE si.publication OWNER TO postgres;
 
 --
--- TOC entry 243 (class 1259 OID 16676)
+-- TOC entry 242 (class 1259 OID 16676)
 -- Name: publication_clair; Type: VIEW; Schema: si; Owner: postgres
 --
 
@@ -455,7 +455,7 @@ CREATE VIEW si.publication_clair AS
 ALTER TABLE si.publication_clair OWNER TO postgres;
 
 --
--- TOC entry 246 (class 1259 OID 16690)
+-- TOC entry 245 (class 1259 OID 16690)
 -- Name: media_publication_clair; Type: VIEW; Schema: si; Owner: postgres
 --
 
@@ -488,7 +488,7 @@ CREATE SEQUENCE si.polluant_code_polluant_seq
 ALTER TABLE si.polluant_code_polluant_seq OWNER TO postgres;
 
 --
--- TOC entry 3510 (class 0 OID 0)
+-- TOC entry 3507 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: polluant_code_polluant_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
@@ -497,7 +497,7 @@ ALTER SEQUENCE si.polluant_code_polluant_seq OWNED BY si.polluant.id_polluant;
 
 
 --
--- TOC entry 229 (class 1259 OID 16501)
+-- TOC entry 228 (class 1259 OID 16501)
 -- Name: proprietaire_objet_id_proprietaire_objet_seq; Type: SEQUENCE; Schema: si; Owner: postgres
 --
 
@@ -513,8 +513,8 @@ CREATE SEQUENCE si.proprietaire_objet_id_proprietaire_objet_seq
 ALTER TABLE si.proprietaire_objet_id_proprietaire_objet_seq OWNER TO postgres;
 
 --
--- TOC entry 3511 (class 0 OID 0)
--- Dependencies: 229
+-- TOC entry 3508 (class 0 OID 0)
+-- Dependencies: 228
 -- Name: proprietaire_objet_id_proprietaire_objet_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
 
@@ -522,7 +522,7 @@ ALTER SEQUENCE si.proprietaire_objet_id_proprietaire_objet_seq OWNED BY si.propr
 
 
 --
--- TOC entry 231 (class 1259 OID 16514)
+-- TOC entry 230 (class 1259 OID 16514)
 -- Name: publication_id_publication_seq; Type: SEQUENCE; Schema: si; Owner: postgres
 --
 
@@ -538,8 +538,8 @@ CREATE SEQUENCE si.publication_id_publication_seq
 ALTER TABLE si.publication_id_publication_seq OWNER TO postgres;
 
 --
--- TOC entry 3512 (class 0 OID 0)
--- Dependencies: 231
+-- TOC entry 3509 (class 0 OID 0)
+-- Dependencies: 230
 -- Name: publication_id_publication_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
 
@@ -547,7 +547,7 @@ ALTER SEQUENCE si.publication_id_publication_seq OWNED BY si.publication.id_publ
 
 
 --
--- TOC entry 238 (class 1259 OID 16627)
+-- TOC entry 237 (class 1259 OID 16627)
 -- Name: serveur; Type: TABLE; Schema: si; Owner: postgres
 --
 
@@ -560,7 +560,7 @@ CREATE TABLE si.serveur (
 ALTER TABLE si.serveur OWNER TO postgres;
 
 --
--- TOC entry 237 (class 1259 OID 16626)
+-- TOC entry 236 (class 1259 OID 16626)
 -- Name: serveur_id_serveur_seq; Type: SEQUENCE; Schema: si; Owner: postgres
 --
 
@@ -576,8 +576,8 @@ CREATE SEQUENCE si.serveur_id_serveur_seq
 ALTER TABLE si.serveur_id_serveur_seq OWNER TO postgres;
 
 --
--- TOC entry 3513 (class 0 OID 0)
--- Dependencies: 237
+-- TOC entry 3510 (class 0 OID 0)
+-- Dependencies: 236
 -- Name: serveur_id_serveur_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
 
@@ -585,7 +585,7 @@ ALTER SEQUENCE si.serveur_id_serveur_seq OWNED BY si.serveur.id_serveur;
 
 
 --
--- TOC entry 221 (class 1259 OID 16428)
+-- TOC entry 220 (class 1259 OID 16428)
 -- Name: type_media_code_type_media_seq; Type: SEQUENCE; Schema: si; Owner: postgres
 --
 
@@ -601,8 +601,8 @@ CREATE SEQUENCE si.type_media_code_type_media_seq
 ALTER TABLE si.type_media_code_type_media_seq OWNER TO postgres;
 
 --
--- TOC entry 3514 (class 0 OID 0)
--- Dependencies: 221
+-- TOC entry 3511 (class 0 OID 0)
+-- Dependencies: 220
 -- Name: type_media_code_type_media_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
 
@@ -610,7 +610,7 @@ ALTER SEQUENCE si.type_media_code_type_media_seq OWNED BY si.type_media.id_type_
 
 
 --
--- TOC entry 3282 (class 2604 OID 16639)
+-- TOC entry 3279 (class 2604 OID 16639)
 -- Name: application id_application; Type: DEFAULT; Schema: si; Owner: postgres
 --
 
@@ -618,7 +618,7 @@ ALTER TABLE ONLY si.application ALTER COLUMN id_application SET DEFAULT nextval(
 
 
 --
--- TOC entry 3265 (class 2604 OID 16412)
+-- TOC entry 3262 (class 2604 OID 16412)
 -- Name: donnee id_donnee; Type: DEFAULT; Schema: si; Owner: postgres
 --
 
@@ -626,7 +626,7 @@ ALTER TABLE ONLY si.donnee ALTER COLUMN id_donnee SET DEFAULT nextval('si.donnee
 
 
 --
--- TOC entry 3276 (class 2604 OID 16496)
+-- TOC entry 3273 (class 2604 OID 16496)
 -- Name: etat_maturite id_etat_maturite; Type: DEFAULT; Schema: si; Owner: postgres
 --
 
@@ -634,7 +634,7 @@ ALTER TABLE ONLY si.etat_maturite ALTER COLUMN id_etat_maturite SET DEFAULT next
 
 
 --
--- TOC entry 3279 (class 2604 OID 16572)
+-- TOC entry 3276 (class 2604 OID 16572)
 -- Name: maille_geo id_maille_geo; Type: DEFAULT; Schema: si; Owner: postgres
 --
 
@@ -642,7 +642,7 @@ ALTER TABLE ONLY si.maille_geo ALTER COLUMN id_maille_geo SET DEFAULT nextval('s
 
 
 --
--- TOC entry 3273 (class 2604 OID 16441)
+-- TOC entry 3270 (class 2604 OID 16441)
 -- Name: media id_media; Type: DEFAULT; Schema: si; Owner: postgres
 --
 
@@ -650,7 +650,7 @@ ALTER TABLE ONLY si.media ALTER COLUMN id_media SET DEFAULT nextval('si.media_id
 
 
 --
--- TOC entry 3263 (class 2604 OID 16403)
+-- TOC entry 3260 (class 2604 OID 16403)
 -- Name: polluant id_polluant; Type: DEFAULT; Schema: si; Owner: postgres
 --
 
@@ -658,7 +658,7 @@ ALTER TABLE ONLY si.polluant ALTER COLUMN id_polluant SET DEFAULT nextval('si.po
 
 
 --
--- TOC entry 3277 (class 2604 OID 16505)
+-- TOC entry 3274 (class 2604 OID 16505)
 -- Name: proprietaire_objet id_proprietaire_objet; Type: DEFAULT; Schema: si; Owner: postgres
 --
 
@@ -666,7 +666,7 @@ ALTER TABLE ONLY si.proprietaire_objet ALTER COLUMN id_proprietaire_objet SET DE
 
 
 --
--- TOC entry 3278 (class 2604 OID 16518)
+-- TOC entry 3275 (class 2604 OID 16518)
 -- Name: publication id_publication; Type: DEFAULT; Schema: si; Owner: postgres
 --
 
@@ -674,7 +674,7 @@ ALTER TABLE ONLY si.publication ALTER COLUMN id_publication SET DEFAULT nextval(
 
 
 --
--- TOC entry 3281 (class 2604 OID 16630)
+-- TOC entry 3278 (class 2604 OID 16630)
 -- Name: serveur id_serveur; Type: DEFAULT; Schema: si; Owner: postgres
 --
 
@@ -682,7 +682,7 @@ ALTER TABLE ONLY si.serveur ALTER COLUMN id_serveur SET DEFAULT nextval('si.serv
 
 
 --
--- TOC entry 3272 (class 2604 OID 16432)
+-- TOC entry 3269 (class 2604 OID 16432)
 -- Name: type_media id_type_media; Type: DEFAULT; Schema: si; Owner: postgres
 --
 
@@ -690,8 +690,8 @@ ALTER TABLE ONLY si.type_media ALTER COLUMN id_type_media SET DEFAULT nextval('s
 
 
 --
--- TOC entry 3499 (class 0 OID 16636)
--- Dependencies: 240
+-- TOC entry 3496 (class 0 OID 16636)
+-- Dependencies: 239
 -- Data for Name: application; Type: TABLE DATA; Schema: si; Owner: postgres
 --
 
@@ -700,10 +700,11 @@ INSERT INTO si.application VALUES (2, 'Outil Prévi', 0);
 INSERT INTO si.application VALUES (3, 'Outil Inventaire', 0);
 INSERT INTO si.application VALUES (4, 'Signal Air', 0);
 INSERT INTO si.application VALUES (0, 'Inconnu', 0);
+INSERT INTO si.application VALUES (5, 'Collecteur API RNSA', 0);
 
 
 --
--- TOC entry 3479 (class 0 OID 16409)
+-- TOC entry 3476 (class 0 OID 16409)
 -- Dependencies: 219
 -- Data for Name: donnee; Type: TABLE DATA; Schema: si; Owner: postgres
 --
@@ -725,11 +726,14 @@ INSERT INTO si.donnee VALUES (6, 1, 'mesure moyenne horaire O3', 'Calcul_agreg',
 INSERT INTO si.donnee VALUES (7, 1, 'mesure moyenne Journaliere O3', 'Calcul_agreg', 1, 1, 5, 13, 'O', '1997-01-01', 1);
 INSERT INTO si.donnee VALUES (8, 1, 'mesure moyenne Mensuelle O3', 'Calcul_agreg', 1, 1, 5, 9, 'O', '1997-01-01', 1);
 INSERT INTO si.donnee VALUES (9, 1, 'mesure moyenne Annuelle O3', 'Calcul_agreg', 1, 1, 5, 11, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (18, 38, 'Indice Pollinique RNSA Noisetier', 'Indice', 1, 0, 2, 10, 'N', '2022-06-30', 5);
+INSERT INTO si.donnee VALUES (19, 39, 'Indice Pollinique RNSA Ambroisie', 'Indice', 1, 0, 2, 10, 'N', '2022-06-30', 5);
+INSERT INTO si.donnee VALUES (20, 40, 'Indice Pollinique RNSA Frene', 'Indice', 1, 0, 2, 10, 'N', '2022-06-30', 5);
 
 
 --
--- TOC entry 3485 (class 0 OID 16479)
--- Dependencies: 226
+-- TOC entry 3482 (class 0 OID 16479)
+-- Dependencies: 225
 -- Data for Name: donnee_lien; Type: TABLE DATA; Schema: si; Owner: postgres
 --
 
@@ -745,8 +749,8 @@ INSERT INTO si.donnee_lien VALUES (16, 11);
 
 
 --
--- TOC entry 3487 (class 0 OID 16493)
--- Dependencies: 228
+-- TOC entry 3484 (class 0 OID 16493)
+-- Dependencies: 227
 -- Data for Name: etat_maturite; Type: TABLE DATA; Schema: si; Owner: postgres
 --
 
@@ -756,8 +760,8 @@ INSERT INTO si.etat_maturite VALUES (2, 'A l''étude');
 
 
 --
--- TOC entry 3494 (class 0 OID 16569)
--- Dependencies: 235
+-- TOC entry 3491 (class 0 OID 16569)
+-- Dependencies: 234
 -- Data for Name: maille_geo; Type: TABLE DATA; Schema: si; Owner: postgres
 --
 
@@ -772,8 +776,8 @@ INSERT INTO si.maille_geo VALUES (14, 'Meso Echelle 1Km');
 
 
 --
--- TOC entry 3495 (class 0 OID 16594)
--- Dependencies: 236
+-- TOC entry 3492 (class 0 OID 16594)
+-- Dependencies: 235
 -- Data for Name: maille_temps; Type: TABLE DATA; Schema: si; Owner: postgres
 --
 
@@ -788,18 +792,19 @@ INSERT INTO si.maille_temps VALUES (13, 'Quotidien');
 
 
 --
--- TOC entry 3483 (class 0 OID 16438)
--- Dependencies: 224
+-- TOC entry 3480 (class 0 OID 16438)
+-- Dependencies: 223
 -- Data for Name: media; Type: TABLE DATA; Schema: si; Owner: postgres
 --
 
 INSERT INTO si.media VALUES (1, 'Carte Indice Atmo Jour', NULL, 1, 0, 0);
 INSERT INTO si.media VALUES (2, 'Widget Air de ma commune / Indice', 'https://www.atmonormandie.fr/air-commune/SaintLo/50502/indice-atmo?date=2023-05-04', 6, 1, 2);
+INSERT INTO si.media VALUES (3, 'Widget Air de ma commune / Pollen', NULL, 6, 1, 2);
 
 
 --
--- TOC entry 3484 (class 0 OID 16453)
--- Dependencies: 225
+-- TOC entry 3481 (class 0 OID 16453)
+-- Dependencies: 224
 -- Data for Name: media_donnee; Type: TABLE DATA; Schema: si; Owner: postgres
 --
 
@@ -809,19 +814,23 @@ INSERT INTO si.media_donnee VALUES (2, 13, 4, 13, 'J');
 INSERT INTO si.media_donnee VALUES (2, 14, 4, 13, 'J');
 INSERT INTO si.media_donnee VALUES (2, 15, 4, 13, 'J');
 INSERT INTO si.media_donnee VALUES (2, 16, 4, 13, 'J');
+INSERT INTO si.media_donnee VALUES (3, 18, 2, 10, 'J');
+INSERT INTO si.media_donnee VALUES (3, 19, 2, 10, 'J');
+INSERT INTO si.media_donnee VALUES (3, 20, 2, 10, 'J');
 
 
 --
--- TOC entry 3492 (class 0 OID 16551)
--- Dependencies: 233
+-- TOC entry 3489 (class 0 OID 16551)
+-- Dependencies: 232
 -- Data for Name: media_publication; Type: TABLE DATA; Schema: si; Owner: postgres
 --
 
 INSERT INTO si.media_publication VALUES (2, 1, 'Region', 'public');
+INSERT INTO si.media_publication VALUES (3, 1, 'Region', 'public');
 
 
 --
--- TOC entry 3477 (class 0 OID 16400)
+-- TOC entry 3474 (class 0 OID 16400)
 -- Dependencies: 217
 -- Data for Name: polluant; Type: TABLE DATA; Schema: si; Owner: postgres
 --
@@ -834,11 +843,14 @@ INSERT INTO si.polluant VALUES (5, 'SO2', NULL, '2025-02-04');
 INSERT INTO si.polluant VALUES (7, ' Ether ', ' XX ', '2023-04-27');
 INSERT INTO si.polluant VALUES (8, ' MethaneCH4 ', ' CD5 ', '2023-04-27');
 INSERT INTO si.polluant VALUES (0, 'Aucun/Multi', NULL, '2023-05-15');
+INSERT INTO si.polluant VALUES (38, 'Pollen Noisetier', NULL, '2023-05-25');
+INSERT INTO si.polluant VALUES (39, 'Pollen Ambroisie', NULL, '2023-05-25');
+INSERT INTO si.polluant VALUES (40, 'Pollen  Frene', NULL, '2023-05-25');
 
 
 --
--- TOC entry 3489 (class 0 OID 16502)
--- Dependencies: 230
+-- TOC entry 3486 (class 0 OID 16502)
+-- Dependencies: 229
 -- Data for Name: proprietaire_objet; Type: TABLE DATA; Schema: si; Owner: postgres
 --
 
@@ -848,8 +860,8 @@ INSERT INTO si.proprietaire_objet VALUES (2, 'Service Communication');
 
 
 --
--- TOC entry 3491 (class 0 OID 16515)
--- Dependencies: 232
+-- TOC entry 3488 (class 0 OID 16515)
+-- Dependencies: 231
 -- Data for Name: publication; Type: TABLE DATA; Schema: si; Owner: postgres
 --
 
@@ -857,8 +869,8 @@ INSERT INTO si.publication VALUES (1, 'Site Atmo Normandie', 1, 2);
 
 
 --
--- TOC entry 3497 (class 0 OID 16627)
--- Dependencies: 238
+-- TOC entry 3494 (class 0 OID 16627)
+-- Dependencies: 237
 -- Data for Name: serveur; Type: TABLE DATA; Schema: si; Owner: postgres
 --
 
@@ -869,8 +881,8 @@ INSERT INTO si.serveur VALUES (0, 'Inconnu');
 
 
 --
--- TOC entry 3481 (class 0 OID 16429)
--- Dependencies: 222
+-- TOC entry 3478 (class 0 OID 16429)
+-- Dependencies: 221
 -- Data for Name: type_media; Type: TABLE DATA; Schema: si; Owner: postgres
 --
 
@@ -883,26 +895,26 @@ INSERT INTO si.type_media VALUES (6, 'DataViz');
 
 
 --
--- TOC entry 3515 (class 0 OID 0)
--- Dependencies: 239
+-- TOC entry 3512 (class 0 OID 0)
+-- Dependencies: 238
 -- Name: application_id_application_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
-SELECT pg_catalog.setval('si.application_id_application_seq', 4, true);
+SELECT pg_catalog.setval('si.application_id_application_seq', 5, true);
 
 
 --
--- TOC entry 3516 (class 0 OID 0)
+-- TOC entry 3513 (class 0 OID 0)
 -- Dependencies: 218
 -- Name: donnee_code_donnee_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
-SELECT pg_catalog.setval('si.donnee_code_donnee_seq', 17, true);
+SELECT pg_catalog.setval('si.donnee_code_donnee_seq', 20, true);
 
 
 --
--- TOC entry 3517 (class 0 OID 0)
--- Dependencies: 227
+-- TOC entry 3514 (class 0 OID 0)
+-- Dependencies: 226
 -- Name: etat_maturite_code_etat_maturite_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
@@ -910,8 +922,8 @@ SELECT pg_catalog.setval('si.etat_maturite_code_etat_maturite_seq', 1, false);
 
 
 --
--- TOC entry 3518 (class 0 OID 0)
--- Dependencies: 234
+-- TOC entry 3515 (class 0 OID 0)
+-- Dependencies: 233
 -- Name: maille_geo_id_maille_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
@@ -919,26 +931,26 @@ SELECT pg_catalog.setval('si.maille_geo_id_maille_seq', 14, true);
 
 
 --
--- TOC entry 3519 (class 0 OID 0)
--- Dependencies: 223
+-- TOC entry 3516 (class 0 OID 0)
+-- Dependencies: 222
 -- Name: media_id_media_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
-SELECT pg_catalog.setval('si.media_id_media_seq', 2, true);
+SELECT pg_catalog.setval('si.media_id_media_seq', 3, true);
 
 
 --
--- TOC entry 3520 (class 0 OID 0)
+-- TOC entry 3517 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: polluant_code_polluant_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
-SELECT pg_catalog.setval('si.polluant_code_polluant_seq', 37, true);
+SELECT pg_catalog.setval('si.polluant_code_polluant_seq', 40, true);
 
 
 --
--- TOC entry 3521 (class 0 OID 0)
--- Dependencies: 229
+-- TOC entry 3518 (class 0 OID 0)
+-- Dependencies: 228
 -- Name: proprietaire_objet_id_proprietaire_objet_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
@@ -946,8 +958,8 @@ SELECT pg_catalog.setval('si.proprietaire_objet_id_proprietaire_objet_seq', 2, t
 
 
 --
--- TOC entry 3522 (class 0 OID 0)
--- Dependencies: 231
+-- TOC entry 3519 (class 0 OID 0)
+-- Dependencies: 230
 -- Name: publication_id_publication_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
@@ -955,8 +967,8 @@ SELECT pg_catalog.setval('si.publication_id_publication_seq', 1, true);
 
 
 --
--- TOC entry 3523 (class 0 OID 0)
--- Dependencies: 237
+-- TOC entry 3520 (class 0 OID 0)
+-- Dependencies: 236
 -- Name: serveur_id_serveur_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
@@ -964,8 +976,8 @@ SELECT pg_catalog.setval('si.serveur_id_serveur_seq', 3, true);
 
 
 --
--- TOC entry 3524 (class 0 OID 0)
--- Dependencies: 221
+-- TOC entry 3521 (class 0 OID 0)
+-- Dependencies: 220
 -- Name: type_media_code_type_media_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
@@ -973,7 +985,7 @@ SELECT pg_catalog.setval('si.type_media_code_type_media_seq', 6, true);
 
 
 --
--- TOC entry 3307 (class 2606 OID 16643)
+-- TOC entry 3304 (class 2606 OID 16643)
 -- Name: application application_pk; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -982,7 +994,7 @@ ALTER TABLE ONLY si.application
 
 
 --
--- TOC entry 3287 (class 2606 OID 16416)
+-- TOC entry 3284 (class 2606 OID 16416)
 -- Name: donnee donnee_pk; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -991,7 +1003,7 @@ ALTER TABLE ONLY si.donnee
 
 
 --
--- TOC entry 3295 (class 2606 OID 16500)
+-- TOC entry 3292 (class 2606 OID 16500)
 -- Name: etat_maturite etat_maturite_pk; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1000,7 +1012,7 @@ ALTER TABLE ONLY si.etat_maturite
 
 
 --
--- TOC entry 3301 (class 2606 OID 16576)
+-- TOC entry 3298 (class 2606 OID 16576)
 -- Name: maille_geo maille_geo_pk; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1009,7 +1021,7 @@ ALTER TABLE ONLY si.maille_geo
 
 
 --
--- TOC entry 3303 (class 2606 OID 16601)
+-- TOC entry 3300 (class 2606 OID 16601)
 -- Name: maille_temps maille_temps_pk; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1018,7 +1030,7 @@ ALTER TABLE ONLY si.maille_temps
 
 
 --
--- TOC entry 3293 (class 2606 OID 16459)
+-- TOC entry 3290 (class 2606 OID 16459)
 -- Name: media_donnee media_donnee_pk; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1027,7 +1039,7 @@ ALTER TABLE ONLY si.media_donnee
 
 
 --
--- TOC entry 3291 (class 2606 OID 16445)
+-- TOC entry 3288 (class 2606 OID 16445)
 -- Name: media media_pk; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1036,7 +1048,7 @@ ALTER TABLE ONLY si.media
 
 
 --
--- TOC entry 3285 (class 2606 OID 16407)
+-- TOC entry 3282 (class 2606 OID 16407)
 -- Name: polluant polluant_pk; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1045,7 +1057,7 @@ ALTER TABLE ONLY si.polluant
 
 
 --
--- TOC entry 3297 (class 2606 OID 16509)
+-- TOC entry 3294 (class 2606 OID 16509)
 -- Name: proprietaire_objet proprietaire_objet_pk; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1054,7 +1066,7 @@ ALTER TABLE ONLY si.proprietaire_objet
 
 
 --
--- TOC entry 3299 (class 2606 OID 16562)
+-- TOC entry 3296 (class 2606 OID 16562)
 -- Name: publication publication_pk; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1063,7 +1075,7 @@ ALTER TABLE ONLY si.publication
 
 
 --
--- TOC entry 3305 (class 2606 OID 16634)
+-- TOC entry 3302 (class 2606 OID 16634)
 -- Name: serveur serveur_pk; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1072,7 +1084,7 @@ ALTER TABLE ONLY si.serveur
 
 
 --
--- TOC entry 3289 (class 2606 OID 16436)
+-- TOC entry 3286 (class 2606 OID 16436)
 -- Name: type_media type_media_pkey; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1081,7 +1093,7 @@ ALTER TABLE ONLY si.type_media
 
 
 --
--- TOC entry 3308 (class 2606 OID 16646)
+-- TOC entry 3305 (class 2606 OID 16646)
 -- Name: donnee appli_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1090,7 +1102,7 @@ ALTER TABLE ONLY si.donnee
 
 
 --
--- TOC entry 3327 (class 2606 OID 16671)
+-- TOC entry 3324 (class 2606 OID 16671)
 -- Name: application application_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1099,7 +1111,7 @@ ALTER TABLE ONLY si.application
 
 
 --
--- TOC entry 3309 (class 2606 OID 16616)
+-- TOC entry 3306 (class 2606 OID 16616)
 -- Name: donnee donnee_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1108,7 +1120,7 @@ ALTER TABLE ONLY si.donnee
 
 
 --
--- TOC entry 3317 (class 2606 OID 16465)
+-- TOC entry 3314 (class 2606 OID 16465)
 -- Name: media_donnee donnee_fk_1; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1117,7 +1129,7 @@ ALTER TABLE ONLY si.media_donnee
 
 
 --
--- TOC entry 3321 (class 2606 OID 16487)
+-- TOC entry 3318 (class 2606 OID 16487)
 -- Name: donnee_lien donnee_lien_fk_cible; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1126,7 +1138,7 @@ ALTER TABLE ONLY si.donnee_lien
 
 
 --
--- TOC entry 3322 (class 2606 OID 16482)
+-- TOC entry 3319 (class 2606 OID 16482)
 -- Name: donnee_lien donnee_lien_fk_source; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1135,7 +1147,7 @@ ALTER TABLE ONLY si.donnee_lien
 
 
 --
--- TOC entry 3310 (class 2606 OID 16578)
+-- TOC entry 3307 (class 2606 OID 16578)
 -- Name: donnee maille_geo_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1144,7 +1156,7 @@ ALTER TABLE ONLY si.donnee
 
 
 --
--- TOC entry 3318 (class 2606 OID 16589)
+-- TOC entry 3315 (class 2606 OID 16589)
 -- Name: media_donnee maille_geo_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1153,7 +1165,7 @@ ALTER TABLE ONLY si.media_donnee
 
 
 --
--- TOC entry 3311 (class 2606 OID 16546)
+-- TOC entry 3308 (class 2606 OID 16546)
 -- Name: donnee maturite_donnee_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1162,7 +1174,7 @@ ALTER TABLE ONLY si.donnee
 
 
 --
--- TOC entry 3323 (class 2606 OID 16526)
+-- TOC entry 3320 (class 2606 OID 16526)
 -- Name: publication maturite_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1171,7 +1183,7 @@ ALTER TABLE ONLY si.publication
 
 
 --
--- TOC entry 3314 (class 2606 OID 16536)
+-- TOC entry 3311 (class 2606 OID 16536)
 -- Name: media maturite_media_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1180,7 +1192,7 @@ ALTER TABLE ONLY si.media
 
 
 --
--- TOC entry 3319 (class 2606 OID 16611)
+-- TOC entry 3316 (class 2606 OID 16611)
 -- Name: media_donnee media_donnee_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1189,7 +1201,7 @@ ALTER TABLE ONLY si.media_donnee
 
 
 --
--- TOC entry 3320 (class 2606 OID 16460)
+-- TOC entry 3317 (class 2606 OID 16460)
 -- Name: media_donnee media_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1198,7 +1210,7 @@ ALTER TABLE ONLY si.media_donnee
 
 
 --
--- TOC entry 3325 (class 2606 OID 16556)
+-- TOC entry 3322 (class 2606 OID 16556)
 -- Name: media_publication media_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1207,7 +1219,7 @@ ALTER TABLE ONLY si.media_publication
 
 
 --
--- TOC entry 3326 (class 2606 OID 16563)
+-- TOC entry 3323 (class 2606 OID 16563)
 -- Name: media_publication media_publication_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1216,7 +1228,7 @@ ALTER TABLE ONLY si.media_publication
 
 
 --
--- TOC entry 3312 (class 2606 OID 16417)
+-- TOC entry 3309 (class 2606 OID 16417)
 -- Name: donnee polluant_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1225,7 +1237,7 @@ ALTER TABLE ONLY si.donnee
 
 
 --
--- TOC entry 3313 (class 2606 OID 16541)
+-- TOC entry 3310 (class 2606 OID 16541)
 -- Name: donnee propriaitaire_donnee_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1234,7 +1246,7 @@ ALTER TABLE ONLY si.donnee
 
 
 --
--- TOC entry 3315 (class 2606 OID 16531)
+-- TOC entry 3312 (class 2606 OID 16531)
 -- Name: media proprietaire_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1243,7 +1255,7 @@ ALTER TABLE ONLY si.media
 
 
 --
--- TOC entry 3324 (class 2606 OID 16521)
+-- TOC entry 3321 (class 2606 OID 16521)
 -- Name: publication publication_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1252,17 +1264,5 @@ ALTER TABLE ONLY si.publication
 
 
 --
--- TOC entry 3316 (class 2606 OID 16470)
+-- TOC entry 3313 (class 2606 OID 16470)
 -- Name: media type_media_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
---
-
-ALTER TABLE ONLY si.media
-    ADD CONSTRAINT type_media_fk FOREIGN KEY (id_type_media) REFERENCES si.type_media(id_type_media);
-
-
--- Completed on 2023-05-24 17:47:21
-
---
--- PostgreSQL database dump complete
---
-
