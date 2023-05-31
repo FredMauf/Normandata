@@ -5,7 +5,7 @@
 -- Dumped from database version 15.2
 -- Dumped by pg_dump version 15.2
 
--- Started on 2023-05-25 08:45:24
+-- Started on 2023-05-31 22:31:44
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -29,8 +29,6 @@ CREATE SCHEMA si;
 ALTER SCHEMA si OWNER TO postgres;
 
 SET default_tablespace = '';
-
-SET default_table_access_method = heap;
 
 --
 -- TOC entry 239 (class 1259 OID 16636)
@@ -372,7 +370,9 @@ CREATE VIEW si.media_donnee_clair AS
     dc.libelle_donnee,
     mg.libelle_maille_geo,
     mt.libelle_maille_temps,
-    md.profondeur_histo_diff
+    md.profondeur_histo_diff,
+    md.id_donnee,
+    md.id_media
    FROM ((((si.media_donnee md
      JOIN si.donnee_clair dc ON ((dc.id_donnee = md.id_donnee)))
      JOIN si.media_clair mc ON ((mc.id_media = md.id_media)))
@@ -466,7 +466,7 @@ CREATE VIEW si.media_publication_clair AS
     mp.condition_acces
    FROM ((si.media_publication mp
      JOIN si.publication_clair pc ON ((pc.id_publication = mp.id_publication)))
-     JOIN si.media_clair mc ON ((mc.id_media = mp.id_publication)));
+     JOIN si.media_clair mc ON ((mc.id_media = mp.id_media)));
 
 
 ALTER TABLE si.media_publication_clair OWNER TO postgres;
@@ -701,6 +701,7 @@ INSERT INTO si.application VALUES (3, 'Outil Inventaire', 0);
 INSERT INTO si.application VALUES (4, 'Signal Air', 0);
 INSERT INTO si.application VALUES (0, 'Inconnu', 0);
 INSERT INTO si.application VALUES (5, 'Collecteur API RNSA', 0);
+INSERT INTO si.application VALUES (6, 'Saisie Micro Capteurs', 0);
 
 
 --
@@ -709,6 +710,10 @@ INSERT INTO si.application VALUES (5, 'Collecteur API RNSA', 0);
 -- Data for Name: donnee; Type: TABLE DATA; Schema: si; Owner: postgres
 --
 
+INSERT INTO si.donnee VALUES (21, 5, 'mesure moyenne horaire SO2', 'Calcul_agreg', 1, 1, 5, 8, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (22, 5, 'mesure moyenne Journaliere SO2', 'Calcul_agreg', 1, 1, 5, 13, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (23, 5, 'mesure moyenne Mensuelle SO2', 'Calcul_agreg', 1, 1, 5, 9, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (24, 5, 'mesure moyenne Annuelle SO2', 'Calcul_agreg', 1, 1, 5, 11, 'O', '1997-01-01', 1);
 INSERT INTO si.donnee VALUES (17, 0, 'Signalement Phenomene Atmosphérique', 'Signalement', 1, 0, 5, 0, 'N', '2022-01-01', 4);
 INSERT INTO si.donnee VALUES (10, 1, 'nb jour depassement O3', 'Calcul_agreg', 1, 0, 0, 11, 'N', '1997-01-01', 3);
 INSERT INTO si.donnee VALUES (11, 0, 'Indice Atmo', 'Modelisation Previ', 1, 0, 14, 13, 'O', '2021-01-01', 2);
@@ -729,6 +734,18 @@ INSERT INTO si.donnee VALUES (9, 1, 'mesure moyenne Annuelle O3', 'Calcul_agreg'
 INSERT INTO si.donnee VALUES (18, 38, 'Indice Pollinique RNSA Noisetier', 'Indice', 1, 0, 2, 10, 'N', '2022-06-30', 5);
 INSERT INTO si.donnee VALUES (19, 39, 'Indice Pollinique RNSA Ambroisie', 'Indice', 1, 0, 2, 10, 'N', '2022-06-30', 5);
 INSERT INTO si.donnee VALUES (20, 40, 'Indice Pollinique RNSA Frene', 'Indice', 1, 0, 2, 10, 'N', '2022-06-30', 5);
+INSERT INTO si.donnee VALUES (25, 2, 'mesure moyenne horaire PM2.5', 'Calcul_agreg', 1, 1, 5, 8, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (26, 2, 'mesure moyenne Journaliere PM2.5', 'Calcul_agreg', 1, 1, 5, 13, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (27, 2, 'mesure moyenne Mensuelle PM2.5', 'Calcul_agreg', 1, 1, 5, 9, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (28, 2, 'mesure moyenne Annuelle PM2.5', 'Calcul_agreg', 1, 1, 5, 11, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (29, 3, 'mesure moyenne horaire PM10', 'Calcul_agreg', 1, 1, 5, 8, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (30, 3, 'mesure moyenne Journaliere  PM10', 'Calcul_agreg', 1, 1, 5, 13, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (31, 3, 'mesure moyenne Mensuelle  PM10', 'Calcul_agreg', 1, 1, 5, 9, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (32, 3, 'mesure moyenne Annuelle  PM10', 'Calcul_agreg', 1, 1, 5, 11, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (33, 4, 'mesure moyenne horaire NO2', 'Calcul_agreg', 1, 1, 5, 8, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (34, 4, 'mesure moyenne Journaliere NO2', 'Calcul_agreg', 1, 1, 5, 13, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (35, 4, 'mesure moyenne Mensuelle NO2', 'Calcul_agreg', 1, 1, 5, 9, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (36, 4, 'mesure moyenne Annuelle NO2', 'Calcul_agreg', 1, 1, 5, 11, 'O', '1997-01-01', 1);
 
 
 --
@@ -746,6 +763,22 @@ INSERT INTO si.donnee_lien VALUES (13, 11);
 INSERT INTO si.donnee_lien VALUES (14, 11);
 INSERT INTO si.donnee_lien VALUES (15, 11);
 INSERT INTO si.donnee_lien VALUES (16, 11);
+INSERT INTO si.donnee_lien VALUES (1, 33);
+INSERT INTO si.donnee_lien VALUES (3, 25);
+INSERT INTO si.donnee_lien VALUES (4, 29);
+INSERT INTO si.donnee_lien VALUES (2, 21);
+INSERT INTO si.donnee_lien VALUES (33, 34);
+INSERT INTO si.donnee_lien VALUES (33, 35);
+INSERT INTO si.donnee_lien VALUES (33, 36);
+INSERT INTO si.donnee_lien VALUES (25, 26);
+INSERT INTO si.donnee_lien VALUES (25, 27);
+INSERT INTO si.donnee_lien VALUES (25, 28);
+INSERT INTO si.donnee_lien VALUES (21, 22);
+INSERT INTO si.donnee_lien VALUES (21, 23);
+INSERT INTO si.donnee_lien VALUES (21, 24);
+INSERT INTO si.donnee_lien VALUES (29, 30);
+INSERT INTO si.donnee_lien VALUES (29, 31);
+INSERT INTO si.donnee_lien VALUES (29, 32);
 
 
 --
@@ -817,6 +850,7 @@ INSERT INTO si.media_donnee VALUES (2, 16, 4, 13, 'J');
 INSERT INTO si.media_donnee VALUES (3, 18, 2, 10, 'J');
 INSERT INTO si.media_donnee VALUES (3, 19, 2, 10, 'J');
 INSERT INTO si.media_donnee VALUES (3, 20, 2, 10, 'J');
+INSERT INTO si.media_donnee VALUES (1, 11, 14, 13, 'J');
 
 
 --
@@ -900,7 +934,7 @@ INSERT INTO si.type_media VALUES (6, 'DataViz');
 -- Name: application_id_application_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
-SELECT pg_catalog.setval('si.application_id_application_seq', 5, true);
+SELECT pg_catalog.setval('si.application_id_application_seq', 6, true);
 
 
 --
@@ -909,7 +943,7 @@ SELECT pg_catalog.setval('si.application_id_application_seq', 5, true);
 -- Name: donnee_code_donnee_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
-SELECT pg_catalog.setval('si.donnee_code_donnee_seq', 20, true);
+SELECT pg_catalog.setval('si.donnee_code_donnee_seq', 36, true);
 
 
 --
@@ -1266,3 +1300,15 @@ ALTER TABLE ONLY si.publication
 --
 -- TOC entry 3313 (class 2606 OID 16470)
 -- Name: media type_media_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
+--
+
+ALTER TABLE ONLY si.media
+    ADD CONSTRAINT type_media_fk FOREIGN KEY (id_type_media) REFERENCES si.type_media(id_type_media);
+
+
+-- Completed on 2023-05-31 22:31:44
+
+--
+-- PostgreSQL database dump complete
+--
+

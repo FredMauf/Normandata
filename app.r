@@ -103,7 +103,7 @@ server <- function(input, output) {
     
     else
       raw_donnee <- dbGetQuery(con, "SELECT * FROM si.donnee_clair")
-    donnee<-raw_donnee
+    
     return(raw_donnee)
     
   })
@@ -111,8 +111,12 @@ server <- function(input, output) {
   data_donnee_lien_source<- reactive({
     
     s <- input$Table_Donnee_Maitre_rows_selected
+    cat(file=stderr(), "la ligne  ", s, "Du tableau maitre est choisie", "\n")
+    cat(file=stderr(), "ca veut dire id donnee vaut ", raw_donnee[s,1], " ", "\n")
     
     if(!is.null(s))
+      
+     
       
       raw_donnee_lien_source <- dbGetQuery(con, paste0("SELECT * FROM si.donnee_lien_clair where id_donnee_cible in (",paste(raw_donnee[s,1],collapse=","),")"))
     
@@ -135,6 +139,36 @@ server <- function(input, output) {
       raw_donnee_lien_cible <- dbGetQuery(con, "SELECT * FROM si.donnee_lien_clair")
     
     return(raw_donnee_lien_cible)
+    
+  })
+  
+  data_media_donnee_selectionnee <- reactive({
+    
+    s <- input$Table_Donnee_Maitre_rows_selected
+    
+    if(!is.null(s))
+      
+      raw_media_donnee <- dbGetQuery(con, paste0("SELECT * FROM si.media_donnee_clair where id_donnee in (",paste(raw_donnee[s,1],collapse=","),")"))
+    
+    else
+      raw_media_donnee <- dbGetQuery(con, "SELECT * FROM  si.media_donnee_clair") 
+    
+    return(raw_media_donnee)
+    
+  })
+  
+  data_media_selectionne<- reactive({
+    
+    s <- input$Table_Media_Donnee_rows_selected
+    
+    if(!is.null(s))
+      
+      raw_media_donnee <- dbGetQuery(con, paste0("SELECT * FROM si.media_clair where id_media in (",paste(raw_media_donnee[s,7],collapse=","),")"))
+    
+    else
+      raw_media <- dbGetQuery(con, "SELECT * FROM si.media_clair")
+    
+    return(raw_media_donnee)
     
   })
   
@@ -167,12 +201,12 @@ server <- function(input, output) {
   
   output$Table_Media <- DT::renderDataTable({
     DT::datatable(
-      data <- media
+      data <- data_media_selectionne()
     )
   })
   output$Table_Media_Donnee <- DT::renderDataTable({
     DT::datatable(
-      data <- media_donnee
+      data <- data_media_donnee_selectionnee()
     )
   })
   output$Table_Publication <- DT::renderDataTable({
