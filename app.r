@@ -29,7 +29,7 @@ raw_publication <- dbGetQuery(con, "SELECT * FROM si.publication_clair")
 
 
 polluant <- data.table(raw_polluant)
-donnee <- data.table(raw_donnee)
+donnee<-raw_donnee
 donnee_lien_source <- data.table(raw_donnee_lien_source)
 donnee_lien_cible <- data.table(raw_donnee_lien_cible)
 media <- data.table(raw_media)
@@ -92,6 +92,53 @@ ui <- fluidPage(
 ) # fluidPage
 
 server <- function(input, output) {
+  
+  data_donnnee_clair <- reactive({
+    
+    s <- input$Table_Polluant_rows_selected
+    
+    if(!is.null(s))
+      
+      raw_donnee <- dbGetQuery(con, paste0("SELECT * FROM si.donnee_clair where id_polluant in (",paste(raw_polluant[s,1],collapse=","),")"))
+    
+    else
+      raw_donnee <- dbGetQuery(con, "SELECT * FROM si.donnee_clair")
+    donnee<-raw_donnee
+    return(raw_donnee)
+    
+  })
+  
+  data_donnee_lien_source<- reactive({
+    
+    s <- input$Table_Donnee_Maitre_rows_selected
+    
+    if(!is.null(s))
+      
+      raw_donnee_lien_source <- dbGetQuery(con, paste0("SELECT * FROM si.donnee_lien_clair where id_donnee_cible in (",paste(raw_donnee[s,1],collapse=","),")"))
+    
+    else
+      raw_donnee_lien_source <- dbGetQuery(con, "SELECT * FROM si.donnee_lien_clair")
+    
+    return(raw_donnee_lien_source)
+    
+  })
+  
+  data_donnee_lien_cible<- reactive({
+    
+    s <- input$Table_Donnee_Maitre_rows_selected
+    
+    if(!is.null(s))
+      
+      raw_donnee_lien_cible <- dbGetQuery(con, paste0("SELECT * FROM si.donnee_lien_clair where id_donnee_source in (",paste(raw_donnee[s,1],collapse=","),")"))
+    
+    else
+      raw_donnee_lien_cible <- dbGetQuery(con, "SELECT * FROM si.donnee_lien_clair")
+    
+    return(raw_donnee_lien_cible)
+    
+  })
+  
+  
   output$Table_Polluant <- DT::renderDataTable({
     DT::datatable(
       data = polluant
@@ -99,22 +146,22 @@ server <- function(input, output) {
   })
   output$Table_Donnee_polluant <- DT::renderDataTable({
     DT::datatable(
-      data <- donnee
+      data <- data_donnnee_clair()
     )
   })
   output$Table_Donnee_Maitre <- DT::renderDataTable({
     DT::datatable(
-      data <- donnee
+      data <- data_donnnee_clair()
     )
   })
   output$Table_Donnee_Lien_source <- DT::renderDataTable({
     DT::datatable(
-      data <- donnee_lien_source
+      data <- data_donnee_lien_source()
     )
   })
   output$Table_Donnee_Lien_cible <- DT::renderDataTable({
     DT::datatable(
-      data <- donnee_lien_cible
+      data <- data_donnee_lien_cible()
     )
   })
   
