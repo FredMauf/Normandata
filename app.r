@@ -99,10 +99,10 @@ server <- function(input, output) {
     
     if(!is.null(s))
       
-      raw_donnee <- dbGetQuery(con, paste0("SELECT * FROM si.donnee_clair where id_polluant in (",paste(raw_polluant[s,1],collapse=","),")"))
+      raw_donnee <<- dbGetQuery(con, paste0("SELECT * FROM si.donnee_clair where id_polluant in (",paste(raw_polluant[s,1],collapse=","),")"))
     
     else
-      raw_donnee <- dbGetQuery(con, "SELECT * FROM si.donnee_clair")
+      raw_donnee <<- dbGetQuery(con, "SELECT * FROM si.donnee_clair")
     
     return(raw_donnee)
     
@@ -118,10 +118,10 @@ server <- function(input, output) {
       
      
       
-      raw_donnee_lien_source <- dbGetQuery(con, paste0("SELECT * FROM si.donnee_lien_clair where id_donnee_cible in (",paste(raw_donnee[s,1],collapse=","),")"))
+      raw_donnee_lien_source <<- dbGetQuery(con, paste0("SELECT * FROM si.donnee_lien_clair where id_donnee_cible in (",paste(raw_donnee[s,1],collapse=","),")"))
     
     else
-      raw_donnee_lien_source <- dbGetQuery(con, "SELECT * FROM si.donnee_lien_clair")
+      raw_donnee_lien_source <<- dbGetQuery(con, "SELECT * FROM si.donnee_lien_clair")
     
     return(raw_donnee_lien_source)
     
@@ -133,10 +133,10 @@ server <- function(input, output) {
     
     if(!is.null(s))
       
-      raw_donnee_lien_cible <- dbGetQuery(con, paste0("SELECT * FROM si.donnee_lien_clair where id_donnee_source in (",paste(raw_donnee[s,1],collapse=","),")"))
+      raw_donnee_lien_cible <<- dbGetQuery(con, paste0("SELECT * FROM si.donnee_lien_clair where id_donnee_source in (",paste(raw_donnee[s,1],collapse=","),")"))
     
     else
-      raw_donnee_lien_cible <- dbGetQuery(con, "SELECT * FROM si.donnee_lien_clair")
+      raw_donnee_lien_cible <<- dbGetQuery(con, "SELECT * FROM si.donnee_lien_clair")
     
     return(raw_donnee_lien_cible)
     
@@ -148,10 +148,10 @@ server <- function(input, output) {
     
     if(!is.null(s))
       
-      raw_media_donnee <- dbGetQuery(con, paste0("SELECT * FROM si.media_donnee_clair where id_donnee in (",paste(raw_donnee[s,1],collapse=","),")"))
+      raw_media_donnee <<- dbGetQuery(con, paste0("SELECT * FROM si.media_donnee_clair where id_donnee in (",paste(raw_donnee[s,1],collapse=","),")"))
     
     else
-      raw_media_donnee <- dbGetQuery(con, "SELECT * FROM  si.media_donnee_clair") 
+      raw_media_donnee <<- dbGetQuery(con, "SELECT * FROM  si.media_donnee_clair") 
     
     return(raw_media_donnee)
     
@@ -163,19 +163,19 @@ server <- function(input, output) {
     
     if(!is.null(s))
       
-      raw_media_donnee <- dbGetQuery(con, paste0("SELECT * FROM si.media_clair where id_media in (",paste(raw_media_donnee[s,7],collapse=","),")"))
+      raw_media <<- dbGetQuery(con, paste0("SELECT * FROM si.media_clair where id_media in (",paste(raw_media_donnee[s,7],collapse=","),")"))
     
     else
-      raw_media <- dbGetQuery(con, "SELECT * FROM si.media_clair")
+      raw_media <<- dbGetQuery(con, "SELECT * FROM si.media_clair")
     
-    return(raw_media_donnee)
+    return(raw_media)
     
   })
   
   
   output$Table_Polluant <- DT::renderDataTable({
     DT::datatable(
-      data = polluant
+      data <- polluant
     )
   })
   output$Table_Donnee_polluant <- DT::renderDataTable({
