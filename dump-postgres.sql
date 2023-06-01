@@ -5,7 +5,7 @@
 -- Dumped from database version 15.2
 -- Dumped by pg_dump version 15.2
 
--- Started on 2023-06-01 11:28:15
+-- Started on 2023-06-01 22:29:10
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -717,6 +717,10 @@ INSERT INTO si.donnee VALUES (22, 5, 'mesure moyenne Journaliere SO2', 'Calcul_a
 INSERT INTO si.donnee VALUES (23, 5, 'mesure moyenne Mensuelle SO2', 'Calcul_agreg', 1, 1, 5, 9, 'O', '1997-01-01', 1);
 INSERT INTO si.donnee VALUES (24, 5, 'mesure moyenne Annuelle SO2', 'Calcul_agreg', 1, 1, 5, 11, 'O', '1997-01-01', 1);
 INSERT INTO si.donnee VALUES (37, 1, 'Concentration Modélisée Expertisée O3', 'Modelisation Expertisée', 1, 1, 14, 13, 'N', '2021-01-01', 2);
+INSERT INTO si.donnee VALUES (38, 0, 'Estimation des émissions annuelles totales', 'Emission ', 1, 1, 4, 11, 'O', '2005-01-01', 3);
+INSERT INTO si.donnee VALUES (39, 4, 'Moyenne Horaire Maximale NO2', 'Calcul_agreg', 1, 1, 5, 11, 'O', '1997-01-01', 0);
+INSERT INTO si.donnee VALUES (40, 4, 'Nombre de jour dépassement No2 OMS2021', 'Calcul_agreg', 1, 1, 5, 11, 'O', '1997-01-01', 0);
+INSERT INTO si.donnee VALUES (41, 4, 'Nombre d''heure de dépassement VL', 'Calcul_agreg', 1, 0, 5, 11, 'O', '1997-01-01', 0);
 INSERT INTO si.donnee VALUES (17, 0, 'Signalement Phenomene Atmosphérique', 'Signalement', 1, 0, 5, 0, 'N', '2022-01-01', 4);
 INSERT INTO si.donnee VALUES (10, 1, 'nb jour depassement O3', 'Calcul_agreg', 1, 0, 0, 11, 'N', '1997-01-01', 3);
 INSERT INTO si.donnee VALUES (11, 0, 'Indice Atmo', 'Modelisation Previ', 1, 0, 14, 13, 'O', '2021-01-01', 2);
@@ -783,6 +787,10 @@ INSERT INTO si.donnee_lien VALUES (29, 30);
 INSERT INTO si.donnee_lien VALUES (29, 31);
 INSERT INTO si.donnee_lien VALUES (29, 32);
 INSERT INTO si.donnee_lien VALUES (37, 15);
+INSERT INTO si.donnee_lien VALUES (7, 40);
+INSERT INTO si.donnee_lien VALUES (33, 41);
+INSERT INTO si.donnee_lien VALUES (33, 39);
+INSERT INTO si.donnee_lien VALUES (34, 40);
 
 
 --
@@ -837,6 +845,15 @@ INSERT INTO si.maille_temps VALUES (13, 'Quotidien');
 INSERT INTO si.media VALUES (1, 'Carte Indice Atmo Jour', NULL, 1, 0, 0);
 INSERT INTO si.media VALUES (2, 'Widget Air de ma commune / Indice', 'https://www.atmonormandie.fr/air-commune/SaintLo/50502/indice-atmo?date=2023-05-04', 6, 1, 2);
 INSERT INTO si.media VALUES (3, 'Widget Air de ma commune / Pollen', NULL, 6, 1, 2);
+INSERT INTO si.media VALUES (6, 'Open Data Emission Région', 'https://api.atmonormandie.fr/index.php/view/map/?repository=emissions&project=emi_normandie_dpt', 5, 1, 1);
+INSERT INTO si.media VALUES (7, 'Open Data Emission Département', 'https://api.atmonormandie.fr/index.php/view/map/?repository=emissions&project=emi_normandie_dpt', 5, 1, 1);
+INSERT INTO si.media VALUES (4, 'Flux WFS 1 an Indice Atmo', NULL, 5, 1, 2);
+INSERT INTO si.media VALUES (5, 'Flux WFS 3 Jours Indice Atmo', 'https://api.atmonormandie.fr/index.php/view/map/?repository=dindice&project=historique_indice_atmo', 5, 1, 2);
+INSERT INTO si.media VALUES (8, 'Open Data Emission Epci', 'https://api.atmonormandie.fr/index.php/view/map/?repository=emissions&project=emi_normandie_dpt', 5, 1, 1);
+INSERT INTO si.media VALUES (12, 'DataViz moyenne horaire maximale', 'https://www.atmonormandie.fr/dataviz/statistiques-annuelles?polluant_id=03&departement_id=&annee=2022', 6, 1, 1);
+INSERT INTO si.media VALUES (9, 'DataViz Moyennes Annuelles No2', 'https://www.atmonormandie.fr/dataviz/statistiques-annuelles?polluant_id=03&departement_id=&annee=2022', 6, 1, 1);
+INSERT INTO si.media VALUES (10, 'DataViz nombre d''heure de dépassement No2', 'https://www.atmonormandie.fr/dataviz/statistiques-annuelles?polluant_id=03&departement_id=&annee=2022', 6, 1, 1);
+INSERT INTO si.media VALUES (11, 'DataViz Nombre de jour de dépassement No2 OMS2021', 'https://www.atmonormandie.fr/dataviz/statistiques-annuelles?polluant_id=03&departement_id=&annee=2022', 6, 1, 1);
 
 
 --
@@ -855,6 +872,14 @@ INSERT INTO si.media_donnee VALUES (3, 18, 2, 10, 'J');
 INSERT INTO si.media_donnee VALUES (3, 19, 2, 10, 'J');
 INSERT INTO si.media_donnee VALUES (3, 20, 2, 10, 'J');
 INSERT INTO si.media_donnee VALUES (1, 11, 14, 13, 'J');
+INSERT INTO si.media_donnee VALUES (4, 11, 4, 13, '3j');
+INSERT INTO si.media_donnee VALUES (5, 11, 4, 13, '1 An');
+INSERT INTO si.media_donnee VALUES (6, 38, 1, 11, '2005');
+INSERT INTO si.media_donnee VALUES (7, 38, 2, 11, '2005');
+INSERT INTO si.media_donnee VALUES (8, 38, 3, 11, '2005');
+INSERT INTO si.media_donnee VALUES (10, 39, 5, 11, 'Année N-1');
+INSERT INTO si.media_donnee VALUES (11, 40, 5, 11, 'Année N-1');
+INSERT INTO si.media_donnee VALUES (12, 41, 5, 11, 'Année N-1');
 
 
 --
@@ -865,6 +890,11 @@ INSERT INTO si.media_donnee VALUES (1, 11, 14, 13, 'J');
 
 INSERT INTO si.media_publication VALUES (2, 1, 'Region', 'public');
 INSERT INTO si.media_publication VALUES (3, 1, 'Region', 'public');
+INSERT INTO si.media_publication VALUES (4, 2, 'Region', 'public');
+INSERT INTO si.media_publication VALUES (4, 2, 'Region', 'public');
+INSERT INTO si.media_publication VALUES (6, 2, 'Region', 'public');
+INSERT INTO si.media_publication VALUES (7, 2, 'Region', 'public');
+INSERT INTO si.media_publication VALUES (8, 2, 'Region', 'public');
 
 
 --
@@ -904,6 +934,7 @@ INSERT INTO si.proprietaire_objet VALUES (2, 'Service Communication');
 --
 
 INSERT INTO si.publication VALUES (1, 'Site Atmo Normandie', 1, 2);
+INSERT INTO si.publication VALUES (2, 'Open Data', 1, 2);
 
 
 --
@@ -947,7 +978,7 @@ SELECT pg_catalog.setval('si.application_id_application_seq', 6, true);
 -- Name: donnee_code_donnee_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
-SELECT pg_catalog.setval('si.donnee_code_donnee_seq', 37, true);
+SELECT pg_catalog.setval('si.donnee_code_donnee_seq', 41, true);
 
 
 --
@@ -974,7 +1005,7 @@ SELECT pg_catalog.setval('si.maille_geo_id_maille_seq', 14, true);
 -- Name: media_id_media_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
-SELECT pg_catalog.setval('si.media_id_media_seq', 3, true);
+SELECT pg_catalog.setval('si.media_id_media_seq', 12, true);
 
 
 --
@@ -1001,7 +1032,7 @@ SELECT pg_catalog.setval('si.proprietaire_objet_id_proprietaire_objet_seq', 2, t
 -- Name: publication_id_publication_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
-SELECT pg_catalog.setval('si.publication_id_publication_seq', 1, true);
+SELECT pg_catalog.setval('si.publication_id_publication_seq', 2, true);
 
 
 --
@@ -1310,7 +1341,7 @@ ALTER TABLE ONLY si.media
     ADD CONSTRAINT type_media_fk FOREIGN KEY (id_type_media) REFERENCES si.type_media(id_type_media);
 
 
--- Completed on 2023-06-01 11:28:15
+-- Completed on 2023-06-01 22:29:10
 
 --
 -- PostgreSQL database dump complete
