@@ -5,7 +5,7 @@
 -- Dumped from database version 15.2
 -- Dumped by pg_dump version 15.2
 
--- Started on 2023-06-05 14:15:39
+-- Started on 2023-06-05 14:41:42
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -29,6 +29,8 @@ CREATE SCHEMA si;
 ALTER SCHEMA si OWNER TO postgres;
 
 SET default_tablespace = '';
+
+ 
 --
 -- TOC entry 239 (class 1259 OID 16636)
 -- Name: application; Type: TABLE; Schema: si; Owner: postgres
@@ -711,9 +713,9 @@ INSERT INTO si.application VALUES (6, 'Saisie Micro Capteurs', 0);
 --
 
 INSERT INTO si.donnee VALUES (22, 5, 'Concentration XR moyenne Journaliere SO2', 'Calcul_agreg', 1, 17, 5, 13, 'O', '1997-01-01', 1);
-INSERT INTO si.donnee VALUES (49, 42, 'Concentration XR moyenne Mensuelle CO', 'Calcul_agreg', 1, 17, 5, 0, 'N', NULL, 0);
-INSERT INTO si.donnee VALUES (50, 42, 'Max Journalier  de MH CO ', 'Calcul_agreg', 1, 17, 5, 0, 'N', NULL, 0);
-INSERT INTO si.donnee VALUES (51, 42, 'Max journalier de moyenne 8H', 'Calcul_agreg', 1, 17, 5, 0, 'N', NULL, 0);
+INSERT INTO si.donnee VALUES (50, 42, 'Max Journalier  de MH CO ', 'Calcul_agreg', 1, 17, 5, 13, 'N', NULL, 0);
+INSERT INTO si.donnee VALUES (51, 42, 'Max journalier de moyenne 8H', 'Calcul_agreg', 1, 17, 5, 13, 'N', NULL, 0);
+INSERT INTO si.donnee VALUES (56, 41, 'Concentration XR moyenne Mensuelle C6H6', 'Calcul_agreg', 1, 17, 5, 9, 'N', NULL, 0);
 INSERT INTO si.donnee VALUES (7, 1, 'Concentration XR moyenne Journaliere O3', 'Calcul_agreg', 1, 17, 5, 13, 'O', '1997-01-01', 1);
 INSERT INTO si.donnee VALUES (33, 4, 'Concentration XR moyenne horaire NO2', 'Calcul_agreg', 1, 17, 5, 8, 'O', '1997-01-01', 1);
 INSERT INTO si.donnee VALUES (35, 4, 'Concentration XR moyenne Mensuelle NO2', 'Calcul_agreg', 1, 17, 5, 9, 'O', '1997-01-01', 1);
@@ -725,6 +727,7 @@ INSERT INTO si.donnee VALUES (39, 4, 'Maxjournalier MH NO2', 'Calcul_agreg', 1, 
 INSERT INTO si.donnee VALUES (41, 4, 'Nombre d''heure de dépassement VL', 'Calcul_agreg', 1, 0, 5, 11, 'O', '1997-01-01', 0);
 INSERT INTO si.donnee VALUES (8, 1, 'Concentration XR moyenne Mensuelle O3', 'Calcul_agreg', 1, 17, 5, 9, 'O', '1997-01-01', 1);
 INSERT INTO si.donnee VALUES (17, 0, 'Signalement Phenomene Atmosphérique', 'Signalement', 1, 0, 5, 0, 'N', '2022-01-01', 4);
+INSERT INTO si.donnee VALUES (49, 42, 'Concentration XR moyenne Mensuelle CO', 'Calcul_agreg', 1, 17, 5, 9, 'N', NULL, 0);
 INSERT INTO si.donnee VALUES (11, 0, 'Indice Atmo', 'Modelisation Previ', 1, 0, 14, 13, 'O', '2021-01-01', 2);
 INSERT INTO si.donnee VALUES (12, 5, 'Sous Indice Atmo SO2', 'Modelisation Previ', 1, 1, 14, 13, 'N', '2021-01-01', 2);
 INSERT INTO si.donnee VALUES (13, 2, 'Sous Indice Atmo PM2.5', 'Modelisation Previ', 1, 1, 14, 13, 'N', '2021-01-01', 2);
@@ -761,38 +764,26 @@ INSERT INTO si.donnee VALUES (1, 4, 'Concentration XR 1/4h NO2', 'Mesure Brute A
 INSERT INTO si.donnee VALUES (2, 5, 'Concentration XR 1/4h SO2', 'Mesure Brute Auto', 1, 16, 5, 7, 'N', '1997-01-01', 1);
 INSERT INTO si.donnee VALUES (43, NULL, 'Donnée Meteo en Station', 'Mesure Brute Auto', 1, 16, 5, 7, 'N', '1997-01-01', 1);
 INSERT INTO si.donnee VALUES (45, 42, 'Concentration XR 1/4h CO', 'Mesure Brute Auto', 1, 16, 5, 7, 'N', NULL, 0);
-INSERT INTO si.donnee VALUES (56, 41, 'Concentration XR moyenne Mensuelle C6H6', 'Calcul_agreg', 1, 17, 5, 0, 'N', NULL, 0);
-INSERT INTO si.donnee VALUES (57, 41, 'Max Journalier  de MH C6H6', 'Calcul_agreg', 1, 17, 5, 0, 'N', NULL, 0);
-INSERT INTO si.donnee VALUES (46, 42, 'Concentration XR moyenne Journaliere CO', 'Calcul_agreg', 1, 17, 5, 0, 'N', NULL, 0);
-INSERT INTO si.donnee VALUES (47, 42, 'Concentration XR moyenne Annuelle CO', 'Calcul_agreg', 1, 17, 5, 0, 'N', NULL, 0);
-INSERT INTO si.donnee VALUES (48, 42, 'Concentration XR moyenne horaire CO', 'Calcul_agreg', 1, 17, 5, 0, 'N', NULL, 0);
+INSERT INTO si.donnee VALUES (47, 42, 'Concentration XR moyenne Annuelle CO', 'Calcul_agreg', 1, 17, 5, 11, 'N', NULL, 0);
+INSERT INTO si.donnee VALUES (48, 42, 'Concentration XR moyenne horaire CO', 'Calcul_agreg', 1, 17, 5, 13, 'N', NULL, 0);
+INSERT INTO si.donnee VALUES (63, 43, 'Max Journalier MH NOx', 'Calcul_agreg', 1, 17, 0, 13, 'N', NULL, 0);
 INSERT INTO si.donnee VALUES (59, 4, 'Nombre de 3Heure de dépassement 400', 'Calcul_agreg', 1, 17, 5, 11, 'O', '1997-01-01', 0);
 INSERT INTO si.donnee VALUES (60, 43, 'Concentration XR moyenne Journaliere NOx', 'Calcul_agreg', 1, 17, 5, 13, 'O', '1997-01-01', 1);
 INSERT INTO si.donnee VALUES (61, 43, 'Concentration XR 1/4h NOx', 'Mesure Auto', 1, 16, 5, 7, 'N', '1997-01-01', 1);
 INSERT INTO si.donnee VALUES (62, 43, 'Concentration XR moyenne horaire NOx', 'Calcul_agreg', 1, 17, 5, 8, 'O', '1997-01-01', 1);
-INSERT INTO si.donnee VALUES (63, 43, 'Max Journalier MH NOx', 'Calcul_agreg', 1, 17, 0, 0, 'N', NULL, 0);
 INSERT INTO si.donnee VALUES (64, 43, 'Concentration XR moyenne Mensuelle NOx', 'Calcul_agreg', 1, 17, 5, 9, 'O', '1997-01-01', 1);
 INSERT INTO si.donnee VALUES (65, 43, 'Concentration XR moyenne Journaliere NOx', 'Calcul_agreg', 1, 17, 5, 13, 'O', '1997-01-01', 1);
-INSERT INTO si.donnee VALUES (66, 1, 'Max Jour de la M8H O3', 'Calcul_agreg', 1, 0, 0, 11, 'N', '1997-01-01', 3);
+INSERT INTO si.donnee VALUES (57, 41, 'Max Journalier  de MH C6H6', 'Calcul_agreg', 1, 17, 5, 13, 'N', NULL, 0);
+INSERT INTO si.donnee VALUES (46, 42, 'Concentration XR moyenne Journaliere CO', 'Calcul_agreg', 1, 17, 5, 13, 'N', NULL, 0);
+INSERT INTO si.donnee VALUES (66, 1, 'Max Jour de la M8H O3', 'Calcul_agreg', 1, 0, 0, 13, 'N', '1997-01-01', 3);
 INSERT INTO si.donnee VALUES (67, 1, 'AOT40 O3 végétation (obj qualité végétation)', 'Calcul_agreg', 1, 0, 0, 11, 'N', '1997-01-01', 3);
 INSERT INTO si.donnee VALUES (68, 1, 'AOT40 - 5 Ans O3 végétation', 'Calcul_agreg', 1, 0, 0, 11, 'N', '1997-01-01', 3);
-INSERT INTO si.donnee VALUES (10, 1, 'Max Jour de la MH O3', 'Calcul_agreg', 1, 0, 0, 11, 'N', '1997-01-01', 3);
 INSERT INTO si.donnee VALUES (69, 1, 'Nb Dépassement MH 180', 'Calcul_agreg', 1, 0, 0, 11, 'N', '1997-01-01', 3);
 INSERT INTO si.donnee VALUES (70, 1, 'Nb Dépassement 3h 240', 'Calcul_agreg', 1, 0, 0, 11, 'N', '1997-01-01', 3);
 INSERT INTO si.donnee VALUES (71, 1, 'Nb Dépassement Moy8h 120', 'Calcul_agreg', 1, 0, 0, 11, 'N', '1997-01-01', 3);
 INSERT INTO si.donnee VALUES (73, 1, 'Pic Saisonnier 6mois OMS 60', 'Calcul_agreg', 1, 0, 0, 11, 'N', '1997-01-01', 3);
-INSERT INTO si.donnee VALUES (74, 5, 'Max Journalier de la MH SO2', 'Calcul_agreg', 1, 17, 5, 8, 'O', '1997-01-01', 1);
-INSERT INTO si.donnee VALUES (75, 5, 'Moyenne Hivernale de la MH SO2', 'Calcul_agreg', 1, 17, 5, 8, 'O', '1997-01-01', 1);
-INSERT INTO si.donnee VALUES (76, 5, 'Nb Dépassement MJ 125', 'Calcul_agreg', 1, 17, 5, 8, 'O', '1997-01-01', 1);
-INSERT INTO si.donnee VALUES (77, 5, 'Nb Dépassement MH 350', 'Calcul_agreg', 1, 17, 5, 8, 'O', '1997-01-01', 1);
-INSERT INTO si.donnee VALUES (78, 5, 'Nb Dépassement 3fois MH 500', 'Calcul_agreg', 1, 17, 5, 8, 'O', '1997-01-01', 1);
 INSERT INTO si.donnee VALUES (72, 1, 'Nb Jour Dépassement Moy8h 100 OMS', 'Calcul_agreg', 1, 0, 0, 11, 'N', '1997-01-01', 3);
-INSERT INTO si.donnee VALUES (79, 5, 'Nb Jour dépassement sup 40µ OMS', 'Calcul_agreg', 1, 17, 5, 8, 'O', '1997-01-01', 1);
 INSERT INTO si.donnee VALUES (80, 3, 'Max Journalier MH PM10', 'Calcul_agreg', 1, 17, 5, 8, 'O', '1997-01-01', 1);
-INSERT INTO si.donnee VALUES (82, 3, 'Nb Dep Moyenne Jour 50', 'Calcul_agreg', 1, 17, 5, 8, 'O', '1997-01-01', 1);
-INSERT INTO si.donnee VALUES (83, 2, 'Depassement Seuil MA 20  PM2.5', 'Calcul_agreg', 1, 17, 5, 8, 'O', '1997-01-01', 1);
-INSERT INTO si.donnee VALUES (84, 2, 'Depassement Seuil MA 25 PM2.5', 'Calcul_agreg', 1, 17, 5, 8, 'O', '1997-01-01', 1);
-INSERT INTO si.donnee VALUES (85, 2, 'Max Journalier MH PM2.5', 'Calcul_agreg', 1, 17, 5, 8, 'O', '1997-01-01', 1);
 INSERT INTO si.donnee VALUES (81, 3, 'Depassement Seuil MA 40 PM10 ', 'Calcul_agreg', 1, 17, 5, 8, 'O', '1997-01-01', 1);
 INSERT INTO si.donnee VALUES (86, 45, 'Moyenne Annuelle AS Particulaire', 'Calcul_agreg', 1, 17, 5, 11, 'N', NULL, 1);
 INSERT INTO si.donnee VALUES (87, 46, 'Moyenne Annuelle CD Particulaire', 'Calcul_agreg', 1, 17, 5, 11, 'N', NULL, 1);
@@ -804,6 +795,17 @@ INSERT INTO si.donnee VALUES (92, 46, 'Moyenne Demi-HoraireCD Particulaire', 'Me
 INSERT INTO si.donnee VALUES (93, 47, 'Moyenne Demi-HoraireNI Particulaire', 'Mesure Brute Auto', 1, 17, 5, 15, 'N', NULL, 1);
 INSERT INTO si.donnee VALUES (94, 48, 'Moyenne Demi-HorairePB Particulaire', 'Mesure Brute Auto', 1, 17, 5, 15, 'N', NULL, 1);
 INSERT INTO si.donnee VALUES (95, 49, 'Moyenne Demi-HoraireBAP Particulaire', 'Mesure Brute Auto', 1, 17, 5, 15, 'N', NULL, 1);
+INSERT INTO si.donnee VALUES (10, 1, 'Max Jour de la MH O3', 'Calcul_agreg', 1, 0, 0, 13, 'N', '1997-01-01', 3);
+INSERT INTO si.donnee VALUES (74, 5, 'Max Journalier de la MH SO2', 'Calcul_agreg', 1, 17, 5, 13, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (75, 5, 'Moyenne Hivernale de la MH SO2', 'Calcul_agreg', 1, 17, 5, 11, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (76, 5, 'Nb Dépassement MJ 125', 'Calcul_agreg', 1, 17, 5, 13, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (77, 5, 'Nb Dépassement MH 350', 'Calcul_agreg', 1, 17, 5, 13, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (78, 5, 'Nb Dépassement 3fois MH 500', 'Calcul_agreg', 1, 17, 5, 13, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (79, 5, 'Nb Jour dépassement sup 40µ OMS', 'Calcul_agreg', 1, 17, 5, 11, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (82, 3, 'Nb Dep Moyenne Jour 50', 'Calcul_agreg', 1, 17, 5, 13, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (83, 2, 'Depassement Seuil MA 20  PM2.5', 'Calcul_agreg', 1, 17, 5, 13, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (84, 2, 'Depassement Seuil MA 25 PM2.5', 'Calcul_agreg', 1, 17, 5, 13, 'O', '1997-01-01', 1);
+INSERT INTO si.donnee VALUES (85, 2, 'Max Journalier MH PM2.5', 'Calcul_agreg', 1, 17, 5, 13, 'O', '1997-01-01', 1);
 
 
 --
@@ -983,6 +985,80 @@ INSERT INTO si.media_donnee VALUES (13, 2, 5, 8, 'J');
 INSERT INTO si.media_donnee VALUES (13, 3, 5, 8, 'J');
 INSERT INTO si.media_donnee VALUES (13, 4, 5, 8, 'J');
 INSERT INTO si.media_donnee VALUES (13, 5, 5, 8, 'J');
+INSERT INTO si.media_donnee VALUES (13, 91, 5, 15, 'J');
+INSERT INTO si.media_donnee VALUES (13, 92, 5, 15, 'J');
+INSERT INTO si.media_donnee VALUES (13, 93, 5, 15, 'J');
+INSERT INTO si.media_donnee VALUES (13, 94, 5, 15, 'J');
+INSERT INTO si.media_donnee VALUES (13, 95, 5, 15, 'J');
+INSERT INTO si.media_donnee VALUES (13, 45, 5, 8, 'J');
+INSERT INTO si.media_donnee VALUES (13, 55, 5, 8, 'J');
+INSERT INTO si.media_donnee VALUES (13, 61, 5, 8, 'J');
+INSERT INTO si.media_donnee VALUES (14, 6, 5, 8, 'J');
+INSERT INTO si.media_donnee VALUES (14, 33, 5, 8, 'J');
+INSERT INTO si.media_donnee VALUES (14, 25, 5, 8, 'J');
+INSERT INTO si.media_donnee VALUES (14, 29, 5, 8, 'J');
+INSERT INTO si.media_donnee VALUES (14, 21, 5, 8, 'J');
+INSERT INTO si.media_donnee VALUES (14, 62, 5, 8, 'J');
+INSERT INTO si.media_donnee VALUES (14, 90, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 53, 5, 0, 'J');
+INSERT INTO si.media_donnee VALUES (14, 54, 5, 0, 'J');
+INSERT INTO si.media_donnee VALUES (14, 56, 5, 9, 'J');
+INSERT INTO si.media_donnee VALUES (14, 57, 5, 13, 'J');
+INSERT INTO si.media_donnee VALUES (14, 48, 5, 13, 'J');
+INSERT INTO si.media_donnee VALUES (14, 86, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 87, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 88, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 89, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 7, 5, 13, 'J');
+INSERT INTO si.media_donnee VALUES (14, 8, 5, 9, 'J');
+INSERT INTO si.media_donnee VALUES (14, 9, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 34, 5, 13, 'J');
+INSERT INTO si.media_donnee VALUES (14, 35, 5, 9, 'J');
+INSERT INTO si.media_donnee VALUES (14, 36, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 26, 5, 13, 'J');
+INSERT INTO si.media_donnee VALUES (14, 27, 5, 9, 'J');
+INSERT INTO si.media_donnee VALUES (14, 28, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 22, 5, 13, 'J');
+INSERT INTO si.media_donnee VALUES (14, 23, 5, 9, 'J');
+INSERT INTO si.media_donnee VALUES (14, 24, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 30, 5, 13, 'J');
+INSERT INTO si.media_donnee VALUES (14, 31, 5, 9, 'J');
+INSERT INTO si.media_donnee VALUES (14, 32, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 41, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 39, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 60, 5, 13, 'J');
+INSERT INTO si.media_donnee VALUES (14, 63, 5, 13, 'J');
+INSERT INTO si.media_donnee VALUES (14, 65, 5, 13, 'J');
+INSERT INTO si.media_donnee VALUES (14, 64, 5, 9, 'J');
+INSERT INTO si.media_donnee VALUES (14, 59, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 49, 5, 9, 'J');
+INSERT INTO si.media_donnee VALUES (14, 50, 5, 13, 'J');
+INSERT INTO si.media_donnee VALUES (14, 51, 5, 13, 'J');
+INSERT INTO si.media_donnee VALUES (14, 52, 5, 0, 'J');
+INSERT INTO si.media_donnee VALUES (14, 46, 5, 13, 'J');
+INSERT INTO si.media_donnee VALUES (14, 47, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 58, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 66, 5, 13, 'J');
+INSERT INTO si.media_donnee VALUES (14, 67, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 68, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 10, 5, 13, 'J');
+INSERT INTO si.media_donnee VALUES (14, 69, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 70, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 71, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 73, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 83, 5, 13, 'J');
+INSERT INTO si.media_donnee VALUES (14, 84, 5, 13, 'J');
+INSERT INTO si.media_donnee VALUES (14, 85, 5, 13, 'J');
+INSERT INTO si.media_donnee VALUES (14, 72, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 80, 5, 8, 'J');
+INSERT INTO si.media_donnee VALUES (14, 81, 5, 8, 'J');
+INSERT INTO si.media_donnee VALUES (14, 82, 5, 13, 'J');
+INSERT INTO si.media_donnee VALUES (14, 79, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 74, 5, 13, 'J');
+INSERT INTO si.media_donnee VALUES (14, 75, 5, 11, 'J');
+INSERT INTO si.media_donnee VALUES (14, 76, 5, 13, 'J');
+INSERT INTO si.media_donnee VALUES (14, 77, 5, 13, 'J');
+INSERT INTO si.media_donnee VALUES (14, 78, 5, 13, 'J');
 
 
 --
@@ -998,6 +1074,7 @@ INSERT INTO si.media_publication VALUES (4, 2, 'Region', 'public');
 INSERT INTO si.media_publication VALUES (6, 2, 'Region', 'public');
 INSERT INTO si.media_publication VALUES (7, 2, 'Region', 'public');
 INSERT INTO si.media_publication VALUES (8, 2, 'Region', 'public');
+INSERT INTO si.media_publication VALUES (14, 3, 'National', 'public');
 
 
 --
@@ -1062,6 +1139,7 @@ INSERT INTO si.proprietaire_objet VALUES (19, 'Exterieur GEODAIR', NULL);
 
 INSERT INTO si.publication VALUES (1, 'Site Atmo Normandie', 1, 3);
 INSERT INTO si.publication VALUES (2, 'Open Data', 1, 3);
+INSERT INTO si.publication VALUES (3, 'Site Geodair', 1, 19);
 
 
 --
@@ -1159,7 +1237,7 @@ SELECT pg_catalog.setval('si.proprietaire_objet_id_proprietaire_objet_seq', 19, 
 -- Name: publication_id_publication_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
-SELECT pg_catalog.setval('si.publication_id_publication_seq', 2, true);
+SELECT pg_catalog.setval('si.publication_id_publication_seq', 3, true);
 
 
 --
@@ -1468,7 +1546,7 @@ ALTER TABLE ONLY si.media
     ADD CONSTRAINT type_media_fk FOREIGN KEY (id_type_media) REFERENCES si.type_media(id_type_media);
 
 
--- Completed on 2023-06-05 14:15:39
+-- Completed on 2023-06-05 14:41:42
 
 --
 -- PostgreSQL database dump complete
