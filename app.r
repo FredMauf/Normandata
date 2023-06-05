@@ -93,38 +93,52 @@ ui <- fluidPage(
 
 server <- function(input, output) {
   
-  data_donnnee_clair <- reactive({
+  
+  data_polluant_selectionne <- reactive({
+    s <- input$Table_Donnee_Maitre_rows_selected
     
-    s <- input$Table_Polluant_rows_selected
+    if (!is.null(s)) {
+      cat("Sélection de lignes détectée : ", s,"identifiant de polluant", raw_donnee[s, 2], " identifiant de donnee ",raw_donnee[s, 1],"\n", file = stderr())
+      raw_polluant <<- dbGetQuery(con, paste0("SELECT * FROM si.polluant WHERE id_polluant IN (", paste(raw_donnee[s, 2], collapse = ","), ")"))
+    } else {
+      cat("Aucune sélection de lignes détectée\n", file = stderr())
+      raw_polluant <<- dbGetQuery(con, "SELECT * FROM si.polluant")
+    }
     
-    if(!is.null(s))
-      
-      raw_donnee <<- dbGetQuery(con, paste0("SELECT * FROM si.donnee_clair where id_polluant in (",paste(raw_polluant[s,1],collapse=","),")"))
-    
-    else
-      raw_donnee <<- dbGetQuery(con, "SELECT * FROM si.donnee_clair")
-    
-    return(raw_donnee)
-    
+    return(raw_polluant)
   })
   
-  data_donnee_lien_source<- reactive({
+  
+  data_donnnee_clair <- reactive({
+    s <- input$Table_Polluant_rows_selected
     
+    if (!is.null(s)) {
+      cat("Sélection de lignes détectée (Table_Polluant_rows_selected) : ", s, "\n", file = stderr())
+      query <- paste0("SELECT * FROM si.donnee_clair WHERE id_polluant IN (", paste(raw_polluant[s, 1], collapse = ","), ")")
+      cat("Requête SQL : ", query, "\n", file = stderr())
+      raw_donnee <<- dbGetQuery(con, query)
+    } else {
+      cat("Aucune sélection de lignes détectée (Table_Polluant_rows_selected)\n", file = stderr())
+      raw_donnee <<- dbGetQuery(con, "SELECT * FROM si.donnee_clair")
+    }
+    
+    return(raw_donnee)
+  })
+  
+  data_donnee_lien_source <- reactive({
     s <- input$Table_Donnee_Maitre_rows_selected
-    cat(file=stderr(), "la ligne  ", s, "Du tableau maitre est choisie", "\n")
-    cat(file=stderr(), "ca veut dire id donnee vaut ", raw_donnee[s,1], " ", "\n")
     
-    if(!is.null(s))
-      
-     
-      
-      raw_donnee_lien_source <<- dbGetQuery(con, paste0("SELECT * FROM si.donnee_lien_clair where id_donnee_cible in (",paste(raw_donnee[s,1],collapse=","),")"))
-    
-    else
+    if (!is.null(s)) {
+      cat("Sélection de lignes détectée (Table_Donnee_Maitre_rows_selected) : ", s, "\n", file = stderr())
+      query <- paste0("SELECT * FROM si.donnee_lien_clair WHERE id_donnee_cible IN (", paste(raw_donnee[s, 1], collapse = ","), ")")
+      cat("Requête SQL : ", query, "\n", file = stderr())
+      raw_donnee_lien_source <<- dbGetQuery(con, query)
+    } else {
+      cat("Aucune sélection de lignes détectée (Table_Donnee_Maitre_rows_selected)\n", file = stderr())
       raw_donnee_lien_source <<- dbGetQuery(con, "SELECT * FROM si.donnee_lien_clair")
+    }
     
     return(raw_donnee_lien_source)
-    
   })
   
   data_donnee_lien_cible<- reactive({
@@ -188,11 +202,13 @@ server <- function(input, output) {
   })
   
   
+  
   output$Table_Polluant <- DT::renderDataTable({
     DT::datatable(
-      data <- polluant
+      data <- data_polluant_selectionne()
     )
   })
+  
   output$Table_Donnee_polluant <- DT::renderDataTable({
     DT::datatable(
       data <- data_donnnee_clair()
