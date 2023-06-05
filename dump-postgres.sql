@@ -5,7 +5,7 @@
 -- Dumped from database version 15.2
 -- Dumped by pg_dump version 15.2
 
--- Started on 2023-06-05 14:41:42
+-- Started on 2023-06-05 14:49:48
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -29,8 +29,8 @@ CREATE SCHEMA si;
 ALTER SCHEMA si OWNER TO postgres;
 
 SET default_tablespace = '';
-
  
+
 --
 -- TOC entry 239 (class 1259 OID 16636)
 -- Name: application; Type: TABLE; Schema: si; Owner: postgres
@@ -457,12 +457,14 @@ CREATE VIEW si.publication_clair AS
 ALTER TABLE si.publication_clair OWNER TO postgres;
 
 --
--- TOC entry 245 (class 1259 OID 16690)
+-- TOC entry 245 (class 1259 OID 24886)
 -- Name: media_publication_clair; Type: VIEW; Schema: si; Owner: postgres
 --
 
 CREATE VIEW si.media_publication_clair AS
- SELECT pc.libelle_publication,
+ SELECT mp.id_publication,
+    mp.id_media,
+    pc.libelle_publication,
     mc.titre_media,
     mp.emprise_geo,
     mp.condition_acces
@@ -1546,7 +1548,7 @@ ALTER TABLE ONLY si.media
     ADD CONSTRAINT type_media_fk FOREIGN KEY (id_type_media) REFERENCES si.type_media(id_type_media);
 
 
--- Completed on 2023-06-05 14:41:42
+-- Completed on 2023-06-05 14:49:48
 
 --
 -- PostgreSQL database dump complete

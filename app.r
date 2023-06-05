@@ -172,6 +172,21 @@ server <- function(input, output) {
     
   })
   
+  data_media_publication_selectionne<- reactive({
+    
+    s <- input$Table_Publication_rows_selected
+    
+    if(!is.null(s))
+      
+      raw_media_publication <<- dbGetQuery(con, paste0("SELECT * FROM si.media_publication_clair where id_publication in (",paste(raw_publication[s,1],collapse=","),")"))
+    
+    else
+      raw_media_publication <<- dbGetQuery(con, "SELECT * FROM si.media_publication_clair")
+    
+    return(raw_media_publication)
+    
+  })
+  
   
   output$Table_Polluant <- DT::renderDataTable({
     DT::datatable(
@@ -216,7 +231,7 @@ server <- function(input, output) {
   })
   output$Table_Publication_Media <- DT::renderDataTable({
     DT::datatable(
-      data <- media_publication
+      data <- data_media_publication_selectionne()
     )
   })
   
