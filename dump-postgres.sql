@@ -5,7 +5,7 @@
 -- Dumped from database version 15.2
 -- Dumped by pg_dump version 15.2
 
--- Started on 2023-06-05 22:00:21
+-- Started on 2023-06-06 08:35:05
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -81,7 +81,7 @@ CREATE TABLE si.donnee (
     id_polluant integer,
     libelle_donnee character varying,
     type_donnee character varying,
-    id_maturite integer DEFAULT 0 NOT NULL,
+    id_etat_maturite integer DEFAULT 0 NOT NULL,
     id_proprietaire_objet integer DEFAULT 0 NOT NULL,
     id_maille_geo integer DEFAULT 0 NOT NULL,
     id_maille_temps integer DEFAULT 0 NOT NULL,
@@ -206,7 +206,7 @@ CREATE VIEW si.donnee_clair AS
     a.nom_application
    FROM ((((((si.donnee d
      JOIN si.polluant p ON ((p.id_polluant = d.id_polluant)))
-     JOIN si.etat_maturite em ON ((em.id_etat_maturite = d.id_maturite)))
+     JOIN si.etat_maturite em ON ((em.id_etat_maturite = d.id_etat_maturite)))
      JOIN si.proprietaire_objet po ON ((po.id_proprietaire_objet = d.id_proprietaire_objet)))
      JOIN si.maille_geo mg ON ((mg.id_maille_geo = d.id_maille_geo)))
      JOIN si.maille_temps mt ON ((mt.id_maille_temps = d.id_maille_temps)))
@@ -217,10 +217,10 @@ ALTER TABLE si.donnee_clair OWNER TO postgres;
 
 --
 -- TOC entry 218 (class 1259 OID 16408)
--- Name: donnee_code_donnee_seq; Type: SEQUENCE; Schema: si; Owner: postgres
+-- Name: donnee_id_donnee_seq; Type: SEQUENCE; Schema: si; Owner: postgres
 --
 
-CREATE SEQUENCE si.donnee_code_donnee_seq
+CREATE SEQUENCE si.donnee_id_donnee_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -229,15 +229,15 @@ CREATE SEQUENCE si.donnee_code_donnee_seq
     CACHE 1;
 
 
-ALTER TABLE si.donnee_code_donnee_seq OWNER TO postgres;
+ALTER TABLE si.donnee_id_donnee_seq OWNER TO postgres;
 
 --
 -- TOC entry 3504 (class 0 OID 0)
 -- Dependencies: 218
--- Name: donnee_code_donnee_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
+-- Name: donnee_id_donnee_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
 
-ALTER SEQUENCE si.donnee_code_donnee_seq OWNED BY si.donnee.id_donnee;
+ALTER SEQUENCE si.donnee_id_donnee_seq OWNED BY si.donnee.id_donnee;
 
 
 --
@@ -274,10 +274,10 @@ ALTER TABLE si.donnee_lien_clair OWNER TO postgres;
 
 --
 -- TOC entry 226 (class 1259 OID 16492)
--- Name: etat_maturite_code_etat_maturite_seq; Type: SEQUENCE; Schema: si; Owner: postgres
+-- Name: etat_maturite_id_etat_maturite_seq; Type: SEQUENCE; Schema: si; Owner: postgres
 --
 
-CREATE SEQUENCE si.etat_maturite_code_etat_maturite_seq
+CREATE SEQUENCE si.etat_maturite_id_etat_maturite_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -286,15 +286,15 @@ CREATE SEQUENCE si.etat_maturite_code_etat_maturite_seq
     CACHE 1;
 
 
-ALTER TABLE si.etat_maturite_code_etat_maturite_seq OWNER TO postgres;
+ALTER TABLE si.etat_maturite_id_etat_maturite_seq OWNER TO postgres;
 
 --
 -- TOC entry 3505 (class 0 OID 0)
 -- Dependencies: 226
--- Name: etat_maturite_code_etat_maturite_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
+-- Name: etat_maturite_id_etat_maturite_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
 
-ALTER SEQUENCE si.etat_maturite_code_etat_maturite_seq OWNED BY si.etat_maturite.id_etat_maturite;
+ALTER SEQUENCE si.etat_maturite_id_etat_maturite_seq OWNED BY si.etat_maturite.id_etat_maturite;
 
 
 --
@@ -478,10 +478,10 @@ ALTER TABLE si.media_publication_clair OWNER TO postgres;
 
 --
 -- TOC entry 216 (class 1259 OID 16399)
--- Name: polluant_code_polluant_seq; Type: SEQUENCE; Schema: si; Owner: postgres
+-- Name: polluant_id_polluant_seq; Type: SEQUENCE; Schema: si; Owner: postgres
 --
 
-CREATE SEQUENCE si.polluant_code_polluant_seq
+CREATE SEQUENCE si.polluant_id_polluant_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -490,15 +490,15 @@ CREATE SEQUENCE si.polluant_code_polluant_seq
     CACHE 1;
 
 
-ALTER TABLE si.polluant_code_polluant_seq OWNER TO postgres;
+ALTER TABLE si.polluant_id_polluant_seq OWNER TO postgres;
 
 --
 -- TOC entry 3507 (class 0 OID 0)
 -- Dependencies: 216
--- Name: polluant_code_polluant_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
+-- Name: polluant_id_polluant_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
 
-ALTER SEQUENCE si.polluant_code_polluant_seq OWNED BY si.polluant.id_polluant;
+ALTER SEQUENCE si.polluant_id_polluant_seq OWNED BY si.polluant.id_polluant;
 
 
 --
@@ -591,10 +591,10 @@ ALTER SEQUENCE si.serveur_id_serveur_seq OWNED BY si.serveur.id_serveur;
 
 --
 -- TOC entry 220 (class 1259 OID 16428)
--- Name: type_media_code_type_media_seq; Type: SEQUENCE; Schema: si; Owner: postgres
+-- Name: type_media_id_type_media_seq; Type: SEQUENCE; Schema: si; Owner: postgres
 --
 
-CREATE SEQUENCE si.type_media_code_type_media_seq
+CREATE SEQUENCE si.type_media_id_type_media_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -603,15 +603,15 @@ CREATE SEQUENCE si.type_media_code_type_media_seq
     CACHE 1;
 
 
-ALTER TABLE si.type_media_code_type_media_seq OWNER TO postgres;
+ALTER TABLE si.type_media_id_type_media_seq OWNER TO postgres;
 
 --
 -- TOC entry 3511 (class 0 OID 0)
 -- Dependencies: 220
--- Name: type_media_code_type_media_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
+-- Name: type_media_id_type_media_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
 
-ALTER SEQUENCE si.type_media_code_type_media_seq OWNED BY si.type_media.id_type_media;
+ALTER SEQUENCE si.type_media_id_type_media_seq OWNED BY si.type_media.id_type_media;
 
 
 --
@@ -623,19 +623,19 @@ ALTER TABLE ONLY si.application ALTER COLUMN id_application SET DEFAULT nextval(
 
 
 --
--- TOC entry 3262 (class 2604 OID 16412)
+-- TOC entry 3262 (class 2604 OID 24890)
 -- Name: donnee id_donnee; Type: DEFAULT; Schema: si; Owner: postgres
 --
 
-ALTER TABLE ONLY si.donnee ALTER COLUMN id_donnee SET DEFAULT nextval('si.donnee_code_donnee_seq'::regclass);
+ALTER TABLE ONLY si.donnee ALTER COLUMN id_donnee SET DEFAULT nextval('si.donnee_id_donnee_seq'::regclass);
 
 
 --
--- TOC entry 3273 (class 2604 OID 16496)
+-- TOC entry 3273 (class 2604 OID 24891)
 -- Name: etat_maturite id_etat_maturite; Type: DEFAULT; Schema: si; Owner: postgres
 --
 
-ALTER TABLE ONLY si.etat_maturite ALTER COLUMN id_etat_maturite SET DEFAULT nextval('si.etat_maturite_code_etat_maturite_seq'::regclass);
+ALTER TABLE ONLY si.etat_maturite ALTER COLUMN id_etat_maturite SET DEFAULT nextval('si.etat_maturite_id_etat_maturite_seq'::regclass);
 
 
 --
@@ -659,7 +659,7 @@ ALTER TABLE ONLY si.media ALTER COLUMN id_media SET DEFAULT nextval('si.media_id
 -- Name: polluant id_polluant; Type: DEFAULT; Schema: si; Owner: postgres
 --
 
-ALTER TABLE ONLY si.polluant ALTER COLUMN id_polluant SET DEFAULT nextval('si.polluant_code_polluant_seq'::regclass);
+ALTER TABLE ONLY si.polluant ALTER COLUMN id_polluant SET DEFAULT nextval('si.polluant_id_polluant_seq'::regclass);
 
 
 --
@@ -687,11 +687,11 @@ ALTER TABLE ONLY si.serveur ALTER COLUMN id_serveur SET DEFAULT nextval('si.serv
 
 
 --
--- TOC entry 3269 (class 2604 OID 16432)
+-- TOC entry 3269 (class 2604 OID 24892)
 -- Name: type_media id_type_media; Type: DEFAULT; Schema: si; Owner: postgres
 --
 
-ALTER TABLE ONLY si.type_media ALTER COLUMN id_type_media SET DEFAULT nextval('si.type_media_code_type_media_seq'::regclass);
+ALTER TABLE ONLY si.type_media ALTER COLUMN id_type_media SET DEFAULT nextval('si.type_media_id_type_media_seq'::regclass);
 
 
 --
@@ -907,8 +907,8 @@ INSERT INTO si.donnee_lien VALUES (21, 78);
 --
 
 INSERT INTO si.etat_maturite VALUES (0, 'Inconnu');
-INSERT INTO si.etat_maturite VALUES (1, 'Service Regulier');
 INSERT INTO si.etat_maturite VALUES (2, 'A l''étude');
+INSERT INTO si.etat_maturite VALUES (1, 'Service Regulier');
 
 
 --
@@ -1246,25 +1246,25 @@ INSERT INTO si.type_media VALUES (8, 'Rapport Complet');
 -- Name: application_id_application_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
-SELECT pg_catalog.setval('si.application_id_application_seq', 7, true);
+SELECT pg_catalog.setval('si.application_id_application_seq', 8, true);
 
 
 --
 -- TOC entry 3513 (class 0 OID 0)
 -- Dependencies: 218
--- Name: donnee_code_donnee_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
+-- Name: donnee_id_donnee_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
-SELECT pg_catalog.setval('si.donnee_code_donnee_seq', 101, true);
+SELECT pg_catalog.setval('si.donnee_id_donnee_seq', 101, true);
 
 
 --
 -- TOC entry 3514 (class 0 OID 0)
 -- Dependencies: 226
--- Name: etat_maturite_code_etat_maturite_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
+-- Name: etat_maturite_id_etat_maturite_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
-SELECT pg_catalog.setval('si.etat_maturite_code_etat_maturite_seq', 1, false);
+SELECT pg_catalog.setval('si.etat_maturite_id_etat_maturite_seq', 1, true);
 
 
 --
@@ -1288,10 +1288,10 @@ SELECT pg_catalog.setval('si.media_id_media_seq', 18, true);
 --
 -- TOC entry 3517 (class 0 OID 0)
 -- Dependencies: 216
--- Name: polluant_code_polluant_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
+-- Name: polluant_id_polluant_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
-SELECT pg_catalog.setval('si.polluant_code_polluant_seq', 51, true);
+SELECT pg_catalog.setval('si.polluant_id_polluant_seq', 51, true);
 
 
 --
@@ -1300,7 +1300,7 @@ SELECT pg_catalog.setval('si.polluant_code_polluant_seq', 51, true);
 -- Name: proprietaire_objet_id_proprietaire_objet_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
-SELECT pg_catalog.setval('si.proprietaire_objet_id_proprietaire_objet_seq', 20, true);
+SELECT pg_catalog.setval('si.proprietaire_objet_id_proprietaire_objet_seq', 22, true);
 
 
 --
@@ -1324,10 +1324,10 @@ SELECT pg_catalog.setval('si.serveur_id_serveur_seq', 4, true);
 --
 -- TOC entry 3521 (class 0 OID 0)
 -- Dependencies: 220
--- Name: type_media_code_type_media_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
+-- Name: type_media_id_type_media_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
-SELECT pg_catalog.setval('si.type_media_code_type_media_seq', 8, true);
+SELECT pg_catalog.setval('si.type_media_id_type_media_seq', 8, true);
 
 
 --
@@ -1516,7 +1516,7 @@ ALTER TABLE ONLY si.media_donnee
 --
 
 ALTER TABLE ONLY si.donnee
-    ADD CONSTRAINT maturite_donnee_fk FOREIGN KEY (id_maturite) REFERENCES si.etat_maturite(id_etat_maturite);
+    ADD CONSTRAINT maturite_donnee_fk FOREIGN KEY (id_etat_maturite) REFERENCES si.etat_maturite(id_etat_maturite);
 
 
 --
@@ -1618,7 +1618,7 @@ ALTER TABLE ONLY si.media
     ADD CONSTRAINT type_media_fk FOREIGN KEY (id_type_media) REFERENCES si.type_media(id_type_media);
 
 
--- Completed on 2023-06-05 22:00:21
+-- Completed on 2023-06-06 08:35:05
 
 --
 -- PostgreSQL database dump complete
