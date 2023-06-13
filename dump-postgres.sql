@@ -5,7 +5,7 @@
 -- Dumped from database version 15.2
 -- Dumped by pg_dump version 15.2
 
--- Started on 2023-06-06 15:23:51
+-- Started on 2023-06-13 17:31:37
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -63,7 +63,7 @@ CREATE SEQUENCE si.application_id_application_seq
 ALTER TABLE si.application_id_application_seq OWNER TO postgres;
 
 --
--- TOC entry 3508 (class 0 OID 0)
+-- TOC entry 3509 (class 0 OID 0)
 -- Dependencies: 217
 -- Name: application_id_application_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
@@ -136,7 +136,7 @@ CREATE SEQUENCE si.maille_geo_id_maille_seq
 ALTER TABLE si.maille_geo_id_maille_seq OWNER TO postgres;
 
 --
--- TOC entry 3509 (class 0 OID 0)
+-- TOC entry 3510 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: maille_geo_id_maille_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
@@ -232,7 +232,7 @@ CREATE SEQUENCE si.donnee_id_donnee_seq
 ALTER TABLE si.donnee_id_donnee_seq OWNER TO postgres;
 
 --
--- TOC entry 3510 (class 0 OID 0)
+-- TOC entry 3511 (class 0 OID 0)
 -- Dependencies: 226
 -- Name: donnee_id_donnee_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
@@ -289,7 +289,7 @@ CREATE SEQUENCE si.etat_maturite_id_etat_maturite_seq
 ALTER TABLE si.etat_maturite_id_etat_maturite_seq OWNER TO postgres;
 
 --
--- TOC entry 3511 (class 0 OID 0)
+-- TOC entry 3512 (class 0 OID 0)
 -- Dependencies: 229
 -- Name: etat_maturite_id_etat_maturite_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
@@ -357,14 +357,15 @@ CREATE TABLE si.media_donnee (
     id_donnee integer NOT NULL,
     id_maille_geo_diff integer,
     id_maille_tempo_diff integer,
-    profondeur_histo_diff character varying
+    profondeur_histo_diff character varying,
+    format_affichage character varying DEFAULT 'A renseigner'::character varying
 );
 
 
 ALTER TABLE si.media_donnee OWNER TO postgres;
 
 --
--- TOC entry 234 (class 1259 OID 24997)
+-- TOC entry 246 (class 1259 OID 33079)
 -- Name: media_donnee_clair; Type: VIEW; Schema: si; Owner: postgres
 --
 
@@ -374,6 +375,7 @@ CREATE VIEW si.media_donnee_clair AS
     mg.libelle_maille_geo,
     mt.libelle_maille_temps,
     md.profondeur_histo_diff,
+    md.format_affichage,
     md.id_donnee,
     md.id_media
    FROM ((((si.media_donnee md
@@ -386,7 +388,7 @@ CREATE VIEW si.media_donnee_clair AS
 ALTER TABLE si.media_donnee_clair OWNER TO postgres;
 
 --
--- TOC entry 235 (class 1259 OID 25002)
+-- TOC entry 234 (class 1259 OID 25002)
 -- Name: media_id_media_seq; Type: SEQUENCE; Schema: si; Owner: postgres
 --
 
@@ -402,8 +404,8 @@ CREATE SEQUENCE si.media_id_media_seq
 ALTER TABLE si.media_id_media_seq OWNER TO postgres;
 
 --
--- TOC entry 3512 (class 0 OID 0)
--- Dependencies: 235
+-- TOC entry 3513 (class 0 OID 0)
+-- Dependencies: 234
 -- Name: media_id_media_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
 
@@ -411,7 +413,7 @@ ALTER SEQUENCE si.media_id_media_seq OWNED BY si.media.id_media;
 
 
 --
--- TOC entry 236 (class 1259 OID 25003)
+-- TOC entry 235 (class 1259 OID 25003)
 -- Name: media_publication; Type: TABLE; Schema: si; Owner: postgres
 --
 
@@ -426,7 +428,7 @@ CREATE TABLE si.media_publication (
 ALTER TABLE si.media_publication OWNER TO postgres;
 
 --
--- TOC entry 237 (class 1259 OID 25008)
+-- TOC entry 236 (class 1259 OID 25008)
 -- Name: publication; Type: TABLE; Schema: si; Owner: postgres
 --
 
@@ -441,7 +443,7 @@ CREATE TABLE si.publication (
 ALTER TABLE si.publication OWNER TO postgres;
 
 --
--- TOC entry 238 (class 1259 OID 25013)
+-- TOC entry 237 (class 1259 OID 25013)
 -- Name: publication_clair; Type: VIEW; Schema: si; Owner: postgres
 --
 
@@ -458,7 +460,7 @@ CREATE VIEW si.publication_clair AS
 ALTER TABLE si.publication_clair OWNER TO postgres;
 
 --
--- TOC entry 239 (class 1259 OID 25017)
+-- TOC entry 238 (class 1259 OID 25017)
 -- Name: media_publication_clair; Type: VIEW; Schema: si; Owner: postgres
 --
 
@@ -477,7 +479,7 @@ CREATE VIEW si.media_publication_clair AS
 ALTER TABLE si.media_publication_clair OWNER TO postgres;
 
 --
--- TOC entry 240 (class 1259 OID 25021)
+-- TOC entry 239 (class 1259 OID 25021)
 -- Name: perimetre_emi; Type: TABLE; Schema: si; Owner: postgres
 --
 
@@ -491,7 +493,7 @@ CREATE TABLE si.perimetre_emi (
 ALTER TABLE si.perimetre_emi OWNER TO postgres;
 
 --
--- TOC entry 241 (class 1259 OID 25026)
+-- TOC entry 240 (class 1259 OID 25026)
 -- Name: polluant_id_polluant_seq; Type: SEQUENCE; Schema: si; Owner: postgres
 --
 
@@ -507,8 +509,8 @@ CREATE SEQUENCE si.polluant_id_polluant_seq
 ALTER TABLE si.polluant_id_polluant_seq OWNER TO postgres;
 
 --
--- TOC entry 3513 (class 0 OID 0)
--- Dependencies: 241
+-- TOC entry 3514 (class 0 OID 0)
+-- Dependencies: 240
 -- Name: polluant_id_polluant_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
 
@@ -516,7 +518,7 @@ ALTER SEQUENCE si.polluant_id_polluant_seq OWNED BY si.polluant.id_polluant;
 
 
 --
--- TOC entry 242 (class 1259 OID 25027)
+-- TOC entry 241 (class 1259 OID 25027)
 -- Name: proprietaire_objet_id_proprietaire_objet_seq; Type: SEQUENCE; Schema: si; Owner: postgres
 --
 
@@ -532,8 +534,8 @@ CREATE SEQUENCE si.proprietaire_objet_id_proprietaire_objet_seq
 ALTER TABLE si.proprietaire_objet_id_proprietaire_objet_seq OWNER TO postgres;
 
 --
--- TOC entry 3514 (class 0 OID 0)
--- Dependencies: 242
+-- TOC entry 3515 (class 0 OID 0)
+-- Dependencies: 241
 -- Name: proprietaire_objet_id_proprietaire_objet_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
 
@@ -541,7 +543,7 @@ ALTER SEQUENCE si.proprietaire_objet_id_proprietaire_objet_seq OWNED BY si.propr
 
 
 --
--- TOC entry 243 (class 1259 OID 25028)
+-- TOC entry 242 (class 1259 OID 25028)
 -- Name: publication_id_publication_seq; Type: SEQUENCE; Schema: si; Owner: postgres
 --
 
@@ -557,8 +559,8 @@ CREATE SEQUENCE si.publication_id_publication_seq
 ALTER TABLE si.publication_id_publication_seq OWNER TO postgres;
 
 --
--- TOC entry 3515 (class 0 OID 0)
--- Dependencies: 243
+-- TOC entry 3516 (class 0 OID 0)
+-- Dependencies: 242
 -- Name: publication_id_publication_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
 
@@ -566,7 +568,7 @@ ALTER SEQUENCE si.publication_id_publication_seq OWNED BY si.publication.id_publ
 
 
 --
--- TOC entry 244 (class 1259 OID 25029)
+-- TOC entry 243 (class 1259 OID 25029)
 -- Name: serveur; Type: TABLE; Schema: si; Owner: postgres
 --
 
@@ -579,7 +581,7 @@ CREATE TABLE si.serveur (
 ALTER TABLE si.serveur OWNER TO postgres;
 
 --
--- TOC entry 245 (class 1259 OID 25034)
+-- TOC entry 244 (class 1259 OID 25034)
 -- Name: serveur_id_serveur_seq; Type: SEQUENCE; Schema: si; Owner: postgres
 --
 
@@ -595,8 +597,8 @@ CREATE SEQUENCE si.serveur_id_serveur_seq
 ALTER TABLE si.serveur_id_serveur_seq OWNER TO postgres;
 
 --
--- TOC entry 3516 (class 0 OID 0)
--- Dependencies: 245
+-- TOC entry 3517 (class 0 OID 0)
+-- Dependencies: 244
 -- Name: serveur_id_serveur_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
 
@@ -604,7 +606,7 @@ ALTER SEQUENCE si.serveur_id_serveur_seq OWNED BY si.serveur.id_serveur;
 
 
 --
--- TOC entry 246 (class 1259 OID 25035)
+-- TOC entry 245 (class 1259 OID 25035)
 -- Name: type_media_id_type_media_seq; Type: SEQUENCE; Schema: si; Owner: postgres
 --
 
@@ -620,8 +622,8 @@ CREATE SEQUENCE si.type_media_id_type_media_seq
 ALTER TABLE si.type_media_id_type_media_seq OWNER TO postgres;
 
 --
--- TOC entry 3517 (class 0 OID 0)
--- Dependencies: 246
+-- TOC entry 3518 (class 0 OID 0)
+-- Dependencies: 245
 -- Name: type_media_id_type_media_seq; Type: SEQUENCE OWNED BY; Schema: si; Owner: postgres
 --
 
@@ -685,7 +687,7 @@ ALTER TABLE ONLY si.proprietaire_objet ALTER COLUMN id_proprietaire_objet SET DE
 
 
 --
--- TOC entry 3283 (class 2604 OID 25043)
+-- TOC entry 3284 (class 2604 OID 25043)
 -- Name: publication id_publication; Type: DEFAULT; Schema: si; Owner: postgres
 --
 
@@ -693,7 +695,7 @@ ALTER TABLE ONLY si.publication ALTER COLUMN id_publication SET DEFAULT nextval(
 
 
 --
--- TOC entry 3284 (class 2604 OID 25044)
+-- TOC entry 3285 (class 2604 OID 25044)
 -- Name: serveur id_serveur; Type: DEFAULT; Schema: si; Owner: postgres
 --
 
@@ -709,7 +711,7 @@ ALTER TABLE ONLY si.type_media ALTER COLUMN id_type_media SET DEFAULT nextval('s
 
 
 --
--- TOC entry 3478 (class 0 OID 24915)
+-- TOC entry 3479 (class 0 OID 24915)
 -- Dependencies: 216
 -- Data for Name: application; Type: TABLE DATA; Schema: si; Owner: postgres
 --
@@ -728,7 +730,7 @@ INSERT INTO si.application VALUES (11, 'Appli R-Shiny + BDD microcapteurs', 6);
 
 
 --
--- TOC entry 3480 (class 0 OID 24922)
+-- TOC entry 3481 (class 0 OID 24922)
 -- Dependencies: 218
 -- Data for Name: donnee; Type: TABLE DATA; Schema: si; Owner: postgres
 --
@@ -864,7 +866,6 @@ INSERT INTO si.donnee VALUES (129, 58, 'Secteur SNAP Simplifié', 'Inventaire', 
 INSERT INTO si.donnee VALUES (130, 60, 'Secteur Secten V1', 'Inventaire', 1, 4, 0, 0, 'O', '2010-01-01', 3);
 INSERT INTO si.donnee VALUES (133, 60, 'Secteur Secten V3', 'Inventaire', 1, 4, 0, 0, 'O', '2010-01-01', 3);
 INSERT INTO si.donnee VALUES (131, 60, 'Secteur Secten V2', 'Inventaire', 1, 4, 0, 0, 'O', '2010-01-01', 3);
-INSERT INTO si.donnee VALUES (135, 62, 'Secteur ORECAN', 'Inventaire', 1, 4, 0, 0, 'O', '2010-01-01', 3);
 INSERT INTO si.donnee VALUES (159, 77, 'Emission Annuelle CD (emi)', 'Inventaire', 1, 4, 4, 11, 'O', '2010-01-01', 3);
 INSERT INTO si.donnee VALUES (160, 2, 'Emission Annuelle PM2.5', 'Inventaire', 1, 4, 4, 11, 'O', '2010-01-01', 3);
 INSERT INTO si.donnee VALUES (161, 71, 'Emission Annuelle HCFC', 'Inventaire', 1, 4, 4, 11, 'O', '2010-01-01', 3);
@@ -895,10 +896,21 @@ INSERT INTO si.donnee VALUES (185, 0, 'Données Emission Siam', 'Inventaire', 1,
 INSERT INTO si.donnee VALUES (186, 0, 'Données Emission Full', 'Inventaire', 1, 4, 4, 11, 'O', '2010-01-01', 0);
 INSERT INTO si.donnee VALUES (187, 43, 'Emission Annuelle Ges Total EqC02', 'Inventaire', 1, 4, 4, 11, 'O', '2010-01-01', 3);
 INSERT INTO si.donnee VALUES (188, 4, 'Concentration µcapteur 1/4h NO2', 'Mesure Brute Auto', 2, 16, 5, 7, 'N', '2021-08-01', 11);
+INSERT INTO si.donnee VALUES (135, 62, 'Secteur ne pas utiliser', 'Inventaire', 1, 4, 0, 0, 'O', '2010-01-01', 3);
+INSERT INTO si.donnee VALUES (189, 0, 'Validité de la mesure', 'Validation Environnementale', 1, 17, 5, 8, 'O', NULL, 0);
+INSERT INTO si.donnee VALUES (190, 0, 'Objectif de qualité représentativite Dreal', 'Stat', 1, 14, 1, 11, 'O', NULL, 0);
+INSERT INTO si.donnee VALUES (191, 0, 'Taux de représentativité de mesure continue', 'Stat', 1, 14, 1, 11, 'O', NULL, 0);
+INSERT INTO si.donnee VALUES (192, 0, 'Taux de représentativité de mesure differée', 'Stat', 1, 14, 1, 11, 'O', NULL, 0);
+INSERT INTO si.donnee VALUES (194, 0, 'Guide Methodologie Inventaire', 'Inventaire', 1, 4, 0, 0, 'O', '2010-01-01', 3);
+INSERT INTO si.donnee VALUES (195, 0, 'Année de Reference Inventaire', 'Inventaire', 1, 4, 0, 0, 'O', '2010-01-01', 3);
+INSERT INTO si.donnee VALUES (193, 0, 'Versionning Inventaire', 'Inventaire', 1, 4, 0, 0, 'O', '2010-01-01', 3);
+INSERT INTO si.donnee VALUES (196, 0, 'Objectif Prepa', 'Inventaire', 2, 18, 3, 11, 'O', '2023-01-01', 0);
+INSERT INTO si.donnee VALUES (197, 0, 'Objectif de Reduction GES', 'Inventaire', 2, 18, 3, 11, 'O', '2023-01-01', 0);
+INSERT INTO si.donnee VALUES (198, 0, 'Objectif Stradet', 'Inventaire', 2, 18, 3, 11, 'O', '2023-01-01', 0);
 
 
 --
--- TOC entry 3488 (class 0 OID 24967)
+-- TOC entry 3489 (class 0 OID 24967)
 -- Dependencies: 227
 -- Data for Name: donnee_lien; Type: TABLE DATA; Schema: si; Owner: postgres
 --
@@ -1071,17 +1083,30 @@ INSERT INTO si.donnee_lien VALUES (181, 186);
 INSERT INTO si.donnee_lien VALUES (182, 185);
 INSERT INTO si.donnee_lien VALUES (182, 186);
 INSERT INTO si.donnee_lien VALUES (182, 183);
-INSERT INTO si.donnee_lien VALUES (135, 183);
 INSERT INTO si.donnee_lien VALUES (134, 183);
 INSERT INTO si.donnee_lien VALUES (165, 187);
 INSERT INTO si.donnee_lien VALUES (178, 187);
 INSERT INTO si.donnee_lien VALUES (187, 183);
 INSERT INTO si.donnee_lien VALUES (182, 187);
 INSERT INTO si.donnee_lien VALUES (182, 187);
+INSERT INTO si.donnee_lien VALUES (191, 190);
+INSERT INTO si.donnee_lien VALUES (192, 190);
+INSERT INTO si.donnee_lien VALUES (33, 191);
+INSERT INTO si.donnee_lien VALUES (6, 191);
+INSERT INTO si.donnee_lien VALUES (25, 191);
+INSERT INTO si.donnee_lien VALUES (29, 191);
+INSERT INTO si.donnee_lien VALUES (21, 191);
+INSERT INTO si.donnee_lien VALUES (62, 191);
+INSERT INTO si.donnee_lien VALUES (55, 191);
+INSERT INTO si.donnee_lien VALUES (48, 191);
+INSERT INTO si.donnee_lien VALUES (99, 191);
+INSERT INTO si.donnee_lien VALUES (126, 191);
+INSERT INTO si.donnee_lien VALUES (194, 193);
+INSERT INTO si.donnee_lien VALUES (195, 193);
 
 
 --
--- TOC entry 3481 (class 0 OID 24933)
+-- TOC entry 3482 (class 0 OID 24933)
 -- Dependencies: 219
 -- Data for Name: etat_maturite; Type: TABLE DATA; Schema: si; Owner: postgres
 --
@@ -1092,7 +1117,7 @@ INSERT INTO si.etat_maturite VALUES (1, 'Service Regulier');
 
 
 --
--- TOC entry 3482 (class 0 OID 24938)
+-- TOC entry 3483 (class 0 OID 24938)
 -- Dependencies: 220
 -- Data for Name: maille_geo; Type: TABLE DATA; Schema: si; Owner: postgres
 --
@@ -1109,7 +1134,7 @@ INSERT INTO si.maille_geo VALUES (17, 'Commune/Iris');
 
 
 --
--- TOC entry 3484 (class 0 OID 24944)
+-- TOC entry 3485 (class 0 OID 24944)
 -- Dependencies: 222
 -- Data for Name: maille_temps; Type: TABLE DATA; Schema: si; Owner: postgres
 --
@@ -1127,7 +1152,7 @@ INSERT INTO si.maille_temps VALUES (16, 'A la demande');
 
 
 --
--- TOC entry 3490 (class 0 OID 24976)
+-- TOC entry 3491 (class 0 OID 24976)
 -- Dependencies: 230
 -- Data for Name: media; Type: TABLE DATA; Schema: si; Owner: postgres
 --
@@ -1161,205 +1186,212 @@ INSERT INTO si.media VALUES (27, 'Flux WFS / WMS Mesure Horaire', NULL, 5, 1, 3)
 INSERT INTO si.media VALUES (5, 'Flux WFS / WMS 3 Jours Indice Atmo', 'https://api.atmonormandie.fr/index.php/view/map/?repository=dindice&project=historique_indice_atmo', 5, 1, 3);
 INSERT INTO si.media VALUES (28, 'Applications du Site ORECAN', 'http://www.orecan.fr/acces_donnees/', 6, 1, 4);
 INSERT INTO si.media VALUES (29, 'Fichiers Mesures Horaires (µ)capteurs ASE', 'http://dx.doi.org/10.17632/82dnstrd93/1', 9, 1, 1);
+INSERT INTO si.media VALUES (30, 'Plateforme Indicateurs Territoriaux', 'http://www.orecan.fr/acces_donnees/', 6, 2, 18);
 
 
 --
--- TOC entry 3492 (class 0 OID 24992)
+-- TOC entry 3493 (class 0 OID 24992)
 -- Dependencies: 233
 -- Data for Name: media_donnee; Type: TABLE DATA; Schema: si; Owner: postgres
 --
 
-INSERT INTO si.media_donnee VALUES (2, 11, 4, 13, 'J');
-INSERT INTO si.media_donnee VALUES (2, 12, 4, 13, 'J');
-INSERT INTO si.media_donnee VALUES (2, 13, 4, 13, 'J');
-INSERT INTO si.media_donnee VALUES (2, 14, 4, 13, 'J');
-INSERT INTO si.media_donnee VALUES (2, 15, 4, 13, 'J');
-INSERT INTO si.media_donnee VALUES (2, 16, 4, 13, 'J');
-INSERT INTO si.media_donnee VALUES (3, 18, 2, 10, 'J');
-INSERT INTO si.media_donnee VALUES (3, 19, 2, 10, 'J');
-INSERT INTO si.media_donnee VALUES (3, 20, 2, 10, 'J');
-INSERT INTO si.media_donnee VALUES (1, 11, 14, 13, 'J');
-INSERT INTO si.media_donnee VALUES (4, 11, 4, 13, '3j');
-INSERT INTO si.media_donnee VALUES (5, 11, 4, 13, '1 An');
-INSERT INTO si.media_donnee VALUES (6, 38, 1, 11, '2005');
-INSERT INTO si.media_donnee VALUES (7, 38, 2, 11, '2005');
-INSERT INTO si.media_donnee VALUES (8, 38, 3, 11, '2005');
-INSERT INTO si.media_donnee VALUES (10, 39, 5, 11, 'Année N-1');
-INSERT INTO si.media_donnee VALUES (11, 40, 5, 11, 'Année N-1');
-INSERT INTO si.media_donnee VALUES (12, 41, 5, 11, 'Année N-1');
-INSERT INTO si.media_donnee VALUES (13, 1, 5, 8, 'J');
-INSERT INTO si.media_donnee VALUES (13, 2, 5, 8, 'J');
-INSERT INTO si.media_donnee VALUES (13, 3, 5, 8, 'J');
-INSERT INTO si.media_donnee VALUES (13, 4, 5, 8, 'J');
-INSERT INTO si.media_donnee VALUES (13, 5, 5, 8, 'J');
-INSERT INTO si.media_donnee VALUES (13, 91, 5, 15, 'J');
-INSERT INTO si.media_donnee VALUES (13, 92, 5, 15, 'J');
-INSERT INTO si.media_donnee VALUES (13, 93, 5, 15, 'J');
-INSERT INTO si.media_donnee VALUES (13, 94, 5, 15, 'J');
-INSERT INTO si.media_donnee VALUES (13, 95, 5, 15, 'J');
-INSERT INTO si.media_donnee VALUES (13, 45, 5, 8, 'J');
-INSERT INTO si.media_donnee VALUES (13, 55, 5, 8, 'J');
-INSERT INTO si.media_donnee VALUES (13, 61, 5, 8, 'J');
-INSERT INTO si.media_donnee VALUES (14, 6, 5, 8, 'J');
-INSERT INTO si.media_donnee VALUES (14, 33, 5, 8, 'J');
-INSERT INTO si.media_donnee VALUES (14, 25, 5, 8, 'J');
-INSERT INTO si.media_donnee VALUES (14, 29, 5, 8, 'J');
-INSERT INTO si.media_donnee VALUES (14, 21, 5, 8, 'J');
-INSERT INTO si.media_donnee VALUES (14, 62, 5, 8, 'J');
-INSERT INTO si.media_donnee VALUES (14, 90, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 53, 5, 0, 'J');
-INSERT INTO si.media_donnee VALUES (14, 54, 5, 0, 'J');
-INSERT INTO si.media_donnee VALUES (14, 56, 5, 9, 'J');
-INSERT INTO si.media_donnee VALUES (14, 57, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (14, 48, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (14, 86, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 87, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 88, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 89, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 7, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (14, 8, 5, 9, 'J');
-INSERT INTO si.media_donnee VALUES (14, 9, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 34, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (14, 35, 5, 9, 'J');
-INSERT INTO si.media_donnee VALUES (14, 36, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 26, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (14, 27, 5, 9, 'J');
-INSERT INTO si.media_donnee VALUES (14, 28, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 22, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (14, 23, 5, 9, 'J');
-INSERT INTO si.media_donnee VALUES (14, 24, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 30, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (14, 31, 5, 9, 'J');
-INSERT INTO si.media_donnee VALUES (14, 32, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 41, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 39, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 60, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (14, 63, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (14, 65, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (14, 64, 5, 9, 'J');
-INSERT INTO si.media_donnee VALUES (14, 59, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 49, 5, 9, 'J');
-INSERT INTO si.media_donnee VALUES (14, 50, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (14, 51, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (14, 52, 5, 0, 'J');
-INSERT INTO si.media_donnee VALUES (14, 46, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (14, 47, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 58, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 66, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (14, 67, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 68, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 10, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (14, 69, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 70, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 71, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 73, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 83, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (14, 84, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (14, 85, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (14, 72, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 80, 5, 8, 'J');
-INSERT INTO si.media_donnee VALUES (14, 81, 5, 8, 'J');
-INSERT INTO si.media_donnee VALUES (14, 82, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (14, 79, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 74, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (14, 75, 5, 11, 'J');
-INSERT INTO si.media_donnee VALUES (14, 76, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (14, 77, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (14, 78, 5, 13, 'J');
-INSERT INTO si.media_donnee VALUES (15, 22, 5, 13, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 56, 5, 9, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 7, 5, 13, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 33, 5, 8, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 35, 5, 9, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 24, 5, 11, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 8, 5, 9, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 49, 5, 9, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 9, 5, 11, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 6, 5, 8, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 23, 5, 9, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 21, 5, 8, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 26, 5, 13, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 28, 5, 11, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 25, 5, 8, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 27, 5, 9, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 30, 5, 13, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 32, 5, 11, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 31, 5, 9, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 29, 5, 8, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 34, 5, 13, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 36, 5, 11, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 47, 5, 11, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 48, 5, 13, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 60, 5, 13, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 62, 5, 8, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 64, 5, 9, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 65, 5, 13, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 46, 5, 13, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 53, 5, 13, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 54, 5, 11, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 55, 5, 8, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 96, 5, 13, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 97, 5, 11, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 98, 5, 9, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 99, 5, 8, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 91, 5, 15, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 92, 5, 15, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 93, 5, 15, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 94, 5, 15, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (15, 95, 5, 15, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (16, 17, 5, 7, 'Long');
-INSERT INTO si.media_donnee VALUES (17, 17, 5, 7, NULL);
-INSERT INTO si.media_donnee VALUES (18, 101, 5, 16, NULL);
-INSERT INTO si.media_donnee VALUES (19, 2, 5, 15, 'J');
-INSERT INTO si.media_donnee VALUES (20, 2, 5, 15, 'J');
-INSERT INTO si.media_donnee VALUES (21, 103, 5, 8, 'J');
-INSERT INTO si.media_donnee VALUES (22, 104, 5, 8, 'Mensuel');
-INSERT INTO si.media_donnee VALUES (22, 21, 5, 8, 'Mensuel');
-INSERT INTO si.media_donnee VALUES (23, 42, 5, 16, 'Annuel');
-INSERT INTO si.media_donnee VALUES (15, 42, 5, 16, 'Plusieurs Années');
-INSERT INTO si.media_donnee VALUES (24, 42, 5, 11, 'Plusieurs Années');
-INSERT INTO si.media_donnee VALUES (25, 42, 5, 9, 'Plusieurs Années');
-INSERT INTO si.media_donnee VALUES (26, 42, 5, 13, 'Plusieurs Années');
-INSERT INTO si.media_donnee VALUES (27, 42, 5, 8, 'Plusieurs Années');
-INSERT INTO si.media_donnee VALUES (24, 32, 5, 11, '5 Ans');
-INSERT INTO si.media_donnee VALUES (24, 54, 5, 11, '5 Ans');
-INSERT INTO si.media_donnee VALUES (24, 47, 5, 11, '5 Ans');
-INSERT INTO si.media_donnee VALUES (24, 36, 5, 11, '5 Ans');
-INSERT INTO si.media_donnee VALUES (24, 9, 5, 11, '5 Ans');
-INSERT INTO si.media_donnee VALUES (24, 28, 5, 11, '5 Ans');
-INSERT INTO si.media_donnee VALUES (24, 24, 5, 11, '5 Ans');
-INSERT INTO si.media_donnee VALUES (24, 123, 5, 11, 'Plusieurs Annees');
-INSERT INTO si.media_donnee VALUES (25, 56, 5, 9, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (25, 35, 5, 9, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (25, 8, 5, 9, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (25, 49, 5, 9, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (25, 23, 5, 9, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (25, 27, 5, 9, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (25, 31, 5, 9, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (25, 125, 5, 9, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (26, 22, 5, 13, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (26, 7, 5, 13, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (26, 26, 5, 13, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (26, 30, 5, 13, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (26, 34, 5, 13, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (26, 46, 5, 13, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (28, 173, 3, 11, '10 ans');
-INSERT INTO si.media_donnee VALUES (26, 53, 5, 13, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (26, 124, 5, 13, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (27, 33, 5, 8, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (27, 6, 5, 8, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (27, 21, 5, 8, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (27, 25, 5, 8, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (27, 29, 5, 8, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (27, 55, 5, 8, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (27, 48, 5, 8, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (27, 126, 5, 8, '1 an glissant');
-INSERT INTO si.media_donnee VALUES (29, 188, 5, 8, '6mois');
+INSERT INTO si.media_donnee VALUES (2, 11, 4, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (2, 12, 4, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (2, 13, 4, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (2, 14, 4, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (2, 15, 4, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (2, 16, 4, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (3, 18, 2, 10, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (3, 19, 2, 10, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (3, 20, 2, 10, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (1, 11, 14, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (4, 11, 4, 13, '3j', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (5, 11, 4, 13, '1 An', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (6, 38, 1, 11, '2005', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (7, 38, 2, 11, '2005', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (8, 38, 3, 11, '2005', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (10, 39, 5, 11, 'Année N-1', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (11, 40, 5, 11, 'Année N-1', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (12, 41, 5, 11, 'Année N-1', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (13, 1, 5, 8, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (13, 2, 5, 8, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (13, 3, 5, 8, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (13, 4, 5, 8, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (13, 5, 5, 8, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (13, 91, 5, 15, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (13, 92, 5, 15, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (13, 93, 5, 15, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (13, 94, 5, 15, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (13, 95, 5, 15, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (13, 45, 5, 8, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (13, 55, 5, 8, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (13, 61, 5, 8, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 6, 5, 8, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 33, 5, 8, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 25, 5, 8, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 29, 5, 8, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 21, 5, 8, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 62, 5, 8, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 90, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 53, 5, 0, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 54, 5, 0, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 56, 5, 9, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 57, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 48, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 86, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 87, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 88, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 89, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 7, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 8, 5, 9, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 9, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 34, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 35, 5, 9, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 36, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 26, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 27, 5, 9, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 28, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 22, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 23, 5, 9, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 24, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 30, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 31, 5, 9, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 32, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 41, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 39, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 60, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 63, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 65, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 64, 5, 9, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 59, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 49, 5, 9, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 50, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 51, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 52, 5, 0, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 46, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 47, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 58, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 66, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 67, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 68, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 10, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 69, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 70, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 71, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 73, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 83, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 84, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 85, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 72, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 80, 5, 8, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 81, 5, 8, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 82, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 79, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 74, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 75, 5, 11, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 76, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 77, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (14, 78, 5, 13, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 22, 5, 13, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 56, 5, 9, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 7, 5, 13, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 33, 5, 8, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 35, 5, 9, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 24, 5, 11, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 8, 5, 9, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 49, 5, 9, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 9, 5, 11, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 6, 5, 8, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 23, 5, 9, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 21, 5, 8, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 26, 5, 13, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 28, 5, 11, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 25, 5, 8, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 27, 5, 9, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 30, 5, 13, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 32, 5, 11, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 31, 5, 9, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 29, 5, 8, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 34, 5, 13, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 36, 5, 11, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 47, 5, 11, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 48, 5, 13, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 60, 5, 13, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 62, 5, 8, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 64, 5, 9, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 65, 5, 13, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 46, 5, 13, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 53, 5, 13, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 54, 5, 11, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 55, 5, 8, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 96, 5, 13, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 97, 5, 11, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 98, 5, 9, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 99, 5, 8, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 91, 5, 15, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 92, 5, 15, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 93, 5, 15, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 94, 5, 15, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 95, 5, 15, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (16, 17, 5, 7, 'Long', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (17, 17, 5, 7, NULL, 'A renseigner');
+INSERT INTO si.media_donnee VALUES (18, 101, 5, 16, NULL, 'A renseigner');
+INSERT INTO si.media_donnee VALUES (19, 2, 5, 15, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (20, 2, 5, 15, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (21, 103, 5, 8, 'J', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (22, 104, 5, 8, 'Mensuel', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (22, 21, 5, 8, 'Mensuel', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (23, 42, 5, 16, 'Annuel', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (15, 42, 5, 16, 'Plusieurs Années', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (24, 42, 5, 11, 'Plusieurs Années', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (25, 42, 5, 9, 'Plusieurs Années', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (26, 42, 5, 13, 'Plusieurs Années', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (27, 42, 5, 8, 'Plusieurs Années', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (24, 32, 5, 11, '5 Ans', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (24, 54, 5, 11, '5 Ans', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (24, 47, 5, 11, '5 Ans', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (24, 36, 5, 11, '5 Ans', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (24, 9, 5, 11, '5 Ans', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (24, 28, 5, 11, '5 Ans', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (24, 24, 5, 11, '5 Ans', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (24, 123, 5, 11, 'Plusieurs Annees', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (25, 56, 5, 9, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (25, 35, 5, 9, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (25, 8, 5, 9, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (25, 49, 5, 9, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (25, 23, 5, 9, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (25, 27, 5, 9, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (25, 31, 5, 9, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (25, 125, 5, 9, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (26, 22, 5, 13, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (26, 7, 5, 13, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (26, 26, 5, 13, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (26, 30, 5, 13, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (26, 34, 5, 13, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (26, 46, 5, 13, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (26, 53, 5, 13, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (26, 124, 5, 13, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (27, 33, 5, 8, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (27, 6, 5, 8, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (27, 21, 5, 8, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (27, 25, 5, 8, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (27, 29, 5, 8, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (27, 55, 5, 8, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (27, 48, 5, 8, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (27, 126, 5, 8, '1 an glissant', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (29, 188, 5, 8, '6mois', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (28, 193, 3, 11, '?', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (30, 183, 3, 11, '10 ans', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (30, 193, 3, 11, '?', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (28, 183, 3, 11, '10 ans', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (30, 196, 3, 11, '?', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (30, 197, 3, 11, '?', 'A renseigner');
+INSERT INTO si.media_donnee VALUES (30, 198, 3, 11, '?', 'A renseigner');
 
 
 --
--- TOC entry 3494 (class 0 OID 25003)
--- Dependencies: 236
+-- TOC entry 3495 (class 0 OID 25003)
+-- Dependencies: 235
 -- Data for Name: media_publication; Type: TABLE DATA; Schema: si; Owner: postgres
 --
 
@@ -1389,8 +1421,8 @@ INSERT INTO si.media_publication VALUES (29, 10, 'Agglo Rouen', 'public');
 
 
 --
--- TOC entry 3496 (class 0 OID 25021)
--- Dependencies: 240
+-- TOC entry 3497 (class 0 OID 25021)
+-- Dependencies: 239
 -- Data for Name: perimetre_emi; Type: TABLE DATA; Schema: si; Owner: postgres
 --
 
@@ -1464,7 +1496,7 @@ INSERT INTO si.perimetre_emi VALUES (NULL, 5, 'SIAM');
 
 
 --
--- TOC entry 3485 (class 0 OID 24950)
+-- TOC entry 3486 (class 0 OID 24950)
 -- Dependencies: 223
 -- Data for Name: polluant; Type: TABLE DATA; Schema: si; Owner: postgres
 --
@@ -1520,7 +1552,7 @@ INSERT INTO si.polluant VALUES (80, 'PB (emi)', NULL, '2023-06-06');
 
 
 --
--- TOC entry 3486 (class 0 OID 24956)
+-- TOC entry 3487 (class 0 OID 24956)
 -- Dependencies: 224
 -- Data for Name: proprietaire_objet; Type: TABLE DATA; Schema: si; Owner: postgres
 --
@@ -1549,8 +1581,8 @@ INSERT INTO si.proprietaire_objet VALUES (20, 'Exterieur SynAirGie', 'EXT');
 
 
 --
--- TOC entry 3495 (class 0 OID 25008)
--- Dependencies: 237
+-- TOC entry 3496 (class 0 OID 25008)
+-- Dependencies: 236
 -- Data for Name: publication; Type: TABLE DATA; Schema: si; Owner: postgres
 --
 
@@ -1567,8 +1599,8 @@ INSERT INTO si.publication VALUES (10, 'Site ScienceDirect / Journal Data In Bri
 
 
 --
--- TOC entry 3500 (class 0 OID 25029)
--- Dependencies: 244
+-- TOC entry 3501 (class 0 OID 25029)
+-- Dependencies: 243
 -- Data for Name: serveur; Type: TABLE DATA; Schema: si; Owner: postgres
 --
 
@@ -1583,7 +1615,7 @@ INSERT INTO si.serveur VALUES (7, 'Serveur ESRI ARCGIS');
 
 
 --
--- TOC entry 3491 (class 0 OID 24983)
+-- TOC entry 3492 (class 0 OID 24983)
 -- Dependencies: 231
 -- Data for Name: type_media; Type: TABLE DATA; Schema: si; Owner: postgres
 --
@@ -1600,7 +1632,7 @@ INSERT INTO si.type_media VALUES (9, 'Fichier Ascii');
 
 
 --
--- TOC entry 3518 (class 0 OID 0)
+-- TOC entry 3519 (class 0 OID 0)
 -- Dependencies: 217
 -- Name: application_id_application_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
@@ -1609,16 +1641,16 @@ SELECT pg_catalog.setval('si.application_id_application_seq', 11, true);
 
 
 --
--- TOC entry 3519 (class 0 OID 0)
+-- TOC entry 3520 (class 0 OID 0)
 -- Dependencies: 226
 -- Name: donnee_id_donnee_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
-SELECT pg_catalog.setval('si.donnee_id_donnee_seq', 188, true);
+SELECT pg_catalog.setval('si.donnee_id_donnee_seq', 198, true);
 
 
 --
--- TOC entry 3520 (class 0 OID 0)
+-- TOC entry 3521 (class 0 OID 0)
 -- Dependencies: 229
 -- Name: etat_maturite_id_etat_maturite_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
@@ -1627,7 +1659,7 @@ SELECT pg_catalog.setval('si.etat_maturite_id_etat_maturite_seq', 1, true);
 
 
 --
--- TOC entry 3521 (class 0 OID 0)
+-- TOC entry 3522 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: maille_geo_id_maille_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
@@ -1636,17 +1668,17 @@ SELECT pg_catalog.setval('si.maille_geo_id_maille_seq', 17, true);
 
 
 --
--- TOC entry 3522 (class 0 OID 0)
--- Dependencies: 235
+-- TOC entry 3523 (class 0 OID 0)
+-- Dependencies: 234
 -- Name: media_id_media_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
-SELECT pg_catalog.setval('si.media_id_media_seq', 29, true);
+SELECT pg_catalog.setval('si.media_id_media_seq', 30, true);
 
 
 --
--- TOC entry 3523 (class 0 OID 0)
--- Dependencies: 241
+-- TOC entry 3524 (class 0 OID 0)
+-- Dependencies: 240
 -- Name: polluant_id_polluant_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
@@ -1654,8 +1686,8 @@ SELECT pg_catalog.setval('si.polluant_id_polluant_seq', 80, true);
 
 
 --
--- TOC entry 3524 (class 0 OID 0)
--- Dependencies: 242
+-- TOC entry 3525 (class 0 OID 0)
+-- Dependencies: 241
 -- Name: proprietaire_objet_id_proprietaire_objet_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
@@ -1663,8 +1695,8 @@ SELECT pg_catalog.setval('si.proprietaire_objet_id_proprietaire_objet_seq', 23, 
 
 
 --
--- TOC entry 3525 (class 0 OID 0)
--- Dependencies: 243
+-- TOC entry 3526 (class 0 OID 0)
+-- Dependencies: 242
 -- Name: publication_id_publication_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
@@ -1672,8 +1704,8 @@ SELECT pg_catalog.setval('si.publication_id_publication_seq', 10, true);
 
 
 --
--- TOC entry 3526 (class 0 OID 0)
--- Dependencies: 245
+-- TOC entry 3527 (class 0 OID 0)
+-- Dependencies: 244
 -- Name: serveur_id_serveur_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
@@ -1681,8 +1713,8 @@ SELECT pg_catalog.setval('si.serveur_id_serveur_seq', 7, true);
 
 
 --
--- TOC entry 3527 (class 0 OID 0)
--- Dependencies: 246
+-- TOC entry 3528 (class 0 OID 0)
+-- Dependencies: 245
 -- Name: type_media_id_type_media_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
@@ -1690,7 +1722,7 @@ SELECT pg_catalog.setval('si.type_media_id_type_media_seq', 9, true);
 
 
 --
--- TOC entry 3286 (class 2606 OID 25047)
+-- TOC entry 3287 (class 2606 OID 25047)
 -- Name: application application_pk; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1699,7 +1731,7 @@ ALTER TABLE ONLY si.application
 
 
 --
--- TOC entry 3288 (class 2606 OID 25049)
+-- TOC entry 3289 (class 2606 OID 25049)
 -- Name: donnee donnee_pk; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1708,7 +1740,7 @@ ALTER TABLE ONLY si.donnee
 
 
 --
--- TOC entry 3290 (class 2606 OID 25051)
+-- TOC entry 3291 (class 2606 OID 25051)
 -- Name: etat_maturite etat_maturite_pk; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1717,7 +1749,7 @@ ALTER TABLE ONLY si.etat_maturite
 
 
 --
--- TOC entry 3292 (class 2606 OID 25053)
+-- TOC entry 3293 (class 2606 OID 25053)
 -- Name: maille_geo maille_geo_pk; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1726,7 +1758,7 @@ ALTER TABLE ONLY si.maille_geo
 
 
 --
--- TOC entry 3294 (class 2606 OID 25055)
+-- TOC entry 3295 (class 2606 OID 25055)
 -- Name: maille_temps maille_temps_pk; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1735,7 +1767,7 @@ ALTER TABLE ONLY si.maille_temps
 
 
 --
--- TOC entry 3304 (class 2606 OID 25057)
+-- TOC entry 3305 (class 2606 OID 25057)
 -- Name: media_donnee media_donnee_pk; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1744,7 +1776,7 @@ ALTER TABLE ONLY si.media_donnee
 
 
 --
--- TOC entry 3300 (class 2606 OID 25059)
+-- TOC entry 3301 (class 2606 OID 25059)
 -- Name: media media_pk; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1753,7 +1785,7 @@ ALTER TABLE ONLY si.media
 
 
 --
--- TOC entry 3296 (class 2606 OID 25061)
+-- TOC entry 3297 (class 2606 OID 25061)
 -- Name: polluant polluant_pk; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1762,7 +1794,7 @@ ALTER TABLE ONLY si.polluant
 
 
 --
--- TOC entry 3298 (class 2606 OID 25063)
+-- TOC entry 3299 (class 2606 OID 25063)
 -- Name: proprietaire_objet proprietaire_objet_pk; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1771,7 +1803,7 @@ ALTER TABLE ONLY si.proprietaire_objet
 
 
 --
--- TOC entry 3306 (class 2606 OID 25065)
+-- TOC entry 3307 (class 2606 OID 25065)
 -- Name: publication publication_pk; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1780,7 +1812,7 @@ ALTER TABLE ONLY si.publication
 
 
 --
--- TOC entry 3308 (class 2606 OID 25067)
+-- TOC entry 3309 (class 2606 OID 25067)
 -- Name: serveur serveur_pk; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1789,7 +1821,7 @@ ALTER TABLE ONLY si.serveur
 
 
 --
--- TOC entry 3302 (class 2606 OID 25069)
+-- TOC entry 3303 (class 2606 OID 25069)
 -- Name: type_media type_media_pkey; Type: CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1798,7 +1830,7 @@ ALTER TABLE ONLY si.type_media
 
 
 --
--- TOC entry 3310 (class 2606 OID 25070)
+-- TOC entry 3311 (class 2606 OID 25070)
 -- Name: donnee appli_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1807,7 +1839,7 @@ ALTER TABLE ONLY si.donnee
 
 
 --
--- TOC entry 3309 (class 2606 OID 25075)
+-- TOC entry 3310 (class 2606 OID 25075)
 -- Name: application application_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1816,7 +1848,7 @@ ALTER TABLE ONLY si.application
 
 
 --
--- TOC entry 3311 (class 2606 OID 25080)
+-- TOC entry 3312 (class 2606 OID 25080)
 -- Name: donnee donnee_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1825,7 +1857,7 @@ ALTER TABLE ONLY si.donnee
 
 
 --
--- TOC entry 3321 (class 2606 OID 25085)
+-- TOC entry 3322 (class 2606 OID 25085)
 -- Name: media_donnee donnee_fk_1; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1834,7 +1866,7 @@ ALTER TABLE ONLY si.media_donnee
 
 
 --
--- TOC entry 3316 (class 2606 OID 25090)
+-- TOC entry 3317 (class 2606 OID 25090)
 -- Name: donnee_lien donnee_lien_fk_cible; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1843,7 +1875,7 @@ ALTER TABLE ONLY si.donnee_lien
 
 
 --
--- TOC entry 3317 (class 2606 OID 25095)
+-- TOC entry 3318 (class 2606 OID 25095)
 -- Name: donnee_lien donnee_lien_fk_source; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1852,7 +1884,7 @@ ALTER TABLE ONLY si.donnee_lien
 
 
 --
--- TOC entry 3312 (class 2606 OID 25100)
+-- TOC entry 3313 (class 2606 OID 25100)
 -- Name: donnee maille_geo_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1861,7 +1893,7 @@ ALTER TABLE ONLY si.donnee
 
 
 --
--- TOC entry 3322 (class 2606 OID 25105)
+-- TOC entry 3323 (class 2606 OID 25105)
 -- Name: media_donnee maille_geo_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1870,7 +1902,7 @@ ALTER TABLE ONLY si.media_donnee
 
 
 --
--- TOC entry 3313 (class 2606 OID 25110)
+-- TOC entry 3314 (class 2606 OID 25110)
 -- Name: donnee maturite_donnee_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1879,7 +1911,7 @@ ALTER TABLE ONLY si.donnee
 
 
 --
--- TOC entry 3327 (class 2606 OID 25115)
+-- TOC entry 3328 (class 2606 OID 25115)
 -- Name: publication maturite_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1888,7 +1920,7 @@ ALTER TABLE ONLY si.publication
 
 
 --
--- TOC entry 3318 (class 2606 OID 25120)
+-- TOC entry 3319 (class 2606 OID 25120)
 -- Name: media maturite_media_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1897,7 +1929,7 @@ ALTER TABLE ONLY si.media
 
 
 --
--- TOC entry 3323 (class 2606 OID 25125)
+-- TOC entry 3324 (class 2606 OID 25125)
 -- Name: media_donnee media_donnee_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1906,7 +1938,7 @@ ALTER TABLE ONLY si.media_donnee
 
 
 --
--- TOC entry 3324 (class 2606 OID 25130)
+-- TOC entry 3325 (class 2606 OID 25130)
 -- Name: media_donnee media_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1915,7 +1947,7 @@ ALTER TABLE ONLY si.media_donnee
 
 
 --
--- TOC entry 3325 (class 2606 OID 25135)
+-- TOC entry 3326 (class 2606 OID 25135)
 -- Name: media_publication media_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1924,7 +1956,7 @@ ALTER TABLE ONLY si.media_publication
 
 
 --
--- TOC entry 3326 (class 2606 OID 25140)
+-- TOC entry 3327 (class 2606 OID 25140)
 -- Name: media_publication media_publication_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1933,7 +1965,7 @@ ALTER TABLE ONLY si.media_publication
 
 
 --
--- TOC entry 3329 (class 2606 OID 25145)
+-- TOC entry 3330 (class 2606 OID 25145)
 -- Name: perimetre_emi perimetre_emi_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1942,7 +1974,7 @@ ALTER TABLE ONLY si.perimetre_emi
 
 
 --
--- TOC entry 3314 (class 2606 OID 25150)
+-- TOC entry 3315 (class 2606 OID 25150)
 -- Name: donnee polluant_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1951,7 +1983,7 @@ ALTER TABLE ONLY si.donnee
 
 
 --
--- TOC entry 3315 (class 2606 OID 25155)
+-- TOC entry 3316 (class 2606 OID 25155)
 -- Name: donnee propriaitaire_donnee_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1960,7 +1992,7 @@ ALTER TABLE ONLY si.donnee
 
 
 --
--- TOC entry 3319 (class 2606 OID 25160)
+-- TOC entry 3320 (class 2606 OID 25160)
 -- Name: media proprietaire_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1969,7 +2001,7 @@ ALTER TABLE ONLY si.media
 
 
 --
--- TOC entry 3328 (class 2606 OID 25165)
+-- TOC entry 3329 (class 2606 OID 25165)
 -- Name: publication publication_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1978,7 +2010,7 @@ ALTER TABLE ONLY si.publication
 
 
 --
--- TOC entry 3320 (class 2606 OID 25170)
+-- TOC entry 3321 (class 2606 OID 25170)
 -- Name: media type_media_fk; Type: FK CONSTRAINT; Schema: si; Owner: postgres
 --
 
@@ -1986,7 +2018,7 @@ ALTER TABLE ONLY si.media
     ADD CONSTRAINT type_media_fk FOREIGN KEY (id_type_media) REFERENCES si.type_media(id_type_media);
 
 
--- Completed on 2023-06-06 15:23:51
+-- Completed on 2023-06-13 17:31:38
 
 --
 -- PostgreSQL database dump complete
