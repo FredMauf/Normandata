@@ -5,7 +5,7 @@
 -- Dumped from database version 15.2
 -- Dumped by pg_dump version 15.2
 
--- Started on 2023-06-13 17:31:37
+-- Started on 2023-06-27 16:31:18
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -907,6 +907,16 @@ INSERT INTO si.donnee VALUES (193, 0, 'Versionning Inventaire', 'Inventaire', 1,
 INSERT INTO si.donnee VALUES (196, 0, 'Objectif Prepa', 'Inventaire', 2, 18, 3, 11, 'O', '2023-01-01', 0);
 INSERT INTO si.donnee VALUES (197, 0, 'Objectif de Reduction GES', 'Inventaire', 2, 18, 3, 11, 'O', '2023-01-01', 0);
 INSERT INTO si.donnee VALUES (198, 0, 'Objectif Stradet', 'Inventaire', 2, 18, 3, 11, 'O', '2023-01-01', 0);
+INSERT INTO si.donnee VALUES (199, NULL, 'Modélisaiton de trafic', NULL, 0, 0, 0, 0, 'N', NULL, 0);
+INSERT INTO si.donnee VALUES (200, NULL, 'Population spacialisé IGN', NULL, 0, 0, 0, 0, 'N', NULL, 0);
+INSERT INTO si.donnee VALUES (201, NULL, 'Population spacialisé Majic LCSQA', NULL, 0, 0, 0, 0, 'N', NULL, 0);
+INSERT INTO si.donnee VALUES (202, NULL, 'Batiment ERP', NULL, 0, 0, 0, 0, 'N', NULL, 0);
+INSERT INTO si.donnee VALUES (203, NULL, 'BD Topo', NULL, 0, 0, 0, 0, 'N', NULL, 0);
+INSERT INTO si.donnee VALUES (204, NULL, 'Comptages Routier (Bureau d etude)', NULL, 0, 0, 0, 0, 'N', NULL, 0);
+INSERT INTO si.donnee VALUES (205, NULL, 'Metéo Mesurée ', NULL, 0, 0, 0, 0, 'N', NULL, 0);
+INSERT INTO si.donnee VALUES (206, NULL, 'Paramétres Meteo MF Publictech', NULL, 0, 0, 0, 0, 'N', NULL, 0);
+INSERT INTO si.donnee VALUES (209, NULL, 'Concentration Estimée ZFE Annuelle', NULL, 0, 0, 0, 11, 'N', NULL, 0);
+INSERT INTO si.donnee VALUES (208, NULL, 'Concentration Estimée ZFE Horaire', NULL, 0, 0, 0, 8, 'N', NULL, 0);
 
 
 --
@@ -1129,8 +1139,9 @@ INSERT INTO si.maille_geo VALUES (4, 'Commune');
 INSERT INTO si.maille_geo VALUES (5, 'Point GPS');
 INSERT INTO si.maille_geo VALUES (6, 'Sur Mesure');
 INSERT INTO si.maille_geo VALUES (0, 'Inconnue');
-INSERT INTO si.maille_geo VALUES (14, 'Meso Echelle 1Km');
 INSERT INTO si.maille_geo VALUES (17, 'Commune/Iris');
+INSERT INTO si.maille_geo VALUES (18, 'Fine Echelle 10m');
+INSERT INTO si.maille_geo VALUES (14, 'Meso echelle 1Km');
 
 
 --
@@ -1187,6 +1198,9 @@ INSERT INTO si.media VALUES (5, 'Flux WFS / WMS 3 Jours Indice Atmo', 'https://a
 INSERT INTO si.media VALUES (28, 'Applications du Site ORECAN', 'http://www.orecan.fr/acces_donnees/', 6, 1, 4);
 INSERT INTO si.media VALUES (29, 'Fichiers Mesures Horaires (µ)capteurs ASE', 'http://dx.doi.org/10.17632/82dnstrd93/1', 9, 1, 1);
 INSERT INTO si.media VALUES (30, 'Plateforme Indicateurs Territoriaux', 'http://www.orecan.fr/acces_donnees/', 6, 2, 18);
+INSERT INTO si.media VALUES (31, 'Carte Concentration Simulation ZFE', NULL, 2, 1, 9);
+INSERT INTO si.media VALUES (32, 'Carte Exposition Population Simulation ZFE', NULL, 2, 1, 9);
+INSERT INTO si.media VALUES (33, 'Carte Emission Simulation ZFE ', NULL, 2, 1, 9);
 
 
 --
@@ -1418,6 +1432,10 @@ INSERT INTO si.media_publication VALUES (26, 2, 'Region', 'public');
 INSERT INTO si.media_publication VALUES (27, 2, 'Region', 'public');
 INSERT INTO si.media_publication VALUES (28, 9, 'Region', 'public');
 INSERT INTO si.media_publication VALUES (29, 10, 'Agglo Rouen', 'public');
+INSERT INTO si.media_publication VALUES (31, 11, 'Region', 'public');
+INSERT INTO si.media_publication VALUES (32, 11, 'Region', 'public');
+INSERT INTO si.media_publication VALUES (33, 11, 'Region', 'public');
+INSERT INTO si.media_publication VALUES (1, 12, 'Region', 'Via Atmo Data');
 
 
 --
@@ -1596,6 +1614,8 @@ INSERT INTO si.publication VALUES (7, 'SFTP Total', 1, 7);
 INSERT INTO si.publication VALUES (8, 'Mail Mensuel Aux industriels ', 1, 14);
 INSERT INTO si.publication VALUES (9, 'Site ORECAN', 1, 4);
 INSERT INTO si.publication VALUES (10, 'Site ScienceDirect / Journal Data In Brief', 2, 7);
+INSERT INTO si.publication VALUES (11, 'Rapport Etude ZFE', 1, 9);
+INSERT INTO si.publication VALUES (12, 'Rouen Métropole dans ma poche', 1, NULL);
 
 
 --
@@ -1646,7 +1666,7 @@ SELECT pg_catalog.setval('si.application_id_application_seq', 11, true);
 -- Name: donnee_id_donnee_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
-SELECT pg_catalog.setval('si.donnee_id_donnee_seq', 198, true);
+SELECT pg_catalog.setval('si.donnee_id_donnee_seq', 209, true);
 
 
 --
@@ -1664,7 +1684,7 @@ SELECT pg_catalog.setval('si.etat_maturite_id_etat_maturite_seq', 1, true);
 -- Name: maille_geo_id_maille_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
-SELECT pg_catalog.setval('si.maille_geo_id_maille_seq', 17, true);
+SELECT pg_catalog.setval('si.maille_geo_id_maille_seq', 18, true);
 
 
 --
@@ -1673,7 +1693,7 @@ SELECT pg_catalog.setval('si.maille_geo_id_maille_seq', 17, true);
 -- Name: media_id_media_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
-SELECT pg_catalog.setval('si.media_id_media_seq', 30, true);
+SELECT pg_catalog.setval('si.media_id_media_seq', 35, true);
 
 
 --
@@ -1700,7 +1720,7 @@ SELECT pg_catalog.setval('si.proprietaire_objet_id_proprietaire_objet_seq', 23, 
 -- Name: publication_id_publication_seq; Type: SEQUENCE SET; Schema: si; Owner: postgres
 --
 
-SELECT pg_catalog.setval('si.publication_id_publication_seq', 10, true);
+SELECT pg_catalog.setval('si.publication_id_publication_seq', 12, true);
 
 
 --
@@ -2018,7 +2038,7 @@ ALTER TABLE ONLY si.media
     ADD CONSTRAINT type_media_fk FOREIGN KEY (id_type_media) REFERENCES si.type_media(id_type_media);
 
 
--- Completed on 2023-06-13 17:31:38
+-- Completed on 2023-06-27 16:31:18
 
 --
 -- PostgreSQL database dump complete
